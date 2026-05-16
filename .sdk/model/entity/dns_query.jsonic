@@ -1,0 +1,62 @@
+# Entity: dns_query
+
+main: kit: entity: dns_query: {
+
+  alias: field: {}
+
+  name: "dns_query"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/dns-query"
+          parts: [
+            "dns-query"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB"
+                kind: "query"
+                name: "dns"
+                orig: "dns"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/dns-query"
+          parts: [
+            "dns-query"
+          ]
+          select: {
+            exist: [
+              "dns"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

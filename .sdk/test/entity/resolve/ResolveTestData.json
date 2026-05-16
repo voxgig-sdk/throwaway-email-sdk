@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "resolve": {
+      "RESOLVE00": {},
+      "RESOLVE01": {},
+      "RESOLVE02": {}
+    }
+  },
+  "new": {
+    "resolve": {
+      "resolve_ref01": {}
+    }
+  }
+}

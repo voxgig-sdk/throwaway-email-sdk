@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "email": {
+      "EMAIL00": {
+        "is_disposable": true,
+        "success": false
+      },
+      "EMAIL01": {
+        "is_disposable": true,
+        "success": false
+      },
+      "EMAIL02": {
+        "is_disposable": true,
+        "success": false
+      }
+    }
+  },
+  "new": {
+    "email": {
+      "email_ref01": {
+        "is_disposable": true,
+        "success": false
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# BasicResolveFlow
+
+main: kit: flow: BasicResolveFlow:
+{
+  entity: "resolve",
+  kind: "basic",
+  name: "BasicResolveFlow",
+  step: [
+    {
+      input: {
+        ref: "resolve_ref01",
+        srcdatavar: "resolve_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-resolve_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicResolveFlow"
+}

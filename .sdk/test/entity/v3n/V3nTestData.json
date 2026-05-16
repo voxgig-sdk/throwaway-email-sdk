@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "v3n": {
+      "V3N00": {
+        "record": {},
+        "success": false,
+        "trait": [],
+        "subject": "SUBJECT01"
+      },
+      "V3N01": {
+        "record": {},
+        "success": false,
+        "trait": [],
+        "subject": "SUBJECT01"
+      },
+      "V3N02": {
+        "record": {},
+        "success": false,
+        "trait": [],
+        "subject": "SUBJECT01"
+      }
+    }
+  },
+  "new": {
+    "v3n": {
+      "v3n_ref01": {
+        "record": {},
+        "success": false,
+        "trait": []
+      }
+    }
+  }
+}

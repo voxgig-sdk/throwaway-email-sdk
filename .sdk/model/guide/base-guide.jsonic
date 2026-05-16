@@ -1,0 +1,59 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 7
+  metrics: count: path: 9
+  metrics: count: method: 10
+
+  entity: dns_query: {
+    path: "/dns-query": {
+      op: create: method: *POST
+      op: load: method: *GET
+    }
+  }
+
+  entity: domain: {
+    path: "/api/v1/domain/{domain}": {
+      rename: param: "domain": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: email: {
+    path: "/api/v1/email/{email}": {
+      rename: param: "email": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: list: {
+    path: "/list.json": {
+      op: list: method: *GET
+    }
+    path: "/list.txt": {
+      op: load: method: *GET
+    }
+    path: "/list.yaml": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: resolve: {
+    path: "/resolve": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: v2n: {
+    path: "/api/v2/{subject}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: v3n: {
+    path: "/api/v3/{subject}": {
+      op: load: method: *GET
+    }
+  }
+
+}

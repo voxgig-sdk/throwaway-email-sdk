@@ -1,0 +1,9 @@
+# Entity Models
+
+@"dns_query.jsonic"
+@"domain.jsonic"
+@"email.jsonic"
+@"list.jsonic"
+@"resolve.jsonic"
+@"v2n.jsonic"
+@"v3n.jsonic"

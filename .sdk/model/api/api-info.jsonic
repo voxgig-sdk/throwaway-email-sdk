@@ -1,0 +1,32 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        email: "throwaway-support@iocium.com"
+        name: "Iocium"
+      }
+      description: "API for detecting disposable/throwaway email domains with trait-based analysis"
+      license: {
+        name: "Apache-2.0"
+        url: "http://www.apache.org/licenses/LICENSE-2.0"
+      }
+      servers: [
+        {
+          description: "Production"
+          url: "https://throwaway.cloud"
+        }
+        {
+          description: "Staging"
+          url: "https://staging.throwaway.cloud"
+        }
+      ]
+      title: "throwaway.cloud API"
+      version: "3.0.0"
+    }
+  }
+}
+
+}

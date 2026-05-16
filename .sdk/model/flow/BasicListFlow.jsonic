@@ -1,0 +1,40 @@
+# BasicListFlow
+
+main: kit: flow: BasicListFlow:
+{
+  entity: "list",
+  kind: "basic",
+  name: "BasicListFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "list_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "list_ref01",
+        srcdatavar: "list_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-list_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListFlow"
+}

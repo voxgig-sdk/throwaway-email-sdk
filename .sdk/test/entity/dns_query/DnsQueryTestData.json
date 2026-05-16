@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "dns_query": {
+      "DNS_QUERY00": {},
+      "DNS_QUERY01": {},
+      "DNS_QUERY02": {}
+    }
+  },
+  "new": {
+    "dns_query": {
+      "dns_query_ref01": {}
+    }
+  }
+}

@@ -1,0 +1,67 @@
+# Entity: email
+
+main: kit: entity: email: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "is_disposable"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "success"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+  ]
+
+  name: "email"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "test@example.com"
+                kind: "param"
+                name: "id"
+                orig: "email"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v1/email/{email}"
+          parts: [
+            "api"
+            "v1"
+            "email"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              email: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

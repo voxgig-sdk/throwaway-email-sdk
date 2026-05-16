@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "list": {
+      "LIST00": {},
+      "LIST01": {},
+      "LIST02": {}
+    }
+  },
+  "new": {
+    "list": {
+      "list_ref01": {}
+    }
+  }
+}

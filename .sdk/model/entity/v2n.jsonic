@@ -1,0 +1,69 @@
+# Entity: v2n
+
+main: kit: entity: v2n: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "is_disposable"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "success"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+  ]
+
+  name: "v2n"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "test@example.com"
+                kind: "param"
+                name: "subject"
+                orig: "subject"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v2/{subject}"
+          parts: [
+            "api"
+            "v2"
+            "{subject}"
+          ]
+          select: {
+            exist: [
+              "subject"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v2"
+      ]
+    ]
+  }
+
+
+
+}

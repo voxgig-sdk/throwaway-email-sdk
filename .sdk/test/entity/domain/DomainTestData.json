@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "domain": {
+      "DOMAIN00": {
+        "is_disposable": true,
+        "success": false
+      },
+      "DOMAIN01": {
+        "is_disposable": true,
+        "success": false
+      },
+      "DOMAIN02": {
+        "is_disposable": true,
+        "success": false
+      }
+    }
+  },
+  "new": {
+    "domain": {
+      "domain_ref01": {
+        "is_disposable": true,
+        "success": false
+      }
+    }
+  }
+}

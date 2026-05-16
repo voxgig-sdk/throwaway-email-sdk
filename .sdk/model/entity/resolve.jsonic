@@ -1,0 +1,73 @@
+# Entity: resolve
+
+main: kit: entity: resolve: {
+
+  alias: field: {}
+
+  name: "resolve"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "cd"
+                orig: "cd"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "do"
+                orig: "do"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: "testmail.ares"
+                kind: "query"
+                name: "name"
+                orig: "name"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: "A"
+                kind: "query"
+                name: "type"
+                orig: "type"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/resolve"
+          parts: [
+            "resolve"
+          ]
+          select: {
+            exist: [
+              "cd"
+              "do"
+              "name"
+              "type"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

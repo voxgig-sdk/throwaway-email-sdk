@@ -1,0 +1,56 @@
+# Entity: list
+
+main: kit: entity: list: {
+
+  alias: field: {}
+
+  name: "list"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/list.json"
+          parts: [
+            "list.json"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/list.txt"
+          parts: [
+            "list.txt"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/list.yaml"
+          parts: [
+            "list.yaml"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
