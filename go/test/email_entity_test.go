@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/throwaway-email-sdk"
-	"github.com/voxgig-sdk/throwaway-email-sdk/core"
+	sdk "github.com/voxgig-sdk/throwaway-email-sdk/go"
+	"github.com/voxgig-sdk/throwaway-email-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/throwaway-email-sdk/go/utility/struct"
 )
 
 func TestEmailEntity(t *testing.T) {

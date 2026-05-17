@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/throwaway-email-sdk/core"
+	"github.com/voxgig-sdk/throwaway-email-sdk/go/core"
 )
 
 type BaseFeature struct {

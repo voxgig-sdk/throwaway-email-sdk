@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/throwaway-email-sdk/core"
+import "github.com/voxgig-sdk/throwaway-email-sdk/go/core"
 
 func init() {
 	core.UtilityRegistrar = registerAll

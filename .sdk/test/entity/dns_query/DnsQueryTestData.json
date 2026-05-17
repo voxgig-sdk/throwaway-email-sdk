@@ -1,9 +1,15 @@
 {
   "existing": {
     "dns_query": {
-      "DNS_QUERY00": {},
-      "DNS_QUERY01": {},
-      "DNS_QUERY02": {}
+      "DNS_QUERY00": {
+        "id": "DNS_QUERY00"
+      },
+      "DNS_QUERY01": {
+        "id": "DNS_QUERY01"
+      },
+      "DNS_QUERY02": {
+        "id": "DNS_QUERY02"
+      }
     }
   },
   "new": {

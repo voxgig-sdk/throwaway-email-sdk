@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/throwaway-email-sdk"
-	"github.com/voxgig-sdk/throwaway-email-sdk/core"
+	sdk "github.com/voxgig-sdk/throwaway-email-sdk/go"
+	"github.com/voxgig-sdk/throwaway-email-sdk/go/core"
 )
 
 func TestListDirect(t *testing.T) {

@@ -1,9 +1,15 @@
 {
   "existing": {
     "list": {
-      "LIST00": {},
-      "LIST01": {},
-      "LIST02": {}
+      "LIST00": {
+        "id": "LIST00"
+      },
+      "LIST01": {
+        "id": "LIST01"
+      },
+      "LIST02": {
+        "id": "LIST02"
+      }
     }
   },
   "new": {

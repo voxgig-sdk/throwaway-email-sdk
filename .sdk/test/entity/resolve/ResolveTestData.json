@@ -1,9 +1,15 @@
 {
   "existing": {
     "resolve": {
-      "RESOLVE00": {},
-      "RESOLVE01": {},
-      "RESOLVE02": {}
+      "RESOLVE00": {
+        "id": "RESOLVE00"
+      },
+      "RESOLVE01": {
+        "id": "RESOLVE01"
+      },
+      "RESOLVE02": {
+        "id": "RESOLVE02"
+      }
     }
   },
   "new": {

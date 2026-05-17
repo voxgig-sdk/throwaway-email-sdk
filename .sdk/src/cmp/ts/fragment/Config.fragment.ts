@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://throwaway.cloud',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 

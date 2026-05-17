@@ -3,15 +3,18 @@
     "email": {
       "EMAIL00": {
         "is_disposable": true,
-        "success": false
+        "success": false,
+        "id": "EMAIL00"
       },
       "EMAIL01": {
         "is_disposable": true,
-        "success": false
+        "success": false,
+        "id": "EMAIL01"
       },
       "EMAIL02": {
         "is_disposable": true,
-        "success": false
+        "success": false,
+        "id": "EMAIL02"
       }
     }
   },

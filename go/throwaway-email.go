@@ -1,10 +1,10 @@
 package voxgigthrowawayemailsdk
 
 import (
-	"github.com/voxgig-sdk/throwaway-email-sdk/core"
-	"github.com/voxgig-sdk/throwaway-email-sdk/entity"
-	"github.com/voxgig-sdk/throwaway-email-sdk/feature"
-	_ "github.com/voxgig-sdk/throwaway-email-sdk/utility"
+	"github.com/voxgig-sdk/throwaway-email-sdk/go/core"
+	"github.com/voxgig-sdk/throwaway-email-sdk/go/entity"
+	"github.com/voxgig-sdk/throwaway-email-sdk/go/feature"
+	_ "github.com/voxgig-sdk/throwaway-email-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
