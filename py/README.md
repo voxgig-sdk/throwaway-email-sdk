@@ -23,12 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from throwawayemail_sdk import ThrowawayEmailSDK
 
-client = ThrowawayEmailSDK({
-    "apikey": os.environ.get("THROWAWAY-EMAIL_APIKEY"),
-})
+client = ThrowawayEmailSDK({})
 ```
 
 ### 3. Load a dnsquery
@@ -125,7 +122,6 @@ Create a `.env.local` file at the project root:
 
 ```
 THROWAWAY-EMAIL_TEST_LIVE=TRUE
-THROWAWAY-EMAIL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -149,7 +145,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

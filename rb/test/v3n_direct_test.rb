@@ -69,14 +69,12 @@ def v3n_direct_setup(mockres)
   env = Runner.env_override({
     "THROWAWAYEMAIL_TEST_V_N_ENTID" => {},
     "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
-    "THROWAWAYEMAIL_APIKEY" => "NONE",
   })
 
   live = env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["THROWAWAYEMAIL_APIKEY"],
     }
     client = ThrowawayEmailSDK.new(merged_opts)
     return {

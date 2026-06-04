@@ -25,8 +25,34 @@ main: {
       ]
       title: "throwaway.cloud API"
       version: "3.0.0"
+      tagline: "Check whether an email address or domain belongs to a disposable / throwaway mail service"
+      homepage: "https://throwaway.cloud"
+      docs_url: "https://throwaway.cloud"
+      license_short: "Apache-2.0 (SDK); upstream API is described as open source and free to use"
+      license_md: `- SDK is distributed under the Apache-2.0 license.
+- The upstream throwaway.cloud service describes itself as "open source and free forever" with no API keys required.
+- No specific upstream licence is named on the homepage; treat licence terms as those stated by throwaway.cloud / iocium.
+- Attribute throwaway.cloud (iocium) if you surface results in a UI.`
+      about_md: `[throwaway.cloud](https://throwaway.cloud) is a disposable-email detection service operated by iocium. Given an email address or a bare domain, it tells you whether that address points at a temporary / throwaway mailbox provider so you can keep them out of signups, newsletters, and abuse-prone forms.
+
+What you get from the API:
+
+- A simple boolean check on a domain — e.g. \`GET /api/v1/domain/{domain}\` — answering "is this a disposable mail domain?"
+- The same check on a full email address — \`GET /api/v1/email/{email}\` — which extracts and evaluates the domain.
+- A combined v2 endpoint, \`GET /api/v2/{subject}\`, that accepts either an email or a domain.
+- DNS-based lookup paths (\`/dns-query\` for DNS-over-HTTPS and \`/resolve\` for DNS-over-JSON) plus a \`*.throwaway.zone\` reverse-DNS zone, returning sinkhole IPs (\`10.0.0.1\` / \`fc00::1\`) for flagged domains.
+
+Operational notes: no API key is required, CORS is enabled, and rate limits are described as "generous" but not numerically published. Detection is built on continuous automated DNS monitoring combined with curated lists and pattern analysis.`
+      entity_desc: {
+        dns_query: "DNS-over-HTTPS lookup interface at `/dns-query` — query a domain and receive a sinkhole answer if it is a known disposable provider."
+        domain: "Direct domain check — `GET /api/v1/domain/{domain}` returns whether that domain operates as a disposable email service."
+        email: "Direct email-address check — `GET /api/v1/email/{email}` extracts the domain and reports whether it is disposable."
+        list: "Bulk / list views of the disposable-domain dataset that backs the detection service."
+        resolve: "DNS-over-JSON lookup interface at `/resolve`, returning a JSON-formatted resolver response for a queried name."
+        v2n: "Combined v2 endpoint — `GET /api/v2/{subject}` — that accepts either an email address or a domain and returns a `{ success, isDisposable }` JSON result."
+        v3n: "Newer v3 detection endpoint exposed by the throwaway.cloud API surface for disposable / temporary mail lookups."
+      }
+      auth: false
     }
   }
-}
-
 }

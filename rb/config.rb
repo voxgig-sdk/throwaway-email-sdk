@@ -15,9 +15,6 @@ module ThrowawayEmailConfig
       },
       "options" => {
         "base" => "https://throwaway.cloud",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },

@@ -91,7 +91,6 @@ def _resolve_basic_setup(extra):
         "THROWAWAYEMAIL_TEST_RESOLVE_ENTID": idmap,
         "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN": "FALSE",
-        "THROWAWAYEMAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +101,6 @@ def _resolve_basic_setup(extra):
     if env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("THROWAWAYEMAIL_APIKEY"),
             },
             extra or {},
         ])
