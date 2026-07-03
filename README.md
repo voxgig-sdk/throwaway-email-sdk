@@ -1,21 +1,8 @@
 # ThrowawayEmail SDK
 
-Check whether an email address or domain belongs to a disposable / throwaway mail service
+throwaway.cloud API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About throwaway.cloud API
-
-[throwaway.cloud](https://throwaway.cloud) is a disposable-email detection service operated by iocium. Given an email address or a bare domain, it tells you whether that address points at a temporary / throwaway mailbox provider so you can keep them out of signups, newsletters, and abuse-prone forms.
-
-What you get from the API:
-
-- A simple boolean check on a domain — e.g. `GET /api/v1/domain/{domain}` — answering "is this a disposable mail domain?"
-- The same check on a full email address — `GET /api/v1/email/{email}` — which extracts and evaluates the domain.
-- A combined v2 endpoint, `GET /api/v2/{subject}`, that accepts either an email or a domain.
-- DNS-based lookup paths (`/dns-query` for DNS-over-HTTPS and `/resolve` for DNS-over-JSON) plus a `*.throwaway.zone` reverse-DNS zone, returning sinkhole IPs (`10.0.0.1` / `fc00::1`) for flagged domains.
-
-Operational notes: no API key is required, CORS is enabled, and rate limits are described as "generous" but not numerically published. Detection is built on continuous automated DNS monitoring combined with curated lists and pattern analysis.
 
 ## Try it
 
@@ -49,27 +36,31 @@ gem install throwaway-email-sdk
 luarocks install throwaway-email-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { ThrowawayEmailSDK } from 'throwaway-email'
 
-const client = new ThrowawayEmailSDK({})
+const client = new ThrowawayEmailSDK({
+  apikey: process.env.THROWAWAY-EMAIL_APIKEY,
+})
 
+// Load dnsquery data
+const dnsquery = await client.DnsQuery().load({})
+console.log(dnsquery.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,13 +90,13 @@ The API exposes 7 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **DnsQuery** | DNS-over-HTTPS lookup interface at `/dns-query` — query a domain and receive a sinkhole answer if it is a known disposable provider. | `/dns-query` |
-| **Domain** | Direct domain check — `GET /api/v1/domain/{domain}` returns whether that domain operates as a disposable email service. | `/api/v1/domain/{domain}` |
-| **Email** | Direct email-address check — `GET /api/v1/email/{email}` extracts the domain and reports whether it is disposable. | `/api/v1/email/{email}` |
-| **List** | Bulk / list views of the disposable-domain dataset that backs the detection service. | `/list.json` |
-| **Resolve** | DNS-over-JSON lookup interface at `/resolve`, returning a JSON-formatted resolver response for a queried name. | `/resolve` |
-| **V2n** | Combined v2 endpoint — `GET /api/v2/{subject}` — that accepts either an email address or a domain and returns a `{ success, isDisposable }` JSON result. | `/api/v2/{subject}` |
-| **V3n** | Newer v3 detection endpoint exposed by the throwaway.cloud API surface for disposable / temporary mail lookups. | `/api/v3/{subject}` |
+| **DnsQuery** |  | `/dns-query` |
+| **Domain** |  | `/api/v1/domain/{domain}` |
+| **Email** |  | `/api/v1/email/{email}` |
+| **List** |  | `/list.json` |
+| **Resolve** |  | `/resolve` |
+| **V2n** |  | `/api/v2/{subject}` |
+| **V3n** |  | `/api/v3/{subject}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -115,15 +106,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from throwawayemail_sdk import ThrowawayEmailSDK
 
-client = ThrowawayEmailSDK({})
+client = ThrowawayEmailSDK({
+    "apikey": os.environ.get("THROWAWAY-EMAIL_APIKEY"),
+})
 
 
 # Load a specific dnsquery
-dnsquery, err = client.DnsQuery(None).load(
-    {"id": "example_id"}, None
-)
+dnsquery, err = client.DnsQuery().load({"id": "example_id"})
+print(dnsquery)
 ```
 
 ### PHP
@@ -132,13 +125,14 @@ dnsquery, err = client.DnsQuery(None).load(
 <?php
 require_once 'throwawayemail_sdk.php';
 
-$client = new ThrowawayEmailSDK([]);
+$client = new ThrowawayEmailSDK([
+    "apikey" => getenv("THROWAWAY-EMAIL_APIKEY"),
+]);
 
 
 // Load a specific dnsquery
-[$dnsquery, $err] = $client->DnsQuery(null)->load(
-    ["id" => "example_id"], null
-);
+[$dnsquery, $err] = $client->DnsQuery()->load(["id" => "example_id"]);
+print_r($dnsquery);
 ```
 
 ### Golang
@@ -146,8 +140,13 @@ $client = new ThrowawayEmailSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/throwaway-email-sdk/go"
 
-client := sdk.NewThrowawayEmailSDK(map[string]any{})
+client := sdk.NewThrowawayEmailSDK(map[string]any{
+    "apikey": os.Getenv("THROWAWAY-EMAIL_APIKEY"),
+})
 
+// Load dnsquery data
+dnsquery, err := client.DnsQuery(nil).Load(map[string]any{}, nil)
+fmt.Println(dnsquery)
 ```
 
 ### Ruby
@@ -155,13 +154,14 @@ client := sdk.NewThrowawayEmailSDK(map[string]any{})
 ```ruby
 require_relative "ThrowawayEmail_sdk"
 
-client = ThrowawayEmailSDK.new({})
+client = ThrowawayEmailSDK.new({
+  "apikey" => ENV["THROWAWAY-EMAIL_APIKEY"],
+})
 
 
 # Load a specific dnsquery
-dnsquery, err = client.DnsQuery(nil).load(
-  { "id" => "example_id" }, nil
-)
+dnsquery, err = client.DnsQuery().load({ "id" => "example_id" })
+puts dnsquery
 ```
 
 ### Lua
@@ -169,13 +169,14 @@ dnsquery, err = client.DnsQuery(nil).load(
 ```lua
 local sdk = require("throwaway-email_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("THROWAWAY-EMAIL_APIKEY"),
+})
 
 
 -- Load a specific dnsquery
-local dnsquery, err = client:DnsQuery(nil):load(
-  { id = "example_id" }, nil
-)
+local dnsquery, err = client:DnsQuery():load({ id = "example_id" })
+print(dnsquery)
 ```
 
 ## Unit testing in offline mode
@@ -194,25 +195,21 @@ const result = await client.DnsQuery().load({ id: 'test01' })
 ### Python
 
 ```python
-client = ThrowawayEmailSDK.test(None, None)
-result, err = client.DnsQuery(None).load(
-    {"id": "test01"}, None
-)
+client = ThrowawayEmailSDK.test()
+result, err = client.DnsQuery().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = ThrowawayEmailSDK::test(null, null);
-[$result, $err] = $client->DnsQuery(null)->load(
-    ["id" => "test01"], null
-);
+$client = ThrowawayEmailSDK::test();
+[$result, $err] = $client->DnsQuery()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.DnsQuery(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -221,19 +218,15 @@ result, err := client.DnsQuery(nil).Load(
 ### Ruby
 
 ```ruby
-client = ThrowawayEmailSDK.test(nil, nil)
-result, err = client.DnsQuery(nil).load(
-  { "id" => "test01" }, nil
-)
+client = ThrowawayEmailSDK.test
+result, err = client.DnsQuery().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:DnsQuery(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:DnsQuery():load({ id = "test01" })
 ```
 
 ## How it works
@@ -337,15 +330,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the throwaway.cloud API
-
-- Upstream: [https://throwaway.cloud](https://throwaway.cloud)
-
-- SDK is distributed under the Apache-2.0 license.
-- The upstream throwaway.cloud service describes itself as "open source and free forever" with no API keys required.
-- No specific upstream licence is named on the homepage; treat licence terms as those stated by throwaway.cloud / iocium.
-- Attribute throwaway.cloud (iocium) if you surface results in a UI.
 
 ---
 

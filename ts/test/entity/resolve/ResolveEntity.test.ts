@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'THROWAWAY_EMAIL_TEST_RESOLVE_ENTID': idmap,
     'THROWAWAY_EMAIL_TEST_LIVE': 'FALSE',
     'THROWAWAY_EMAIL_TEST_EXPLAIN': 'FALSE',
+    'THROWAWAY_EMAIL_APIKEY': 'NONE',
   })
 
   idmap = env['THROWAWAY_EMAIL_TEST_RESOLVE_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new ThrowawayEmailSDK(merge([
       {
+        apikey: env.THROWAWAY_EMAIL_APIKEY,
       },
       extra
     ]))

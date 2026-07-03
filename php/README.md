@@ -1,6 +1,11 @@
 # ThrowawayEmail PHP SDK
 
-The PHP SDK for the ThrowawayEmail API. Provides an entity-oriented interface using PHP conventions.
+
+
+The PHP SDK for the ThrowawayEmail API — an entity-oriented client using PHP conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -20,13 +25,15 @@ loading a specific record.
 <?php
 require_once 'throwawayemail_sdk.php';
 
-$client = new ThrowawayEmailSDK([]);
+$client = new ThrowawayEmailSDK([
+    "apikey" => getenv("THROWAWAY-EMAIL_APIKEY"),
+]);
 ```
 
 ### 3. Load a dnsquery
 
 ```php
-[$result, $err] = $client->DnsQuery(null)->load(["id" => "example_id"], null);
+[$result, $err] = $client->DnsQuery()->load(["id" => "example_id"]);
 if ($err) { throw new \Exception($err); }
 print_r($result);
 ```
@@ -35,7 +42,7 @@ print_r($result);
 
 ```php
 // Create
-[$created, $_] = $client->DnsQuery(null)->create(["name" => "Example"], null);
+[$created, $_] = $client->DnsQuery()->create(["name" => "Example"]);
 
 ```
 
@@ -80,11 +87,9 @@ print_r($fetchdef["headers"]);
 Create a mock client for unit testing — no server required:
 
 ```php
-$client = ThrowawayEmailSDK::test(null, null);
+$client = ThrowawayEmailSDK::test();
 
-[$result, $err] = $client->ThrowawayEmail(null)->load(
-    ["id" => "test01"], null
-);
+[$result, $err] = $client->ThrowawayEmail()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -119,6 +124,7 @@ Create a `.env.local` file at the project root:
 
 ```
 THROWAWAY-EMAIL_TEST_LIVE=TRUE
+THROWAWAY-EMAIL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -141,6 +147,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

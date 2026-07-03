@@ -64,12 +64,14 @@ def _dns_query_direct_setup(mockres):
     env = runner.env_override({
         "THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID": {},
         "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
+        "THROWAWAYEMAIL_APIKEY": "NONE",
     })
 
     live = env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("THROWAWAYEMAIL_APIKEY"),
         }
         client = ThrowawayEmailSDK(merged_opts)
         return {

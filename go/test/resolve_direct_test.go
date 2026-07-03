@@ -105,12 +105,14 @@ func resolveDirectSetup(mockres any) *resolveDirectSetupResult {
 	env := envOverride(map[string]any{
 		"THROWAWAYEMAIL_TEST_RESOLVE_ENTID": map[string]any{},
 		"THROWAWAYEMAIL_TEST_LIVE":    "FALSE",
+		"THROWAWAYEMAIL_APIKEY":       "NONE",
 	})
 
 	live := env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["THROWAWAYEMAIL_APIKEY"],
 		}
 		client := sdk.NewThrowawayEmailSDK(mergedOpts)
 

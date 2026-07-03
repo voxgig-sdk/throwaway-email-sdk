@@ -107,12 +107,14 @@ function list_direct_setup(mockres)
   local env = runner.env_override({
     ["THROWAWAYEMAIL_TEST_LIST_ENTID"] = {},
     ["THROWAWAYEMAIL_TEST_LIVE"] = "FALSE",
+    ["THROWAWAYEMAIL_APIKEY"] = "NONE",
   })
 
   local live = env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["THROWAWAYEMAIL_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

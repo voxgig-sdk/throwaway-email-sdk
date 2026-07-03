@@ -78,12 +78,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID': {},
     'THROWAWAYEMAIL_TEST_LIVE': 'FALSE',
+    'THROWAWAYEMAIL_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.THROWAWAYEMAIL_TEST_LIVE
 
   if (live) {
     const client = new ThrowawayEmailSDK({
+      apikey: env.THROWAWAYEMAIL_APIKEY,
     })
 
     let idmap: any = env['THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID']

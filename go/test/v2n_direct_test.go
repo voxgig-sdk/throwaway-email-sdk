@@ -110,12 +110,14 @@ func v2nDirectSetup(mockres any) *v2nDirectSetupResult {
 	env := envOverride(map[string]any{
 		"THROWAWAYEMAIL_TEST_V_N_ENTID": map[string]any{},
 		"THROWAWAYEMAIL_TEST_LIVE":    "FALSE",
+		"THROWAWAYEMAIL_APIKEY":       "NONE",
 	})
 
 	live := env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["THROWAWAYEMAIL_APIKEY"],
 		}
 		client := sdk.NewThrowawayEmailSDK(mergedOpts)
 

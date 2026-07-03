@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -118,8 +118,8 @@ local dns_query = client:DnsQuery(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:DnsQuery(nil):create({
-}, nil)
+local result, err = client:DnsQuery():create({
+})
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -127,7 +127,7 @@ local result, err = client:DnsQuery(nil):create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:DnsQuery(nil):load({ id = "dns_query_id" }, nil)
+local result, err = client:DnsQuery():load({ id = "dns_query_id" })
 ```
 
 ### Common Methods
@@ -180,7 +180,7 @@ local domain = client:Domain(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Domain(nil):load({ id = "domain_id" }, nil)
+local result, err = client:Domain():load({ id = "domain_id" })
 ```
 
 ### Common Methods
@@ -233,7 +233,7 @@ local email = client:Email(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Email(nil):load({ id = "email_id" }, nil)
+local result, err = client:Email():load({ id = "email_id" })
 ```
 
 ### Common Methods
@@ -279,7 +279,7 @@ local list = client:List(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:List(nil):list(nil, nil)
+local results, err = client:List():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -287,7 +287,7 @@ local results, err = client:List(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:List(nil):load({ id = "list_id" }, nil)
+local result, err = client:List():load({ id = "list_id" })
 ```
 
 ### Common Methods
@@ -333,7 +333,7 @@ local resolve = client:Resolve(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Resolve(nil):load({ id = "resolve_id" }, nil)
+local result, err = client:Resolve():load({ id = "resolve_id" })
 ```
 
 ### Common Methods
@@ -386,7 +386,7 @@ local v2n = client:V2n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V2n(nil):load({ id = "v2n_id" }, nil)
+local result, err = client:V2n():load({ id = "v2n_id" })
 ```
 
 ### Common Methods
@@ -440,7 +440,7 @@ local v3n = client:V3n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V3n(nil):load({ id = "v3n_id" }, nil)
+local result, err = client:V3n():load({ id = "v3n_id" })
 ```
 
 ### Common Methods

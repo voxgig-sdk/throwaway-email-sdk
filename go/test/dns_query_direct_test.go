@@ -105,12 +105,14 @@ func dns_queryDirectSetup(mockres any) *dns_queryDirectSetupResult {
 	env := envOverride(map[string]any{
 		"THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID": map[string]any{},
 		"THROWAWAYEMAIL_TEST_LIVE":    "FALSE",
+		"THROWAWAYEMAIL_APIKEY":       "NONE",
 	})
 
 	live := env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["THROWAWAYEMAIL_APIKEY"],
 		}
 		client := sdk.NewThrowawayEmailSDK(mergedOpts)
 
