@@ -10,7 +10,7 @@ The PHP SDK for the ThrowawayEmail API — an entity-oriented client using PHP c
 
 ## Install
 ```bash
-composer require voxgig/throwaway-email-sdk
+composer require voxgig-sdk/throwaway-email
 ```
 
 

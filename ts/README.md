@@ -10,7 +10,7 @@ The TypeScript SDK for the ThrowawayEmail API — a type-safe, entity-oriented c
 
 ## Install
 ```bash
-npm install throwaway-email
+npm install @voxgig-sdk/throwaway-email
 ```
 ## Tutorial: your first API call
 

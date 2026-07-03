@@ -10,7 +10,7 @@ The Lua SDK for the ThrowawayEmail API — an entity-oriented client using Lua c
 
 ## Install
 ```bash
-luarocks install throwaway-email-sdk
+luarocks install voxgig-sdk-throwaway-email
 ```
 
 If the module is not yet published, add the source directory to

@@ -10,7 +10,7 @@ The Python SDK for the ThrowawayEmail API — an entity-oriented client followin
 
 ## Install
 ```bash
-pip install throwaway-email-sdk
+pip install voxgig-sdk-throwaway-email
 ```
 
 Or install from source:

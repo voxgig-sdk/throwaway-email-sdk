@@ -1,7 +1,23 @@
 {
   "name": "@voxgig-sdk/throwaway-email",
   "version": "0.0.1",
-  "description": "DESCRIPTION",
+  "description": "Unofficial generated TypeScript SDK for the throwaway.cloud public API. Not affiliated with or endorsed by the upstream API provider.",
+  "keywords": [
+    "voxgig",
+    "sdk",
+    "generated-sdk",
+    "openapi",
+    "api-client",
+    "throwaway-email"
+  ],
+  "homepage": "https://github.com/voxgig-sdk/throwaway-email-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig-sdk/throwaway-email-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voxgig-sdk/throwaway-email-sdk/issues"
+  },
   "main": "dist/ThrowawayEmailSDK.js",
   "type": "commonjs",
   "types": "dist/ThrowawayEmailSDK.d.ts",
@@ -14,7 +30,10 @@
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm run build && npm test"
   },
-  "author": "ThrowawayEmail",
+  "author": {
+    "name": "Voxgig",
+    "url": "https://voxgig.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "peerDependencies": {},

@@ -10,13 +10,13 @@ The Ruby SDK for the ThrowawayEmail API — an entity-oriented client using idio
 
 ## Install
 ```bash
-gem install throwaway-email-sdk
+gem install voxgig-sdk-throwaway-email
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "throwaway-email-sdk"
+gem "voxgig-sdk-throwaway-email"
 ```
 
 Then run:
