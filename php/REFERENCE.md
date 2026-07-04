@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `$options` | `array` | SDK configuration options. |
-| `$options["apikey"]` | `string` | API key for authentication. |
 | `$options["base"]` | `string` | Base URL for API requests. |
 | `$options["prefix"]` | `string` | URL prefix appended after base. |
 | `$options["suffix"]` | `string` | URL suffix appended after path. |
@@ -80,7 +79,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -94,11 +96,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -106,26 +109,26 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## DnsQueryEntity
 
 ```php
-$dns_query = $client->DnsQuery();
+$dns_query = $client->dns_query();
 ```
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->DnsQuery()->create([
+$result = $client->dns_query()->create([
 ]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->DnsQuery()->load(["id" => "dns_query_id"]);
+$result = $client->dns_query()->load(["id" => "dns_query_id"]);
 ```
 
 ### Common Methods
@@ -161,7 +164,7 @@ Return the entity name.
 ## DomainEntity
 
 ```php
-$domain = $client->Domain();
+$domain = $client->domain();
 ```
 
 ### Fields
@@ -173,12 +176,12 @@ $domain = $client->Domain();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Domain()->load(["id" => "domain_id"]);
+$result = $client->domain()->load(["id" => "domain_id"]);
 ```
 
 ### Common Methods
@@ -214,7 +217,7 @@ Return the entity name.
 ## EmailEntity
 
 ```php
-$email = $client->Email();
+$email = $client->email();
 ```
 
 ### Fields
@@ -226,12 +229,12 @@ $email = $client->Email();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Email()->load(["id" => "email_id"]);
+$result = $client->email()->load(["id" => "email_id"]);
 ```
 
 ### Common Methods
@@ -267,25 +270,25 @@ Return the entity name.
 ## ListEntity
 
 ```php
-$list = $client->List();
+$list = $client->list();
 ```
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->List()->list([]);
+$results = $client->list()->list([]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->List()->load(["id" => "list_id"]);
+$result = $client->list()->load(["id" => "list_id"]);
 ```
 
 ### Common Methods
@@ -321,17 +324,17 @@ Return the entity name.
 ## ResolveEntity
 
 ```php
-$resolve = $client->Resolve();
+$resolve = $client->resolve();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Resolve()->load(["id" => "resolve_id"]);
+$result = $client->resolve()->load(["id" => "resolve_id"]);
 ```
 
 ### Common Methods
@@ -367,7 +370,7 @@ Return the entity name.
 ## V2nEntity
 
 ```php
-$v2n = $client->V2n();
+$v2n = $client->v2n();
 ```
 
 ### Fields
@@ -379,12 +382,12 @@ $v2n = $client->V2n();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->V2n()->load(["id" => "v2n_id"]);
+$result = $client->v2n()->load(["id" => "v2n_id"]);
 ```
 
 ### Common Methods
@@ -420,7 +423,7 @@ Return the entity name.
 ## V3nEntity
 
 ```php
-$v3n = $client->V3n();
+$v3n = $client->v3n();
 ```
 
 ### Fields
@@ -433,12 +436,12 @@ $v3n = $client->V3n();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->V3n()->load(["id" => "v3n_id"]);
+$result = $client->v3n()->load(["id" => "v3n_id"]);
 ```
 
 ### Common Methods

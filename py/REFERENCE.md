@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -78,9 +77,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -93,11 +92,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -105,26 +104,26 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## DnsQueryEntity
 
 ```python
-dns_query = client.DnsQuery()
+dns_query = client.dns_query
 ```
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.DnsQuery().create({
+result = client.dns_query.create({
 })
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.DnsQuery().load({"id": "dns_query_id"})
+result = client.dns_query.load({"id": "dns_query_id"})
 ```
 
 ### Common Methods
@@ -159,7 +158,7 @@ Return the entity name.
 ## DomainEntity
 
 ```python
-domain = client.Domain()
+domain = client.domain
 ```
 
 ### Fields
@@ -171,12 +170,12 @@ domain = client.Domain()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Domain().load({"id": "domain_id"})
+result = client.domain.load({"id": "domain_id"})
 ```
 
 ### Common Methods
@@ -211,7 +210,7 @@ Return the entity name.
 ## EmailEntity
 
 ```python
-email = client.Email()
+email = client.email
 ```
 
 ### Fields
@@ -223,12 +222,12 @@ email = client.Email()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Email().load({"id": "email_id"})
+result = client.email.load({"id": "email_id"})
 ```
 
 ### Common Methods
@@ -263,25 +262,25 @@ Return the entity name.
 ## ListEntity
 
 ```python
-list = client.List()
+list = client.list
 ```
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.List().list({})
+results = client.list.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.List().load({"id": "list_id"})
+result = client.list.load({"id": "list_id"})
 ```
 
 ### Common Methods
@@ -316,17 +315,17 @@ Return the entity name.
 ## ResolveEntity
 
 ```python
-resolve = client.Resolve()
+resolve = client.resolve
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Resolve().load({"id": "resolve_id"})
+result = client.resolve.load({"id": "resolve_id"})
 ```
 
 ### Common Methods
@@ -361,7 +360,7 @@ Return the entity name.
 ## V2nEntity
 
 ```python
-v2n = client.V2n()
+v2n = client.v2n
 ```
 
 ### Fields
@@ -373,12 +372,12 @@ v2n = client.V2n()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.V2n().load({"id": "v2n_id"})
+result = client.v2n.load({"id": "v2n_id"})
 ```
 
 ### Common Methods
@@ -413,7 +412,7 @@ Return the entity name.
 ## V3nEntity
 
 ```python
-v3n = client.V3n()
+v3n = client.v3n
 ```
 
 ### Fields
@@ -426,12 +425,12 @@ v3n = client.V3n()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.V3n().load({"id": "v3n_id"})
+result = client.v3n.load({"id": "v3n_id"})
 ```
 
 ### Common Methods

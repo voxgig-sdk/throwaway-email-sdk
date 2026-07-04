@@ -9,9 +9,10 @@ The PHP SDK for the ThrowawayEmail API — an entity-oriented client using PHP c
 
 
 ## Install
-```bash
-composer require voxgig-sdk/throwaway-email
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/throwaway-email-sdk/releases](https://github.com/voxgig-sdk/throwaway-email-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,24 +26,25 @@ loading a specific record.
 <?php
 require_once 'throwawayemail_sdk.php';
 
-$client = new ThrowawayEmailSDK([
-    "apikey" => getenv("THROWAWAY-EMAIL_APIKEY"),
-]);
+$client = new ThrowawayEmailSDK();
 ```
 
 ### 3. Load a dnsquery
 
 ```php
-[$result, $err] = $client->DnsQuery()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->dnsquery()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 ### 4. Create, update, and remove
 
 ```php
 // Create
-[$created, $_] = $client->DnsQuery()->create(["name" => "Example"]);
+$created = $client->dnsquery()->create(["name" => "Example"]);
 
 ```
 
@@ -54,28 +56,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -89,7 +94,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = ThrowawayEmailSDK::test();
 
-[$result, $err] = $client->ThrowawayEmail()->load(["id" => "test01"]);
+$result = $client->dnsquery()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -123,8 +128,7 @@ $client = new ThrowawayEmailSDK([
 Create a `.env.local` file at the project root:
 
 ```
-THROWAWAY-EMAIL_TEST_LIVE=TRUE
-THROWAWAY-EMAIL_APIKEY=<your-key>
+THROWAWAY_EMAIL_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -147,7 +151,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -199,8 +202,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -292,7 +299,7 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `const dns_query = client.DnsQuery()`
+Create an instance: `const dns_query = client.dns_query`
 
 #### Operations
 
@@ -304,20 +311,20 @@ Create an instance: `const dns_query = client.DnsQuery()`
 #### Example: Load
 
 ```ts
-const dns_query = await client.DnsQuery().load({ id: 'dns_query_id' })
+const dns_query = await client.dns_query.load({ id: 'dns_query_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const dns_query = await client.DnsQuery().create({
+const dns_query = await client.dns_query.create({
 })
 ```
 
 
 ### Domain
 
-Create an instance: `const domain = client.Domain()`
+Create an instance: `const domain = client.domain`
 
 #### Operations
 
@@ -335,13 +342,13 @@ Create an instance: `const domain = client.Domain()`
 #### Example: Load
 
 ```ts
-const domain = await client.Domain().load({ id: 'domain_id' })
+const domain = await client.domain.load({ id: 'domain_id' })
 ```
 
 
 ### Email
 
-Create an instance: `const email = client.Email()`
+Create an instance: `const email = client.email`
 
 #### Operations
 
@@ -359,13 +366,13 @@ Create an instance: `const email = client.Email()`
 #### Example: Load
 
 ```ts
-const email = await client.Email().load({ id: 'email_id' })
+const email = await client.email.load({ id: 'email_id' })
 ```
 
 
 ### List
 
-Create an instance: `const list = client.List()`
+Create an instance: `const list = client.list`
 
 #### Operations
 
@@ -377,19 +384,19 @@ Create an instance: `const list = client.List()`
 #### Example: Load
 
 ```ts
-const list = await client.List().load({ id: 'list_id' })
+const list = await client.list.load({ id: 'list_id' })
 ```
 
 #### Example: List
 
 ```ts
-const lists = await client.List().list()
+const lists = await client.list.list()
 ```
 
 
 ### Resolve
 
-Create an instance: `const resolve = client.Resolve()`
+Create an instance: `const resolve = client.resolve`
 
 #### Operations
 
@@ -400,13 +407,13 @@ Create an instance: `const resolve = client.Resolve()`
 #### Example: Load
 
 ```ts
-const resolve = await client.Resolve().load({ id: 'resolve_id' })
+const resolve = await client.resolve.load({ id: 'resolve_id' })
 ```
 
 
 ### V2n
 
-Create an instance: `const v2n = client.V2n()`
+Create an instance: `const v2n = client.v2n`
 
 #### Operations
 
@@ -424,13 +431,13 @@ Create an instance: `const v2n = client.V2n()`
 #### Example: Load
 
 ```ts
-const v2n = await client.V2n().load({ id: 'v2n_id' })
+const v2n = await client.v2n.load({ id: 'v2n_id' })
 ```
 
 
 ### V3n
 
-Create an instance: `const v3n = client.V3n()`
+Create an instance: `const v3n = client.v3n`
 
 #### Operations
 
@@ -449,7 +456,7 @@ Create an instance: `const v3n = client.V3n()`
 #### Example: Load
 
 ```ts
-const v3n = await client.V3n().load({ id: 'v3n_id' })
+const v3n = await client.v3n.load({ id: 'v3n_id' })
 ```
 
 
@@ -524,11 +531,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$dnsquery = $client->dnsquery();
+$dnsquery->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $dnsquery->dataGet() now returns the loaded dnsquery data
+// $dnsquery->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

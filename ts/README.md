@@ -9,9 +9,12 @@ The TypeScript SDK for the ThrowawayEmail API — a type-safe, entity-oriented c
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/throwaway-email
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/throwaway-email-sdk/releases](https://github.com/voxgig-sdk/throwaway-email-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ThrowawayEmailSDK } from 'throwaway-email'
+import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email'
 
-const client = new ThrowawayEmailSDK({
-  apikey: process.env.THROWAWAY-EMAIL_APIKEY,
-})
+const client = new ThrowawayEmailSDK()
 ```
 
 ### 3. Load a dnsquery
 
 ```ts
-const result = await client.DnsQuery().load({ id: 'example_id' })
+const result = await client.dnsquery.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -41,7 +42,7 @@ if (result.ok) {
 
 ```ts
 // Create
-const created = await client.DnsQuery().create({
+const created = await client.dnsquery.create({
   name: 'Example',
 })
 
@@ -89,7 +90,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ThrowawayEmailSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.dnsquery.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -97,7 +98,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new ThrowawayEmailSDK({ apikey: '...' })
+const client = new ThrowawayEmailSDK()
 const testClient = client.tester()
 ```
 
@@ -106,7 +107,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.dnsquery
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,7 +134,6 @@ const logger = {
 }
 
 const client = new ThrowawayEmailSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -143,8 +143,7 @@ const client = new ThrowawayEmailSDK({
 Create a `.env.local` file at the project root:
 
 ```
-THROWAWAY-EMAIL_TEST_LIVE=TRUE
-THROWAWAY-EMAIL_APIKEY=<your-key>
+THROWAWAY_EMAIL_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -162,7 +161,6 @@ cd ts && npm test
 
 ```ts
 new ThrowawayEmailSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -173,7 +171,6 @@ new ThrowawayEmailSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -344,7 +341,7 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `const dns_query = client.DnsQuery()`
+Create an instance: `const dns_query = client.dns_query`
 
 #### Operations
 
@@ -356,20 +353,20 @@ Create an instance: `const dns_query = client.DnsQuery()`
 #### Example: Load
 
 ```ts
-const dns_query = await client.DnsQuery().load({ id: 'dns_query_id' })
+const dns_query = await client.dns_query.load({ id: 'dns_query_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const dns_query = await client.DnsQuery().create({
+const dns_query = await client.dns_query.create({
 })
 ```
 
 
 ### Domain
 
-Create an instance: `const domain = client.Domain()`
+Create an instance: `const domain = client.domain`
 
 #### Operations
 
@@ -387,13 +384,13 @@ Create an instance: `const domain = client.Domain()`
 #### Example: Load
 
 ```ts
-const domain = await client.Domain().load({ id: 'domain_id' })
+const domain = await client.domain.load({ id: 'domain_id' })
 ```
 
 
 ### Email
 
-Create an instance: `const email = client.Email()`
+Create an instance: `const email = client.email`
 
 #### Operations
 
@@ -411,13 +408,13 @@ Create an instance: `const email = client.Email()`
 #### Example: Load
 
 ```ts
-const email = await client.Email().load({ id: 'email_id' })
+const email = await client.email.load({ id: 'email_id' })
 ```
 
 
 ### List
 
-Create an instance: `const list = client.List()`
+Create an instance: `const list = client.list`
 
 #### Operations
 
@@ -429,19 +426,19 @@ Create an instance: `const list = client.List()`
 #### Example: Load
 
 ```ts
-const list = await client.List().load({ id: 'list_id' })
+const list = await client.list.load({ id: 'list_id' })
 ```
 
 #### Example: List
 
 ```ts
-const lists = await client.List().list()
+const lists = await client.list.list()
 ```
 
 
 ### Resolve
 
-Create an instance: `const resolve = client.Resolve()`
+Create an instance: `const resolve = client.resolve`
 
 #### Operations
 
@@ -452,13 +449,13 @@ Create an instance: `const resolve = client.Resolve()`
 #### Example: Load
 
 ```ts
-const resolve = await client.Resolve().load({ id: 'resolve_id' })
+const resolve = await client.resolve.load({ id: 'resolve_id' })
 ```
 
 
 ### V2n
 
-Create an instance: `const v2n = client.V2n()`
+Create an instance: `const v2n = client.v2n`
 
 #### Operations
 
@@ -476,13 +473,13 @@ Create an instance: `const v2n = client.V2n()`
 #### Example: Load
 
 ```ts
-const v2n = await client.V2n().load({ id: 'v2n_id' })
+const v2n = await client.v2n.load({ id: 'v2n_id' })
 ```
 
 
 ### V3n
 
-Create an instance: `const v3n = client.V3n()`
+Create an instance: `const v3n = client.v3n`
 
 #### Operations
 
@@ -501,7 +498,7 @@ Create an instance: `const v3n = client.V3n()`
 #### Example: Load
 
 ```ts
-const v3n = await client.V3n().load({ id: 'v3n_id' })
+const v3n = await client.v3n.load({ id: 'v3n_id' })
 ```
 
 
@@ -562,7 +559,7 @@ throwaway-email/
 Import the SDK from the package root:
 
 ```ts
-import { ThrowawayEmailSDK } from 'throwaway-email'
+import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email'
 ```
 
 ### Entity state
@@ -572,11 +569,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const dnsquery = client.dnsquery
+await dnsquery.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// dnsquery.data() now returns the loaded dnsquery data
+// dnsquery.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

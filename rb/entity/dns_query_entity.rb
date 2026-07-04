@@ -45,6 +45,7 @@ class DnsQueryEntity
     end
   end
 
+  # @return [DnsQuery, Hash] the current DnsQuery data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class DnsQueryEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of DnsQuery fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single DnsQuery.
+  #
+  # @param reqmatch [DnsQueryLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [DnsQuery, Hash] the loaded DnsQuery; raises ThrowawayEmailError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -88,6 +95,11 @@ class DnsQueryEntity
   
 
   
+  # Create a new DnsQuery.
+  #
+  # @param reqdata [DnsQueryCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [DnsQuery, Hash] the created DnsQuery; raises ThrowawayEmailError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

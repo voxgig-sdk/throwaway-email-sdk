@@ -49,8 +49,7 @@ class V2nEntityTest extends TestCase
         // LOAD
         $v2n_ref01_ent = $client->V2n(null);
         $v2n_ref01_match_dt0 = [];
-        [$v2n_ref01_data_dt0_loaded, $err] = $v2n_ref01_ent->load($v2n_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $v2n_ref01_data_dt0_loaded = $v2n_ref01_ent->load($v2n_ref01_match_dt0, null);
         $this->assertNotNull($v2n_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function v2n_basic_setup($extra)
         "THROWAWAYEMAIL_TEST_V_N_ENTID" => $idmap,
         "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-        "THROWAWAYEMAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function v2n_basic_setup($extra)
     if ($env["THROWAWAYEMAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["THROWAWAYEMAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

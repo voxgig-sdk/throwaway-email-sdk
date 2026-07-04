@@ -144,16 +144,23 @@ class ThrowawayEmailSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class ThrowawayEmailSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,45 +212,122 @@ class ThrowawayEmailSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def dns_query(self):
+        """Idiomatic facade: client.dns_query.list() / client.dns_query.load({"id": ...})."""
+        from entity.dns_query_entity import DnsQueryEntity
+        cached = getattr(self, "_dns_query", None)
+        if cached is None:
+            cached = DnsQueryEntity(self, None)
+            self._dns_query = cached
+        return cached
 
     def DnsQuery(self, data=None):
+        # Deprecated: use client.dns_query instead.
         from entity.dns_query_entity import DnsQueryEntity
         return DnsQueryEntity(self, data)
 
 
+    @property
+    def domain(self):
+        """Idiomatic facade: client.domain.list() / client.domain.load({"id": ...})."""
+        from entity.domain_entity import DomainEntity
+        cached = getattr(self, "_domain", None)
+        if cached is None:
+            cached = DomainEntity(self, None)
+            self._domain = cached
+        return cached
+
     def Domain(self, data=None):
+        # Deprecated: use client.domain instead.
         from entity.domain_entity import DomainEntity
         return DomainEntity(self, data)
 
 
+    @property
+    def email(self):
+        """Idiomatic facade: client.email.list() / client.email.load({"id": ...})."""
+        from entity.email_entity import EmailEntity
+        cached = getattr(self, "_email", None)
+        if cached is None:
+            cached = EmailEntity(self, None)
+            self._email = cached
+        return cached
+
     def Email(self, data=None):
+        # Deprecated: use client.email instead.
         from entity.email_entity import EmailEntity
         return EmailEntity(self, data)
 
 
+    @property
+    def list(self):
+        """Idiomatic facade: client.list.list() / client.list.load({"id": ...})."""
+        from entity.list_entity import ListEntity
+        cached = getattr(self, "_list", None)
+        if cached is None:
+            cached = ListEntity(self, None)
+            self._list = cached
+        return cached
+
     def List(self, data=None):
+        # Deprecated: use client.list instead.
         from entity.list_entity import ListEntity
         return ListEntity(self, data)
 
 
+    @property
+    def resolve(self):
+        """Idiomatic facade: client.resolve.list() / client.resolve.load({"id": ...})."""
+        from entity.resolve_entity import ResolveEntity
+        cached = getattr(self, "_resolve", None)
+        if cached is None:
+            cached = ResolveEntity(self, None)
+            self._resolve = cached
+        return cached
+
     def Resolve(self, data=None):
+        # Deprecated: use client.resolve instead.
         from entity.resolve_entity import ResolveEntity
         return ResolveEntity(self, data)
 
 
+    @property
+    def v2n(self):
+        """Idiomatic facade: client.v2n.list() / client.v2n.load({"id": ...})."""
+        from entity.v2n_entity import V2nEntity
+        cached = getattr(self, "_v2n", None)
+        if cached is None:
+            cached = V2nEntity(self, None)
+            self._v2n = cached
+        return cached
+
     def V2n(self, data=None):
+        # Deprecated: use client.v2n instead.
         from entity.v2n_entity import V2nEntity
         return V2nEntity(self, data)
 
 
+    @property
+    def v3n(self):
+        """Idiomatic facade: client.v3n.list() / client.v3n.load({"id": ...})."""
+        from entity.v3n_entity import V3nEntity
+        cached = getattr(self, "_v3n", None)
+        if cached is None:
+            cached = V3nEntity(self, None)
+            self._v3n = cached
+        return cached
+
     def V3n(self, data=None):
+        # Deprecated: use client.v3n instead.
         from entity.v3n_entity import V3nEntity
         return V3nEntity(self, data)
 

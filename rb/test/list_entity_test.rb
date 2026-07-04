@@ -43,14 +43,12 @@ class ListEntityTest < Minitest::Test
     list_ref01_ent = client.List(nil)
     list_ref01_match = {}
 
-    list_ref01_list_result, err = list_ref01_ent.list(list_ref01_match, nil)
-    assert_nil err
+    list_ref01_list_result = list_ref01_ent.list(list_ref01_match, nil)
     assert list_ref01_list_result.is_a?(Array)
 
     # LOAD
     list_ref01_match_dt0 = {}
-    list_ref01_data_dt0_loaded, err = list_ref01_ent.load(list_ref01_match_dt0, nil)
-    assert_nil err
+    list_ref01_data_dt0_loaded = list_ref01_ent.load(list_ref01_match_dt0, nil)
     assert !list_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def list_basic_setup(extra)
     "THROWAWAYEMAIL_TEST_LIST_ENTID" => idmap,
     "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
     "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-    "THROWAWAYEMAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def list_basic_setup(extra)
   if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["THROWAWAYEMAIL_APIKEY"],
       },
       extra || {},
     ])

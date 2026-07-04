@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ResolveLoadMatch
+---@param ctrl? table
+---@return Resolve
+---@return string? err
 function ResolveEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

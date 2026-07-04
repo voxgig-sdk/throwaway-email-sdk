@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  V2n,
+  V2nLoadMatch,
+} from '../ThrowawayEmailTypes'
 
 // TODO: needs Entity superclass
-class V2nEntity extends ThrowawayEmailEntityBase {
+class V2nEntity extends ThrowawayEmailEntityBase<V2n> {
 
   constructor(client: ThrowawayEmailSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class V2nEntity extends ThrowawayEmailEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: V2nLoadMatch, ctrl?: Control): Promise<V2n> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class V2nEntity extends ThrowawayEmailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<V2n> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

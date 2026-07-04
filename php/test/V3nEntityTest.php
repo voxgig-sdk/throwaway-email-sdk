@@ -49,8 +49,7 @@ class V3nEntityTest extends TestCase
         // LOAD
         $v3n_ref01_ent = $client->V3n(null);
         $v3n_ref01_match_dt0 = [];
-        [$v3n_ref01_data_dt0_loaded, $err] = $v3n_ref01_ent->load($v3n_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $v3n_ref01_data_dt0_loaded = $v3n_ref01_ent->load($v3n_ref01_match_dt0, null);
         $this->assertNotNull($v3n_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function v3n_basic_setup($extra)
         "THROWAWAYEMAIL_TEST_V_N_ENTID" => $idmap,
         "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-        "THROWAWAYEMAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function v3n_basic_setup($extra)
     if ($env["THROWAWAYEMAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["THROWAWAYEMAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

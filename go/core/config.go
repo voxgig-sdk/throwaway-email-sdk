@@ -14,9 +14,6 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "https://throwaway.cloud",
-			"auth": map[string]any{
-				"prefix": "Bearer",
-			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -135,6 +132,7 @@ func MakeConfig() map[string]any {
 											"orig": "domain",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},
@@ -205,6 +203,7 @@ func MakeConfig() map[string]any {
 											"orig": "email",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},
@@ -420,6 +419,7 @@ func MakeConfig() map[string]any {
 											"orig": "subject",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},
@@ -495,6 +495,7 @@ func MakeConfig() map[string]any {
 											"orig": "subject",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},

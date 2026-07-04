@@ -49,8 +49,7 @@ class EmailEntityTest extends TestCase
         // LOAD
         $email_ref01_ent = $client->Email(null);
         $email_ref01_match_dt0 = [];
-        [$email_ref01_data_dt0_loaded, $err] = $email_ref01_ent->load($email_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $email_ref01_data_dt0_loaded = $email_ref01_ent->load($email_ref01_match_dt0, null);
         $this->assertNotNull($email_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function email_basic_setup($extra)
         "THROWAWAYEMAIL_TEST_EMAIL_ENTID" => $idmap,
         "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-        "THROWAWAYEMAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function email_basic_setup($extra)
     if ($env["THROWAWAYEMAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["THROWAWAYEMAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

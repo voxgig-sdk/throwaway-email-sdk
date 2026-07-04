@@ -103,7 +103,7 @@ class ThrowawayEmailSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class ThrowawayEmailSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class ThrowawayEmailSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,66 +216,143 @@ class ThrowawayEmailSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function DnsQuery($data = null)
+    private $_dns_query = null;
+
+    // Idiomatic facade: $client->dns_query()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias DnsQuery() (PHP method
+    // names are case-insensitive).
+    public function dns_query($data = null)
     {
         require_once __DIR__ . '/entity/dns_query_entity.php';
+        if ($data === null) {
+            if ($this->_dns_query === null) {
+                $this->_dns_query = new DnsQueryEntity($this, null);
+            }
+            return $this->_dns_query;
+        }
         return new DnsQueryEntity($this, $data);
     }
 
 
-    public function Domain($data = null)
+    private $_domain = null;
+
+    // Idiomatic facade: $client->domain()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Domain() (PHP method
+    // names are case-insensitive).
+    public function domain($data = null)
     {
         require_once __DIR__ . '/entity/domain_entity.php';
+        if ($data === null) {
+            if ($this->_domain === null) {
+                $this->_domain = new DomainEntity($this, null);
+            }
+            return $this->_domain;
+        }
         return new DomainEntity($this, $data);
     }
 
 
-    public function Email($data = null)
+    private $_email = null;
+
+    // Idiomatic facade: $client->email()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Email() (PHP method
+    // names are case-insensitive).
+    public function email($data = null)
     {
         require_once __DIR__ . '/entity/email_entity.php';
+        if ($data === null) {
+            if ($this->_email === null) {
+                $this->_email = new EmailEntity($this, null);
+            }
+            return $this->_email;
+        }
         return new EmailEntity($this, $data);
     }
 
 
-    public function List($data = null)
+    private $_list = null;
+
+    // Idiomatic facade: $client->list()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias List() (PHP method
+    // names are case-insensitive).
+    public function list($data = null)
     {
         require_once __DIR__ . '/entity/list_entity.php';
+        if ($data === null) {
+            if ($this->_list === null) {
+                $this->_list = new ListEntity($this, null);
+            }
+            return $this->_list;
+        }
         return new ListEntity($this, $data);
     }
 
 
-    public function Resolve($data = null)
+    private $_resolve = null;
+
+    // Idiomatic facade: $client->resolve()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Resolve() (PHP method
+    // names are case-insensitive).
+    public function resolve($data = null)
     {
         require_once __DIR__ . '/entity/resolve_entity.php';
+        if ($data === null) {
+            if ($this->_resolve === null) {
+                $this->_resolve = new ResolveEntity($this, null);
+            }
+            return $this->_resolve;
+        }
         return new ResolveEntity($this, $data);
     }
 
 
-    public function V2n($data = null)
+    private $_v2n = null;
+
+    // Idiomatic facade: $client->v2n()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias V2n() (PHP method
+    // names are case-insensitive).
+    public function v2n($data = null)
     {
         require_once __DIR__ . '/entity/v2n_entity.php';
+        if ($data === null) {
+            if ($this->_v2n === null) {
+                $this->_v2n = new V2nEntity($this, null);
+            }
+            return $this->_v2n;
+        }
         return new V2nEntity($this, $data);
     }
 
 
-    public function V3n($data = null)
+    private $_v3n = null;
+
+    // Idiomatic facade: $client->v3n()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias V3n() (PHP method
+    // names are case-insensitive).
+    public function v3n($data = null)
     {
         require_once __DIR__ . '/entity/v3n_entity.php';
+        if ($data === null) {
+            if ($this->_v3n === null) {
+                $this->_v3n = new V3nEntity($this, null);
+            }
+            return $this->_v3n;
+        }
         return new V3nEntity($this, $data);
     }
 

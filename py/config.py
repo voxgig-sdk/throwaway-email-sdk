@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://throwaway.cloud",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -136,6 +133,7 @@ def make_config():
                       "orig": "domain",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -206,6 +204,7 @@ def make_config():
                       "orig": "email",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -421,6 +420,7 @@ def make_config():
                       "orig": "subject",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -496,6 +496,7 @@ def make_config():
                       "orig": "subject",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

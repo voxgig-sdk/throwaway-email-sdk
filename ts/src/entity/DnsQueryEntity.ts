@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  DnsQuery,
+  DnsQueryLoadMatch,
+  DnsQueryCreateData,
+} from '../ThrowawayEmailTypes'
 
 // TODO: needs Entity superclass
-class DnsQueryEntity extends ThrowawayEmailEntityBase {
+class DnsQueryEntity extends ThrowawayEmailEntityBase<DnsQuery> {
 
   constructor(client: ThrowawayEmailSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class DnsQueryEntity extends ThrowawayEmailEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: DnsQueryLoadMatch, ctrl?: Control): Promise<DnsQuery> {
 
     const utility = this._utility
 
@@ -136,7 +141,9 @@ class DnsQueryEntity extends ThrowawayEmailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<DnsQuery> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
@@ -144,7 +151,7 @@ class DnsQueryEntity extends ThrowawayEmailEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: DnsQueryCreateData, ctrl?: Control): Promise<DnsQuery> {
 
     const utility = this._utility
     const {
@@ -243,7 +250,9 @@ class DnsQueryEntity extends ThrowawayEmailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<DnsQuery> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

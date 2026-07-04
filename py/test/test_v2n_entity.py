@@ -49,8 +49,7 @@ class TestV2nEntity:
         # LOAD
         v2n_ref01_ent = client.V2n(None)
         v2n_ref01_match_dt0 = {}
-        v2n_ref01_data_dt0_loaded, err = v2n_ref01_ent.load(v2n_ref01_match_dt0, None)
-        assert err is None
+        v2n_ref01_data_dt0_loaded = v2n_ref01_ent.load(v2n_ref01_match_dt0, None)
         assert v2n_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _v2n_basic_setup(extra):
         "THROWAWAYEMAIL_TEST_V_N_ENTID": idmap,
         "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN": "FALSE",
-        "THROWAWAYEMAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _v2n_basic_setup(extra):
     if env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("THROWAWAYEMAIL_APIKEY"),
             },
             extra or {},
         ])

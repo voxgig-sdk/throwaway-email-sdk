@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'ThrowawayEmail_types'
+
 
 class ThrowawayEmailSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class ThrowawayEmailSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class ThrowawayEmailSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue ThrowawayEmailError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = ThrowawayEmailHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class ThrowawayEmailSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,52 +198,101 @@ class ThrowawayEmailSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.dns_query.list / client.dns_query.load({ "id" => ... })
+  def dns_query
+    require_relative 'entity/dns_query_entity'
+    @dns_query ||= DnsQueryEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.dns_query instead.
   def DnsQuery(data = nil)
     require_relative 'entity/dns_query_entity'
     DnsQueryEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.domain.list / client.domain.load({ "id" => ... })
+  def domain
+    require_relative 'entity/domain_entity'
+    @domain ||= DomainEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.domain instead.
   def Domain(data = nil)
     require_relative 'entity/domain_entity'
     DomainEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.email.list / client.email.load({ "id" => ... })
+  def email
+    require_relative 'entity/email_entity'
+    @email ||= EmailEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.email instead.
   def Email(data = nil)
     require_relative 'entity/email_entity'
     EmailEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.list.list / client.list.load({ "id" => ... })
+  def list
+    require_relative 'entity/list_entity'
+    @list ||= ListEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.list instead.
   def List(data = nil)
     require_relative 'entity/list_entity'
     ListEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.resolve.list / client.resolve.load({ "id" => ... })
+  def resolve
+    require_relative 'entity/resolve_entity'
+    @resolve ||= ResolveEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.resolve instead.
   def Resolve(data = nil)
     require_relative 'entity/resolve_entity'
     ResolveEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v2n.list / client.v2n.load({ "id" => ... })
+  def v2n
+    require_relative 'entity/v2n_entity'
+    @v2n ||= V2nEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v2n instead.
   def V2n(data = nil)
     require_relative 'entity/v2n_entity'
     V2nEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v3n.list / client.v3n.load({ "id" => ... })
+  def v3n
+    require_relative 'entity/v3n_entity'
+    @v3n ||= V3nEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v3n instead.
   def V3n(data = nil)
     require_relative 'entity/v3n_entity'
     V3nEntity.new(self, data)

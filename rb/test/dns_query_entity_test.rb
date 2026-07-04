@@ -36,15 +36,13 @@ class DnsQueryEntityTest < Minitest::Test
     dns_query_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.dns_query"), "dns_query_ref01"))
 
-    dns_query_ref01_data_result, err = dns_query_ref01_ent.create(dns_query_ref01_data, nil)
-    assert_nil err
+    dns_query_ref01_data_result = dns_query_ref01_ent.create(dns_query_ref01_data, nil)
     dns_query_ref01_data = Helpers.to_map(dns_query_ref01_data_result)
     assert !dns_query_ref01_data.nil?
 
     # LOAD
     dns_query_ref01_match_dt0 = {}
-    dns_query_ref01_data_dt0_loaded, err = dns_query_ref01_ent.load(dns_query_ref01_match_dt0, nil)
-    assert_nil err
+    dns_query_ref01_data_dt0_loaded = dns_query_ref01_ent.load(dns_query_ref01_match_dt0, nil)
     assert !dns_query_ref01_data_dt0_loaded.nil?
 
   end
@@ -83,7 +81,6 @@ def dns_query_basic_setup(extra)
     "THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID" => idmap,
     "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
     "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-    "THROWAWAYEMAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +92,6 @@ def dns_query_basic_setup(extra)
   if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["THROWAWAYEMAIL_APIKEY"],
       },
       extra || {},
     ])

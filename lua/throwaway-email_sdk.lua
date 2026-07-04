@@ -244,42 +244,133 @@ end
 
 
 
+-- Idiomatic facade: client:dns_query():list() / client:dns_query():load({ id = ... })
+function ThrowawayEmailSDK:dns_query(data)
+  local EntityMod = require("entity.dns_query_entity")
+  if data == nil then
+    if self._dns_query == nil then
+      self._dns_query = EntityMod.new(self, nil)
+    end
+    return self._dns_query
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:dns_query() instead.
 function ThrowawayEmailSDK:DnsQuery(data)
   local EntityMod = require("entity.dns_query_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:domain():list() / client:domain():load({ id = ... })
+function ThrowawayEmailSDK:domain(data)
+  local EntityMod = require("entity.domain_entity")
+  if data == nil then
+    if self._domain == nil then
+      self._domain = EntityMod.new(self, nil)
+    end
+    return self._domain
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:domain() instead.
 function ThrowawayEmailSDK:Domain(data)
   local EntityMod = require("entity.domain_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:email():list() / client:email():load({ id = ... })
+function ThrowawayEmailSDK:email(data)
+  local EntityMod = require("entity.email_entity")
+  if data == nil then
+    if self._email == nil then
+      self._email = EntityMod.new(self, nil)
+    end
+    return self._email
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:email() instead.
 function ThrowawayEmailSDK:Email(data)
   local EntityMod = require("entity.email_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:list():list() / client:list():load({ id = ... })
+function ThrowawayEmailSDK:list(data)
+  local EntityMod = require("entity.list_entity")
+  if data == nil then
+    if self._list == nil then
+      self._list = EntityMod.new(self, nil)
+    end
+    return self._list
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:list() instead.
 function ThrowawayEmailSDK:List(data)
   local EntityMod = require("entity.list_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:resolve():list() / client:resolve():load({ id = ... })
+function ThrowawayEmailSDK:resolve(data)
+  local EntityMod = require("entity.resolve_entity")
+  if data == nil then
+    if self._resolve == nil then
+      self._resolve = EntityMod.new(self, nil)
+    end
+    return self._resolve
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:resolve() instead.
 function ThrowawayEmailSDK:Resolve(data)
   local EntityMod = require("entity.resolve_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v2n():list() / client:v2n():load({ id = ... })
+function ThrowawayEmailSDK:v2n(data)
+  local EntityMod = require("entity.v2n_entity")
+  if data == nil then
+    if self._v2n == nil then
+      self._v2n = EntityMod.new(self, nil)
+    end
+    return self._v2n
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v2n() instead.
 function ThrowawayEmailSDK:V2n(data)
   local EntityMod = require("entity.v2n_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v3n():list() / client:v3n():load({ id = ... })
+function ThrowawayEmailSDK:v3n(data)
+  local EntityMod = require("entity.v3n_entity")
+  if data == nil then
+    if self._v3n == nil then
+      self._v3n = EntityMod.new(self, nil)
+    end
+    return self._v3n
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v3n() instead.
 function ThrowawayEmailSDK:V3n(data)
   local EntityMod = require("entity.v3n_entity")
   return EntityMod.new(self, data)

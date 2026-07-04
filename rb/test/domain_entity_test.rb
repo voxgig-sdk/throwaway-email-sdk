@@ -42,8 +42,7 @@ class DomainEntityTest < Minitest::Test
     # LOAD
     domain_ref01_ent = client.Domain(nil)
     domain_ref01_match_dt0 = {}
-    domain_ref01_data_dt0_loaded, err = domain_ref01_ent.load(domain_ref01_match_dt0, nil)
-    assert_nil err
+    domain_ref01_data_dt0_loaded = domain_ref01_ent.load(domain_ref01_match_dt0, nil)
     assert !domain_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def domain_basic_setup(extra)
     "THROWAWAYEMAIL_TEST_DOMAIN_ENTID" => idmap,
     "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
     "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-    "THROWAWAYEMAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def domain_basic_setup(extra)
   if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["THROWAWAYEMAIL_APIKEY"],
       },
       extra || {},
     ])

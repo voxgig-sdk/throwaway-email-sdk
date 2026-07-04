@@ -44,15 +44,12 @@ class TestDnsQueryEntity:
         dns_query_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.dns_query"), "dns_query_ref01"))
 
-        dns_query_ref01_data_result, err = dns_query_ref01_ent.create(dns_query_ref01_data, None)
-        assert err is None
-        dns_query_ref01_data = helpers.to_map(dns_query_ref01_data_result)
+        dns_query_ref01_data = helpers.to_map(dns_query_ref01_ent.create(dns_query_ref01_data, None))
         assert dns_query_ref01_data is not None
 
         # LOAD
         dns_query_ref01_match_dt0 = {}
-        dns_query_ref01_data_dt0_loaded, err = dns_query_ref01_ent.load(dns_query_ref01_match_dt0, None)
-        assert err is None
+        dns_query_ref01_data_dt0_loaded = dns_query_ref01_ent.load(dns_query_ref01_match_dt0, None)
         assert dns_query_ref01_data_dt0_loaded is not None
 
 
@@ -93,7 +90,6 @@ def _dns_query_basic_setup(extra):
         "THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID": idmap,
         "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN": "FALSE",
-        "THROWAWAYEMAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -104,7 +100,6 @@ def _dns_query_basic_setup(extra):
     if env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("THROWAWAYEMAIL_APIKEY"),
             },
             extra or {},
         ])

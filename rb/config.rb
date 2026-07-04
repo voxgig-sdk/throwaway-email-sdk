@@ -15,9 +15,6 @@ module ThrowawayEmailConfig
       },
       "options" => {
         "base" => "https://throwaway.cloud",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -136,6 +133,7 @@ module ThrowawayEmailConfig
                         "orig" => "domain",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -206,6 +204,7 @@ module ThrowawayEmailConfig
                         "orig" => "email",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -421,6 +420,7 @@ module ThrowawayEmailConfig
                         "orig" => "subject",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -496,6 +496,7 @@ module ThrowawayEmailConfig
                         "orig" => "subject",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

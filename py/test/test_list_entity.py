@@ -50,14 +50,12 @@ class TestListEntity:
         list_ref01_ent = client.List(None)
         list_ref01_match = {}
 
-        list_ref01_list_result, err = list_ref01_ent.list(list_ref01_match, None)
-        assert err is None
+        list_ref01_list_result = list_ref01_ent.list(list_ref01_match, None)
         assert isinstance(list_ref01_list_result, list)
 
         # LOAD
         list_ref01_match_dt0 = {}
-        list_ref01_data_dt0_loaded, err = list_ref01_ent.load(list_ref01_match_dt0, None)
-        assert err is None
+        list_ref01_data_dt0_loaded = list_ref01_ent.load(list_ref01_match_dt0, None)
         assert list_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _list_basic_setup(extra):
         "THROWAWAYEMAIL_TEST_LIST_ENTID": idmap,
         "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN": "FALSE",
-        "THROWAWAYEMAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _list_basic_setup(extra):
     if env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("THROWAWAYEMAIL_APIKEY"),
             },
             extra or {},
         ])

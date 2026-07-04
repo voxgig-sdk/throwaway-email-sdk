@@ -45,6 +45,7 @@ class V2nEntity
     end
   end
 
+  # @return [V2n, Hash] the current V2n data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class V2nEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of V2n fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single V2n.
+  #
+  # @param reqmatch [V2nLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [V2n, Hash] the loaded V2n; raises ThrowawayEmailError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

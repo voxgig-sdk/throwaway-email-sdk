@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://throwaway.cloud',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -177,7 +173,8 @@ class Config {
                     "name": "id",
                     "orig": "domain",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -247,7 +244,8 @@ class Config {
                     "name": "id",
                     "orig": "email",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -462,7 +460,8 @@ class Config {
                     "name": "subject",
                     "orig": "subject",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -537,7 +536,8 @@ class Config {
                     "name": "subject",
                     "orig": "subject",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

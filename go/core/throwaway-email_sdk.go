@@ -245,36 +245,57 @@ func (sdk *ThrowawayEmailSDK) Direct(fetchargs map[string]any) (map[string]any, 
 }
 
 
+// DnsQuery returns a DnsQuery entity bound to this client.
+// Idiomatic usage: client.DnsQuery(nil).List(nil, nil) or
+// client.DnsQuery(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) DnsQuery(data map[string]any) ThrowawayEmailEntity {
 	return NewDnsQueryEntityFunc(sdk, data)
 }
 
 
+// Domain returns a Domain entity bound to this client.
+// Idiomatic usage: client.Domain(nil).List(nil, nil) or
+// client.Domain(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) Domain(data map[string]any) ThrowawayEmailEntity {
 	return NewDomainEntityFunc(sdk, data)
 }
 
 
+// Email returns a Email entity bound to this client.
+// Idiomatic usage: client.Email(nil).List(nil, nil) or
+// client.Email(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) Email(data map[string]any) ThrowawayEmailEntity {
 	return NewEmailEntityFunc(sdk, data)
 }
 
 
+// List returns a List entity bound to this client.
+// Idiomatic usage: client.List(nil).List(nil, nil) or
+// client.List(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) List(data map[string]any) ThrowawayEmailEntity {
 	return NewListEntityFunc(sdk, data)
 }
 
 
+// Resolve returns a Resolve entity bound to this client.
+// Idiomatic usage: client.Resolve(nil).List(nil, nil) or
+// client.Resolve(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) Resolve(data map[string]any) ThrowawayEmailEntity {
 	return NewResolveEntityFunc(sdk, data)
 }
 
 
+// V2n returns a V2n entity bound to this client.
+// Idiomatic usage: client.V2n(nil).List(nil, nil) or
+// client.V2n(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) V2n(data map[string]any) ThrowawayEmailEntity {
 	return NewV2nEntityFunc(sdk, data)
 }
 
 
+// V3n returns a V3n entity bound to this client.
+// Idiomatic usage: client.V3n(nil).List(nil, nil) or
+// client.V3n(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThrowawayEmailSDK) V3n(data map[string]any) ThrowawayEmailEntity {
 	return NewV3nEntityFunc(sdk, data)
 }

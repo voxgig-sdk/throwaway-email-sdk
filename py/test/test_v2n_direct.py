@@ -27,7 +27,7 @@ class TestV2nDirect:
         else:
             params["subject"] = "direct01"
 
-        result, err = client.direct({
+        result = client.direct({
             "path": "api/v2/{subject}",
             "method": "GET",
             "params": params,
@@ -37,8 +37,8 @@ class TestV2nDirect:
             # Live mode is lenient: synthetic IDs frequently 4xx. Skip
             # rather than fail when the load endpoint isn't reachable
             # with the IDs we can construct from setup.idmap.
-            if err is not None:
-                pytest.skip(f"load call failed (likely synthetic IDs against live API): {err}")
+            if result.get("err") is not None:
+                pytest.skip(f"load call failed (likely synthetic IDs against live API): {result.get('err')}")
                 return
             if not result.get("ok"):
                 pytest.skip("load call not ok (likely synthetic IDs against live API)")
@@ -48,7 +48,6 @@ class TestV2nDirect:
                 pytest.skip(f"expected 2xx status, got {status}")
                 return
         else:
-            assert err is None
             assert result["ok"] is True
             assert helpers.to_int(result["status"]) == 200
             assert result["data"] is not None
@@ -66,14 +65,12 @@ def _v2n_direct_setup(mockres):
     env = runner.env_override({
         "THROWAWAYEMAIL_TEST_V_N_ENTID": {},
         "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
-        "THROWAWAYEMAIL_APIKEY": "NONE",
     })
 
     live = env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("THROWAWAYEMAIL_APIKEY"),
         }
         client = ThrowawayEmailSDK(merged_opts)
         return {

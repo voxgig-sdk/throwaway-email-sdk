@@ -42,8 +42,7 @@ class EmailEntityTest < Minitest::Test
     # LOAD
     email_ref01_ent = client.Email(nil)
     email_ref01_match_dt0 = {}
-    email_ref01_data_dt0_loaded, err = email_ref01_ent.load(email_ref01_match_dt0, nil)
-    assert_nil err
+    email_ref01_data_dt0_loaded = email_ref01_ent.load(email_ref01_match_dt0, nil)
     assert !email_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def email_basic_setup(extra)
     "THROWAWAYEMAIL_TEST_EMAIL_ENTID" => idmap,
     "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
     "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-    "THROWAWAYEMAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def email_basic_setup(extra)
   if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["THROWAWAYEMAIL_APIKEY"],
       },
       extra || {},
     ])

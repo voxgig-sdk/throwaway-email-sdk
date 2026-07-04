@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch DnsQueryLoadMatch
+---@param ctrl? table
+---@return DnsQuery
+---@return string? err
 function DnsQueryEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -106,6 +110,10 @@ end
 
 
 
+---@param reqdata DnsQueryCreateData
+---@param ctrl? table
+---@return DnsQuery
+---@return string? err
 function DnsQueryEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

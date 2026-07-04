@@ -117,7 +117,6 @@ func v2nBasicSetup(extra map[string]any) *entityTestSetup {
 		"THROWAWAYEMAIL_TEST_V_N_ENTID": idmap,
 		"THROWAWAYEMAIL_TEST_LIVE":      "FALSE",
 		"THROWAWAYEMAIL_TEST_EXPLAIN":   "FALSE",
-		"THROWAWAYEMAIL_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["THROWAWAYEMAIL_TEST_V_N_ENTID"])
@@ -128,7 +127,6 @@ func v2nBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["THROWAWAYEMAIL_APIKEY"],
 			},
 			extra,
 		})

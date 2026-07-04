@@ -42,8 +42,7 @@ class V3nEntityTest < Minitest::Test
     # LOAD
     v3n_ref01_ent = client.V3n(nil)
     v3n_ref01_match_dt0 = {}
-    v3n_ref01_data_dt0_loaded, err = v3n_ref01_ent.load(v3n_ref01_match_dt0, nil)
-    assert_nil err
+    v3n_ref01_data_dt0_loaded = v3n_ref01_ent.load(v3n_ref01_match_dt0, nil)
     assert !v3n_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def v3n_basic_setup(extra)
     "THROWAWAYEMAIL_TEST_V_N_ENTID" => idmap,
     "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
     "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-    "THROWAWAYEMAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def v3n_basic_setup(extra)
   if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["THROWAWAYEMAIL_APIKEY"],
       },
       extra || {},
     ])

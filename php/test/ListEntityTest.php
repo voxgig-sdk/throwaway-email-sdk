@@ -50,14 +50,12 @@ class ListEntityTest extends TestCase
         $list_ref01_ent = $client->List(null);
         $list_ref01_match = [];
 
-        [$list_ref01_list_result, $err] = $list_ref01_ent->list($list_ref01_match, null);
-        $this->assertNull($err);
+        $list_ref01_list_result = $list_ref01_ent->list($list_ref01_match, null);
         $this->assertIsArray($list_ref01_list_result);
 
         // LOAD
         $list_ref01_match_dt0 = [];
-        [$list_ref01_data_dt0_loaded, $err] = $list_ref01_ent->load($list_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $list_ref01_data_dt0_loaded = $list_ref01_ent->load($list_ref01_match_dt0, null);
         $this->assertNotNull($list_ref01_data_dt0_loaded);
 
     }
@@ -92,7 +90,6 @@ function list_basic_setup($extra)
         "THROWAWAYEMAIL_TEST_LIST_ENTID" => $idmap,
         "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
         "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
-        "THROWAWAYEMAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +101,6 @@ function list_basic_setup($extra)
     if ($env["THROWAWAYEMAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["THROWAWAYEMAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

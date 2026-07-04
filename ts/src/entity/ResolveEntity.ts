@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Resolve,
+  ResolveLoadMatch,
+} from '../ThrowawayEmailTypes'
 
 // TODO: needs Entity superclass
-class ResolveEntity extends ThrowawayEmailEntityBase {
+class ResolveEntity extends ThrowawayEmailEntityBase<Resolve> {
 
   constructor(client: ThrowawayEmailSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ResolveEntity extends ThrowawayEmailEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ResolveLoadMatch, ctrl?: Control): Promise<Resolve> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ResolveEntity extends ThrowawayEmailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Resolve> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
