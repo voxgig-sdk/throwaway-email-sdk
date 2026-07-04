@@ -110,7 +110,7 @@ same parameters as `direct()`. Raises on error.
 ## DnsQueryEntity
 
 ```ruby
-dns_query = client.dns_query
+dns_query = client.DnsQuery
 ```
 
 ### Operations
@@ -120,7 +120,7 @@ dns_query = client.dns_query
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.dns_query.create({
+result = client.DnsQuery.create({
 })
 ```
 
@@ -129,7 +129,7 @@ result = client.dns_query.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.dns_query.load({ "id" => "dns_query_id" })
+result = client.DnsQuery.load({ "id" => "dns_query_id" })
 ```
 
 ### Common Methods
@@ -165,7 +165,7 @@ Return the entity name.
 ## DomainEntity
 
 ```ruby
-domain = client.domain
+domain = client.Domain
 ```
 
 ### Fields
@@ -182,7 +182,7 @@ domain = client.domain
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.domain.load({ "id" => "domain_id" })
+result = client.Domain.load({ "id" => "domain_id" })
 ```
 
 ### Common Methods
@@ -218,7 +218,7 @@ Return the entity name.
 ## EmailEntity
 
 ```ruby
-email = client.email
+email = client.Email
 ```
 
 ### Fields
@@ -235,7 +235,7 @@ email = client.email
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.email.load({ "id" => "email_id" })
+result = client.Email.load({ "id" => "email_id" })
 ```
 
 ### Common Methods
@@ -271,7 +271,7 @@ Return the entity name.
 ## ListEntity
 
 ```ruby
-list = client.list
+list = client.List
 ```
 
 ### Operations
@@ -281,7 +281,7 @@ list = client.list
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.list.list(nil)
+results = client.List.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -289,7 +289,7 @@ results = client.list.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.list.load({ "id" => "list_id" })
+result = client.List.load({ "id" => "list_id" })
 ```
 
 ### Common Methods
@@ -325,7 +325,7 @@ Return the entity name.
 ## ResolveEntity
 
 ```ruby
-resolve = client.resolve
+resolve = client.Resolve
 ```
 
 ### Operations
@@ -335,7 +335,7 @@ resolve = client.resolve
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.resolve.load({ "id" => "resolve_id" })
+result = client.Resolve.load({ "id" => "resolve_id" })
 ```
 
 ### Common Methods
@@ -371,7 +371,7 @@ Return the entity name.
 ## V2nEntity
 
 ```ruby
-v2n = client.v2n
+v2n = client.V2n
 ```
 
 ### Fields
@@ -388,7 +388,7 @@ v2n = client.v2n
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.v2n.load({ "id" => "v2n_id" })
+result = client.V2n.load({ "id" => "v2n_id" })
 ```
 
 ### Common Methods
@@ -424,7 +424,7 @@ Return the entity name.
 ## V3nEntity
 
 ```ruby
-v3n = client.v3n
+v3n = client.V3n
 ```
 
 ### Fields
@@ -442,7 +442,7 @@ v3n = client.v3n
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.v3n.load({ "id" => "v3n_id" })
+result = client.V3n.load({ "id" => "v3n_id" })
 ```
 
 ### Common Methods

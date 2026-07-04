@@ -26,9 +26,9 @@ import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email'
 
 const client = new ThrowawayEmailSDK()
 
-// Load dnsquery data
-const dnsquery = await client.dnsquery.load({})
-console.log(dnsquery.data)
+// Load dnsquery data (returns a DnsQuery)
+const dnsquery = await client.DnsQuery().load()
+console.log(dnsquery)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -90,8 +90,8 @@ from throwawayemail_sdk import ThrowawayEmailSDK
 client = ThrowawayEmailSDK()
 
 
-# Load a specific dnsquery
-dnsquery = client.dnsquery.load({"id": "example_id"})
+# Load a specific dnsquery (returns the record, raises on error)
+dnsquery = client.DnsQuery().load({"id": "example_id"})
 print(dnsquery)
 ```
 
@@ -104,8 +104,8 @@ require_once 'throwawayemail_sdk.php';
 $client = new ThrowawayEmailSDK();
 
 
-// Load a specific dnsquery
-$dnsquery = $client->dnsquery()->load(["id" => "example_id"]);
+// Load a specific dnsquery (returns the bare record; throws on error)
+$dnsquery = $client->DnsQuery()->load(["id" => "example_id"]);
 print_r($dnsquery);
 ```
 
@@ -129,8 +129,8 @@ require_relative "ThrowawayEmail_sdk"
 client = ThrowawayEmailSDK.new
 
 
-# Load a specific dnsquery
-dnsquery = client.dnsquery.load({ "id" => "example_id" })
+# Load a specific dnsquery (returns the bare record; raises on error)
+dnsquery = client.DnsQuery.load({ "id" => "example_id" })
 puts dnsquery
 ```
 
@@ -143,7 +143,7 @@ local client = sdk.new()
 
 
 -- Load a specific dnsquery
-local dnsquery, err = client:dnsquery():load({ id = "example_id" })
+local dnsquery, err = client:DnsQuery():load({ id = "example_id" })
 print(dnsquery)
 ```
 
@@ -156,22 +156,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = ThrowawayEmailSDK.test()
-const result = await client.dnsquery.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const dnsquery = await client.DnsQuery().load({ id: 'test01' })
+// dnsquery is a bare DnsQuery populated with mock data
+console.log(dnsquery)
 ```
 
 ### Python
 
 ```python
 client = ThrowawayEmailSDK.test()
-result = client.dnsquery.load({"id": "test01"})
+dnsquery = client.DnsQuery().load({"id": "test01"})
+print(dnsquery)
 ```
 
 ### PHP
 
 ```php
-$client = ThrowawayEmailSDK::test();
-$result = $client->dnsquery()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = ThrowawayEmailSDK::test([
+    "entity" => ["dnsquery" => ["test01" => ["id" => "test01"]]],
+]);
+$dnsquery = $client->DnsQuery()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -186,15 +191,18 @@ result, err := client.DnsQuery(nil).Load(
 ### Ruby
 
 ```ruby
-client = ThrowawayEmailSDK.test
-result = client.dnsquery.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = ThrowawayEmailSDK.test({
+  "entity" => { "dnsquery" => { "test01" => { "id" => "test01" } } },
+})
+dnsquery = client.DnsQuery.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:dnsquery():load({ id = "test01" })
+local result, err = client:DnsQuery():load({ id = "test01" })
 ```
 
 ## How it works
@@ -242,6 +250,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

@@ -33,10 +33,12 @@ client = ThrowawayEmailSDK()
 
 ### 3. Load a dnsquery
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.dnsquery.load({"id": "example_id"})
-    print(result)
+    dnsquery = client.DnsQuery().load({"id": "example_id"})
+    print(dnsquery)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -44,8 +46,8 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.dnsquery.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.DnsQuery().create({"name": "Example"})
 
 ```
 
@@ -92,8 +94,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ThrowawayEmailSDK.test()
 
-result = client.dnsquery.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+dnsquery = client.DnsQuery().load({"id": "test01"})
+# dnsquery contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -171,7 +174,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `DnsQuery` | `(data) -> DnsQueryEntity` | Create a DnsQuery entity instance. |
 | `Domain` | `(data) -> DomainEntity` | Create a Domain entity instance. |
-| `Email` | `(data) -> EmailEntity` | Create a Email entity instance. |
+| `Email` | `(data) -> EmailEntity` | Create an Email entity instance. |
 | `List` | `(data) -> ListEntity` | Create a List entity instance. |
 | `Resolve` | `(data) -> ResolveEntity` | Create a Resolve entity instance. |
 | `V2n` | `(data) -> V2nEntity` | Create a V2n entity instance. |
@@ -294,7 +297,7 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `const dns_query = client.dns_query`
+Create an instance: `dns_query = client.DnsQuery()`
 
 #### Operations
 
@@ -305,21 +308,21 @@ Create an instance: `const dns_query = client.dns_query`
 
 #### Example: Load
 
-```ts
-const dns_query = await client.dns_query.load({ id: 'dns_query_id' })
+```python
+dns_query = client.DnsQuery().load({"id": "dns_query_id"})
 ```
 
 #### Example: Create
 
-```ts
-const dns_query = await client.dns_query.create({
+```python
+dns_query = client.DnsQuery().create({
 })
 ```
 
 
 ### Domain
 
-Create an instance: `const domain = client.domain`
+Create an instance: `domain = client.Domain()`
 
 #### Operations
 
@@ -336,14 +339,14 @@ Create an instance: `const domain = client.domain`
 
 #### Example: Load
 
-```ts
-const domain = await client.domain.load({ id: 'domain_id' })
+```python
+domain = client.Domain().load({"id": "domain_id"})
 ```
 
 
 ### Email
 
-Create an instance: `const email = client.email`
+Create an instance: `email = client.Email()`
 
 #### Operations
 
@@ -360,14 +363,14 @@ Create an instance: `const email = client.email`
 
 #### Example: Load
 
-```ts
-const email = await client.email.load({ id: 'email_id' })
+```python
+email = client.Email().load({"id": "email_id"})
 ```
 
 
 ### List
 
-Create an instance: `const list = client.list`
+Create an instance: `list = client.List()`
 
 #### Operations
 
@@ -378,20 +381,20 @@ Create an instance: `const list = client.list`
 
 #### Example: Load
 
-```ts
-const list = await client.list.load({ id: 'list_id' })
+```python
+list = client.List().load({"id": "list_id"})
 ```
 
 #### Example: List
 
-```ts
-const lists = await client.list.list()
+```python
+lists = client.List().list({})
 ```
 
 
 ### Resolve
 
-Create an instance: `const resolve = client.resolve`
+Create an instance: `resolve = client.Resolve()`
 
 #### Operations
 
@@ -401,14 +404,14 @@ Create an instance: `const resolve = client.resolve`
 
 #### Example: Load
 
-```ts
-const resolve = await client.resolve.load({ id: 'resolve_id' })
+```python
+resolve = client.Resolve().load({"id": "resolve_id"})
 ```
 
 
 ### V2n
 
-Create an instance: `const v2n = client.v2n`
+Create an instance: `v2n = client.V2n()`
 
 #### Operations
 
@@ -425,14 +428,14 @@ Create an instance: `const v2n = client.v2n`
 
 #### Example: Load
 
-```ts
-const v2n = await client.v2n.load({ id: 'v2n_id' })
+```python
+v2n = client.V2n().load({"id": "v2n_id"})
 ```
 
 
 ### V3n
 
-Create an instance: `const v3n = client.v3n`
+Create an instance: `v3n = client.V3n()`
 
 #### Operations
 
@@ -450,8 +453,8 @@ Create an instance: `const v3n = client.v3n`
 
 #### Example: Load
 
-```ts
-const v3n = await client.v3n.load({ id: 'v3n_id' })
+```python
+v3n = client.V3n().load({"id": "v3n_id"})
 ```
 
 
@@ -525,7 +528,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-dnsquery = client.dnsquery
+dnsquery = client.DnsQuery()
 dnsquery.load({"id": "example_id"})
 
 # dnsquery.data_get() now returns the loaded dnsquery data

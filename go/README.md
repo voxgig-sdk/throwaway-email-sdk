@@ -30,49 +30,38 @@ go mod edit -replace github.com/voxgig-sdk/throwaway-email-sdk/go=../throwaway-e
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/throwaway-email-sdk/go"
-    "github.com/voxgig-sdk/throwaway-email-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 3. Load a dnsquery
-
-```go
-    result, err = client.DnsQuery(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single dnsquery — the value is the loaded record.
+    dnsquery, err := client.DnsQuery(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
+    fmt.Println(dnsquery)
 
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
+    // Create a dnsquery.
+    created, err := client.DnsQuery(nil).Create(map[string]any{"name": "Example"}, nil)
+    if err != nil {
+        panic(err)
     }
+    fmt.Println(created)
 }
-```
-
-### 4. Create, update, and remove
-
-```go
-// Create
-created, _ := client.DnsQuery(nil).Create(
-    map[string]any{"name": "Example"}, nil,
-)
-cm := core.ToMapAny(created)
-newID := core.ToMapAny(cm["data"])["id"]
-
 ```
 
 
@@ -122,10 +111,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.DnsQuery(nil).Load(
+dnsquery, err := client.DnsQuery(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(dnsquery) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -204,7 +196,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
 | `DnsQuery` | `(data map[string]any) ThrowawayEmailEntity` | Create a DnsQuery entity instance. |
 | `Domain` | `(data map[string]any) ThrowawayEmailEntity` | Create a Domain entity instance. |
-| `Email` | `(data map[string]any) ThrowawayEmailEntity` | Create a Email entity instance. |
+| `Email` | `(data map[string]any) ThrowawayEmailEntity` | Create an Email entity instance. |
 | `List` | `(data map[string]any) ThrowawayEmailEntity` | Create a List entity instance. |
 | `Resolve` | `(data map[string]any) ThrowawayEmailEntity` | Create a Resolve entity instance. |
 | `V2n` | `(data map[string]any) ThrowawayEmailEntity` | Create a V2n entity instance. |
@@ -228,17 +220,24 @@ All entities implement the `ThrowawayEmailEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    dnsquery, err := client.DnsQuery(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // dnsquery is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -333,7 +332,11 @@ Create an instance: `dns_query := client.DnsQuery(nil)`
 #### Example: Load
 
 ```go
-result, err := client.DnsQuery(nil).Load(map[string]any{"id": "dns_query_id"}, nil)
+dns_query, err := client.DnsQuery(nil).Load(map[string]any{"id": "dns_query_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(dns_query) // the loaded record
 ```
 
 #### Example: Create
@@ -364,7 +367,11 @@ Create an instance: `domain := client.Domain(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Domain(nil).Load(map[string]any{"id": "domain_id"}, nil)
+domain, err := client.Domain(nil).Load(map[string]any{"id": "domain_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(domain) // the loaded record
 ```
 
 
@@ -388,7 +395,11 @@ Create an instance: `email := client.Email(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Email(nil).Load(map[string]any{"id": "email_id"}, nil)
+email, err := client.Email(nil).Load(map[string]any{"id": "email_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(email) // the loaded record
 ```
 
 
@@ -406,13 +417,21 @@ Create an instance: `list := client.List(nil)`
 #### Example: Load
 
 ```go
-result, err := client.List(nil).Load(map[string]any{"id": "list_id"}, nil)
+list, err := client.List(nil).Load(map[string]any{"id": "list_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(list) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.List(nil).List(nil, nil)
+lists, err := client.List(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(lists) // the array of records
 ```
 
 
@@ -429,7 +448,11 @@ Create an instance: `resolve := client.Resolve(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Resolve(nil).Load(map[string]any{"id": "resolve_id"}, nil)
+resolve, err := client.Resolve(nil).Load(map[string]any{"id": "resolve_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(resolve) // the loaded record
 ```
 
 
@@ -453,7 +476,11 @@ Create an instance: `v2n := client.V2n(nil)`
 #### Example: Load
 
 ```go
-result, err := client.V2n(nil).Load(map[string]any{"id": "v2n_id"}, nil)
+v2n, err := client.V2n(nil).Load(map[string]any{"id": "v2n_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(v2n) // the loaded record
 ```
 
 
@@ -478,7 +505,11 @@ Create an instance: `v3n := client.V3n(nil)`
 #### Example: Load
 
 ```go
-result, err := client.V3n(nil).Load(map[string]any{"id": "v3n_id"}, nil)
+v3n, err := client.V3n(nil).Load(map[string]any{"id": "v3n_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(v3n) // the loaded record
 ```
 
 

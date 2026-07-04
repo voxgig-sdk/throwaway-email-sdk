@@ -30,19 +30,22 @@ const client = new ThrowawayEmailSDK()
 
 ### 3. Load a dnsquery
 
-```ts
-const result = await client.dnsquery.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const dnsquery = await client.DnsQuery().load({ id: 'example_id' })
+  console.log(dnsquery)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
 ### 4. Create, update, and remove
 
 ```ts
-// Create
-const created = await client.dnsquery.create({
+// Create — returns the created DnsQuery
+const created = await client.DnsQuery().create({
   name: 'Example',
 })
 
@@ -62,6 +65,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -90,9 +96,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ThrowawayEmailSDK.test()
 
-const result = await client.dnsquery.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const dnsquery = await client.DnsQuery().load({ id: 'test01' })
+// dnsquery is a bare entity populated with mock response data
+console.log(dnsquery)
 ```
 
 You can also use the instance method:
@@ -107,7 +113,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.dnsquery
+const entity = client.DnsQuery()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -187,7 +193,7 @@ new ThrowawayEmailSDK(options?: {
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
 | `DnsQuery(data?)` | `DnsQueryEntity` | Create a DnsQuery entity instance. |
 | `Domain(data?)` | `DomainEntity` | Create a Domain entity instance. |
-| `Email(data?)` | `EmailEntity` | Create a Email entity instance. |
+| `Email(data?)` | `EmailEntity` | Create an Email entity instance. |
 | `List(data?)` | `ListEntity` | Create a List entity instance. |
 | `Resolve(data?)` | `ResolveEntity` | Create a Resolve entity instance. |
 | `V2n(data?)` | `V2nEntity` | Create a V2n entity instance. |
@@ -208,29 +214,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): ThrowawayEmailSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -341,7 +348,7 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `const dns_query = client.dns_query`
+Create an instance: `const dns_query = client.DnsQuery()`
 
 #### Operations
 
@@ -353,20 +360,20 @@ Create an instance: `const dns_query = client.dns_query`
 #### Example: Load
 
 ```ts
-const dns_query = await client.dns_query.load({ id: 'dns_query_id' })
+const dns_query = await client.DnsQuery().load({ id: 'dns_query_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const dns_query = await client.dns_query.create({
+const dns_query = await client.DnsQuery().create({
 })
 ```
 
 
 ### Domain
 
-Create an instance: `const domain = client.domain`
+Create an instance: `const domain = client.Domain()`
 
 #### Operations
 
@@ -384,13 +391,13 @@ Create an instance: `const domain = client.domain`
 #### Example: Load
 
 ```ts
-const domain = await client.domain.load({ id: 'domain_id' })
+const domain = await client.Domain().load({ id: 'domain_id' })
 ```
 
 
 ### Email
 
-Create an instance: `const email = client.email`
+Create an instance: `const email = client.Email()`
 
 #### Operations
 
@@ -408,13 +415,13 @@ Create an instance: `const email = client.email`
 #### Example: Load
 
 ```ts
-const email = await client.email.load({ id: 'email_id' })
+const email = await client.Email().load({ id: 'email_id' })
 ```
 
 
 ### List
 
-Create an instance: `const list = client.list`
+Create an instance: `const list = client.List()`
 
 #### Operations
 
@@ -426,19 +433,19 @@ Create an instance: `const list = client.list`
 #### Example: Load
 
 ```ts
-const list = await client.list.load({ id: 'list_id' })
+const list = await client.List().load({ id: 'list_id' })
 ```
 
 #### Example: List
 
 ```ts
-const lists = await client.list.list()
+const lists = await client.List().list()
 ```
 
 
 ### Resolve
 
-Create an instance: `const resolve = client.resolve`
+Create an instance: `const resolve = client.Resolve()`
 
 #### Operations
 
@@ -449,13 +456,13 @@ Create an instance: `const resolve = client.resolve`
 #### Example: Load
 
 ```ts
-const resolve = await client.resolve.load({ id: 'resolve_id' })
+const resolve = await client.Resolve().load({ id: 'resolve_id' })
 ```
 
 
 ### V2n
 
-Create an instance: `const v2n = client.v2n`
+Create an instance: `const v2n = client.V2n()`
 
 #### Operations
 
@@ -473,13 +480,13 @@ Create an instance: `const v2n = client.v2n`
 #### Example: Load
 
 ```ts
-const v2n = await client.v2n.load({ id: 'v2n_id' })
+const v2n = await client.V2n().load({ id: 'v2n_id' })
 ```
 
 
 ### V3n
 
-Create an instance: `const v3n = client.v3n`
+Create an instance: `const v3n = client.V3n()`
 
 #### Operations
 
@@ -498,7 +505,7 @@ Create an instance: `const v3n = client.v3n`
 #### Example: Load
 
 ```ts
-const v3n = await client.v3n.load({ id: 'v3n_id' })
+const v3n = await client.V3n().load({ id: 'v3n_id' })
 ```
 
 
@@ -569,7 +576,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const dnsquery = client.dnsquery
+const dnsquery = client.DnsQuery()
 await dnsquery.load({ id: "example_id" })
 
 // dnsquery.data() now returns the loaded dnsquery data

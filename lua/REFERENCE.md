@@ -107,7 +107,7 @@ same parameters as `direct()`.
 ## DnsQueryEntity
 
 ```lua
-local dns_query = client:dns_query(nil)
+local dns_query = client:DnsQuery(nil)
 ```
 
 ### Operations
@@ -117,7 +117,7 @@ local dns_query = client:dns_query(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:dns_query():create({
+local result, err = client:DnsQuery():create({
 })
 ```
 
@@ -126,7 +126,7 @@ local result, err = client:dns_query():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:dns_query():load({ id = "dns_query_id" })
+local result, err = client:DnsQuery():load({ id = "dns_query_id" })
 ```
 
 ### Common Methods
@@ -162,7 +162,7 @@ Return the entity name.
 ## DomainEntity
 
 ```lua
-local domain = client:domain(nil)
+local domain = client:Domain(nil)
 ```
 
 ### Fields
@@ -179,7 +179,7 @@ local domain = client:domain(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:domain():load({ id = "domain_id" })
+local result, err = client:Domain():load({ id = "domain_id" })
 ```
 
 ### Common Methods
@@ -215,7 +215,7 @@ Return the entity name.
 ## EmailEntity
 
 ```lua
-local email = client:email(nil)
+local email = client:Email(nil)
 ```
 
 ### Fields
@@ -232,7 +232,7 @@ local email = client:email(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:email():load({ id = "email_id" })
+local result, err = client:Email():load({ id = "email_id" })
 ```
 
 ### Common Methods
@@ -268,7 +268,7 @@ Return the entity name.
 ## ListEntity
 
 ```lua
-local list = client:list(nil)
+local list = client:List(nil)
 ```
 
 ### Operations
@@ -278,7 +278,7 @@ local list = client:list(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:list():list()
+local results, err = client:List():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -286,7 +286,7 @@ local results, err = client:list():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:list():load({ id = "list_id" })
+local result, err = client:List():load({ id = "list_id" })
 ```
 
 ### Common Methods
@@ -322,7 +322,7 @@ Return the entity name.
 ## ResolveEntity
 
 ```lua
-local resolve = client:resolve(nil)
+local resolve = client:Resolve(nil)
 ```
 
 ### Operations
@@ -332,7 +332,7 @@ local resolve = client:resolve(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:resolve():load({ id = "resolve_id" })
+local result, err = client:Resolve():load({ id = "resolve_id" })
 ```
 
 ### Common Methods
@@ -368,7 +368,7 @@ Return the entity name.
 ## V2nEntity
 
 ```lua
-local v2n = client:v2n(nil)
+local v2n = client:V2n(nil)
 ```
 
 ### Fields
@@ -385,7 +385,7 @@ local v2n = client:v2n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:v2n():load({ id = "v2n_id" })
+local result, err = client:V2n():load({ id = "v2n_id" })
 ```
 
 ### Common Methods
@@ -421,7 +421,7 @@ Return the entity name.
 ## V3nEntity
 
 ```lua
-local v3n = client:v3n(nil)
+local v3n = client:V3n(nil)
 ```
 
 ### Fields
@@ -439,7 +439,7 @@ local v3n = client:v3n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:v3n():load({ id = "v3n_id" })
+local result, err = client:V3n():load({ id = "v3n_id" })
 ```
 
 ### Common Methods

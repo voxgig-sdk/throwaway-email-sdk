@@ -181,7 +181,7 @@ Alias for `ThrowawayEmailSDK.test()`.
 ## DnsQueryEntity
 
 ```ts
-const dns_query = client.dns_query
+const dns_query = client.DnsQuery()
 ```
 
 ### Operations
@@ -191,7 +191,7 @@ const dns_query = client.dns_query
 Create a new entity with the given data.
 
 ```ts
-const result = await client.dns_query.create({
+const result = await client.DnsQuery().create({
 })
 ```
 
@@ -200,7 +200,7 @@ const result = await client.dns_query.create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.dns_query.load({ id: 'dns_query_id' })
+const result = await client.DnsQuery().load({ id: 'dns_query_id' })
 ```
 
 ### Common Methods
@@ -234,7 +234,7 @@ Return a copy of the entity options.
 ## DomainEntity
 
 ```ts
-const domain = client.domain
+const domain = client.Domain()
 ```
 
 ### Fields
@@ -251,7 +251,7 @@ const domain = client.domain
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.domain.load({ id: 'domain_id' })
+const result = await client.Domain().load({ id: 'domain_id' })
 ```
 
 ### Common Methods
@@ -285,7 +285,7 @@ Return a copy of the entity options.
 ## EmailEntity
 
 ```ts
-const email = client.email
+const email = client.Email()
 ```
 
 ### Fields
@@ -302,7 +302,7 @@ const email = client.email
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.email.load({ id: 'email_id' })
+const result = await client.Email().load({ id: 'email_id' })
 ```
 
 ### Common Methods
@@ -336,7 +336,7 @@ Return a copy of the entity options.
 ## ListEntity
 
 ```ts
-const list = client.list
+const list = client.List()
 ```
 
 ### Operations
@@ -346,7 +346,7 @@ const list = client.list
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.list.list()
+const results = await client.List().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -354,7 +354,7 @@ const results = await client.list.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.list.load({ id: 'list_id' })
+const result = await client.List().load({ id: 'list_id' })
 ```
 
 ### Common Methods
@@ -388,7 +388,7 @@ Return a copy of the entity options.
 ## ResolveEntity
 
 ```ts
-const resolve = client.resolve
+const resolve = client.Resolve()
 ```
 
 ### Operations
@@ -398,7 +398,7 @@ const resolve = client.resolve
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.resolve.load({ id: 'resolve_id' })
+const result = await client.Resolve().load({ id: 'resolve_id' })
 ```
 
 ### Common Methods
@@ -432,7 +432,7 @@ Return a copy of the entity options.
 ## V2nEntity
 
 ```ts
-const v2n = client.v2n
+const v2n = client.V2n()
 ```
 
 ### Fields
@@ -449,7 +449,7 @@ const v2n = client.v2n
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.v2n.load({ id: 'v2n_id' })
+const result = await client.V2n().load({ id: 'v2n_id' })
 ```
 
 ### Common Methods
@@ -483,7 +483,7 @@ Return a copy of the entity options.
 ## V3nEntity
 
 ```ts
-const v3n = client.v3n
+const v3n = client.V3n()
 ```
 
 ### Fields
@@ -501,7 +501,7 @@ const v3n = client.v3n
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.v3n.load({ id: 'v3n_id' })
+const result = await client.V3n().load({ id: 'v3n_id' })
 ```
 
 ### Common Methods

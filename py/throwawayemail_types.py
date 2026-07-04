@@ -4,94 +4,85 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class DnsQuery:
+class DnsQuery(TypedDict):
     pass
 
 
-@dataclass
-class DnsQueryLoadMatch:
+class DnsQueryLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class DnsQueryCreateData:
+class DnsQueryCreateData(TypedDict):
     pass
 
 
-@dataclass
-class Domain:
-    is_disposable: Optional[bool] = None
-    success: Optional[bool] = None
+class Domain(TypedDict, total=False):
+    is_disposable: bool
+    success: bool
 
 
-@dataclass
-class DomainLoadMatch:
+class DomainLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Email:
-    is_disposable: Optional[bool] = None
-    success: Optional[bool] = None
+class Email(TypedDict, total=False):
+    is_disposable: bool
+    success: bool
 
 
-@dataclass
-class EmailLoadMatch:
+class EmailLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class List:
+class List(TypedDict):
     pass
 
 
-@dataclass
-class ListLoadMatch:
+class ListLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class ListListMatch:
+class ListListMatch(TypedDict):
     pass
 
 
-@dataclass
-class Resolve:
+class Resolve(TypedDict):
     pass
 
 
-@dataclass
-class ResolveLoadMatch:
+class ResolveLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class V2n:
-    is_disposable: Optional[bool] = None
-    success: Optional[bool] = None
+class V2n(TypedDict, total=False):
+    is_disposable: bool
+    success: bool
 
 
-@dataclass
-class V2nLoadMatch:
+class V2nLoadMatch(TypedDict):
     subject: str
 
 
-@dataclass
-class V3n:
+class V3nRequired(TypedDict):
     success: bool
     trait: list
-    record: Optional[dict] = None
 
 
-@dataclass
-class V3nLoadMatch:
+class V3n(V3nRequired, total=False):
+    record: dict
+
+
+class V3nLoadMatch(TypedDict):
     subject: str
-

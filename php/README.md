@@ -33,9 +33,10 @@ $client = new ThrowawayEmailSDK();
 
 ```php
 try {
-    $result = $client->dnsquery()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare DnsQuery record (throws on error).
+    $dnsquery = $client->DnsQuery()->load(["id" => "example_id"]);
+    print_r($dnsquery);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -43,8 +44,8 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->dnsquery()->create(["name" => "Example"]);
+// create() returns the bare created DnsQuery record.
+$created = $client->DnsQuery()->create(["name" => "Example"]);
 
 ```
 
@@ -89,13 +90,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = ThrowawayEmailSDK::test();
+$client = ThrowawayEmailSDK::test([
+    "entity" => ["dnsquery" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->dnsquery()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$dnsquery = $client->DnsQuery()->load(["id" => "test01"]);
+print_r($dnsquery);
 ```
 
 ### Use a custom fetch function
@@ -176,7 +181,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
 | `DnsQuery` | `($data): DnsQueryEntity` | Create a DnsQuery entity instance. |
 | `Domain` | `($data): DomainEntity` | Create a Domain entity instance. |
-| `Email` | `($data): EmailEntity` | Create a Email entity instance. |
+| `Email` | `($data): EmailEntity` | Create an Email entity instance. |
 | `List` | `($data): ListEntity` | Create a List entity instance. |
 | `Resolve` | `($data): ResolveEntity` | Create a Resolve entity instance. |
 | `V2n` | `($data): V2nEntity` | Create a V2n entity instance. |
@@ -299,7 +304,7 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `const dns_query = client.dns_query`
+Create an instance: `$dns_query = $client->DnsQuery();`
 
 #### Operations
 
@@ -310,21 +315,22 @@ Create an instance: `const dns_query = client.dns_query`
 
 #### Example: Load
 
-```ts
-const dns_query = await client.dns_query.load({ id: 'dns_query_id' })
+```php
+// load() returns the bare DnsQuery record (throws on error).
+$dns_query = $client->DnsQuery()->load(["id" => "dns_query_id"]);
 ```
 
 #### Example: Create
 
-```ts
-const dns_query = await client.dns_query.create({
-})
+```php
+$dns_query = $client->DnsQuery()->create([
+]);
 ```
 
 
 ### Domain
 
-Create an instance: `const domain = client.domain`
+Create an instance: `$domain = $client->Domain();`
 
 #### Operations
 
@@ -341,14 +347,15 @@ Create an instance: `const domain = client.domain`
 
 #### Example: Load
 
-```ts
-const domain = await client.domain.load({ id: 'domain_id' })
+```php
+// load() returns the bare Domain record (throws on error).
+$domain = $client->Domain()->load(["id" => "domain_id"]);
 ```
 
 
 ### Email
 
-Create an instance: `const email = client.email`
+Create an instance: `$email = $client->Email();`
 
 #### Operations
 
@@ -365,14 +372,15 @@ Create an instance: `const email = client.email`
 
 #### Example: Load
 
-```ts
-const email = await client.email.load({ id: 'email_id' })
+```php
+// load() returns the bare Email record (throws on error).
+$email = $client->Email()->load(["id" => "email_id"]);
 ```
 
 
 ### List
 
-Create an instance: `const list = client.list`
+Create an instance: `$list = $client->List();`
 
 #### Operations
 
@@ -383,20 +391,22 @@ Create an instance: `const list = client.list`
 
 #### Example: Load
 
-```ts
-const list = await client.list.load({ id: 'list_id' })
+```php
+// load() returns the bare List record (throws on error).
+$list = $client->List()->load(["id" => "list_id"]);
 ```
 
 #### Example: List
 
-```ts
-const lists = await client.list.list()
+```php
+// list() returns an array of List records (throws on error).
+$lists = $client->List()->list();
 ```
 
 
 ### Resolve
 
-Create an instance: `const resolve = client.resolve`
+Create an instance: `$resolve = $client->Resolve();`
 
 #### Operations
 
@@ -406,14 +416,15 @@ Create an instance: `const resolve = client.resolve`
 
 #### Example: Load
 
-```ts
-const resolve = await client.resolve.load({ id: 'resolve_id' })
+```php
+// load() returns the bare Resolve record (throws on error).
+$resolve = $client->Resolve()->load(["id" => "resolve_id"]);
 ```
 
 
 ### V2n
 
-Create an instance: `const v2n = client.v2n`
+Create an instance: `$v2n = $client->V2n();`
 
 #### Operations
 
@@ -430,14 +441,15 @@ Create an instance: `const v2n = client.v2n`
 
 #### Example: Load
 
-```ts
-const v2n = await client.v2n.load({ id: 'v2n_id' })
+```php
+// load() returns the bare V2n record (throws on error).
+$v2n = $client->V2n()->load(["id" => "v2n_id"]);
 ```
 
 
 ### V3n
 
-Create an instance: `const v3n = client.v3n`
+Create an instance: `$v3n = $client->V3n();`
 
 #### Operations
 
@@ -455,8 +467,9 @@ Create an instance: `const v3n = client.v3n`
 
 #### Example: Load
 
-```ts
-const v3n = await client.v3n.load({ id: 'v3n_id' })
+```php
+// load() returns the bare V3n record (throws on error).
+$v3n = $client->V3n()->load(["id" => "v3n_id"]);
 ```
 
 
@@ -531,7 +544,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$dnsquery = $client->dnsquery();
+$dnsquery = $client->DnsQuery();
 $dnsquery->load(["id" => "example_id"]);
 
 // $dnsquery->dataGet() now returns the loaded dnsquery data

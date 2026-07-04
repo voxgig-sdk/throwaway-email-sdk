@@ -233,10 +233,10 @@ class ThrowawayEmailSDK
 
     private $_dns_query = null;
 
-    // Idiomatic facade: $client->dns_query()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias DnsQuery() (PHP method
-    // names are case-insensitive).
-    public function dns_query($data = null)
+    // Canonical facade: $client->DnsQuery()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->dns_query()
+    // resolves here too.
+    public function DnsQuery($data = null)
     {
         require_once __DIR__ . '/entity/dns_query_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class ThrowawayEmailSDK
 
     private $_domain = null;
 
-    // Idiomatic facade: $client->domain()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Domain() (PHP method
-    // names are case-insensitive).
-    public function domain($data = null)
+    // Canonical facade: $client->Domain()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->domain()
+    // resolves here too.
+    public function Domain($data = null)
     {
         require_once __DIR__ . '/entity/domain_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class ThrowawayEmailSDK
 
     private $_email = null;
 
-    // Idiomatic facade: $client->email()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Email() (PHP method
-    // names are case-insensitive).
-    public function email($data = null)
+    // Canonical facade: $client->Email()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->email()
+    // resolves here too.
+    public function Email($data = null)
     {
         require_once __DIR__ . '/entity/email_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class ThrowawayEmailSDK
 
     private $_list = null;
 
-    // Idiomatic facade: $client->list()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias List() (PHP method
-    // names are case-insensitive).
-    public function list($data = null)
+    // Canonical facade: $client->List()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->list()
+    // resolves here too.
+    public function List($data = null)
     {
         require_once __DIR__ . '/entity/list_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class ThrowawayEmailSDK
 
     private $_resolve = null;
 
-    // Idiomatic facade: $client->resolve()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Resolve() (PHP method
-    // names are case-insensitive).
-    public function resolve($data = null)
+    // Canonical facade: $client->Resolve()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->resolve()
+    // resolves here too.
+    public function Resolve($data = null)
     {
         require_once __DIR__ . '/entity/resolve_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class ThrowawayEmailSDK
 
     private $_v2n = null;
 
-    // Idiomatic facade: $client->v2n()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V2n() (PHP method
-    // names are case-insensitive).
-    public function v2n($data = null)
+    // Canonical facade: $client->V2n()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v2n()
+    // resolves here too.
+    public function V2n($data = null)
     {
         require_once __DIR__ . '/entity/v2n_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class ThrowawayEmailSDK
 
     private $_v3n = null;
 
-    // Idiomatic facade: $client->v3n()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V3n() (PHP method
-    // names are case-insensitive).
-    public function v3n($data = null)
+    // Canonical facade: $client->V3n()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v3n()
+    // resolves here too.
+    public function V3n($data = null)
     {
         require_once __DIR__ . '/entity/v3n_entity.php';
         if ($data === null) {

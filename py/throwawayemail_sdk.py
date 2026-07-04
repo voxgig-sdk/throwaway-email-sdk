@@ -220,121 +220,51 @@ class ThrowawayEmailSDK:
         }
 
 
-    @property
-    def dns_query(self):
-        """Idiomatic facade: client.dns_query.list() / client.dns_query.load({"id": ...})."""
-        from entity.dns_query_entity import DnsQueryEntity
-        cached = getattr(self, "_dns_query", None)
-        if cached is None:
-            cached = DnsQueryEntity(self, None)
-            self._dns_query = cached
-        return cached
-
-    def DnsQuery(self, data=None):
-        # Deprecated: use client.dns_query instead.
+    def DnsQuery(self, data=None) -> "DnsQueryEntity":
+        """Entity factory: client.DnsQuery().list({}) / client.DnsQuery().load({"id": ...})."""
         from entity.dns_query_entity import DnsQueryEntity
         return DnsQueryEntity(self, data)
 
 
-    @property
-    def domain(self):
-        """Idiomatic facade: client.domain.list() / client.domain.load({"id": ...})."""
-        from entity.domain_entity import DomainEntity
-        cached = getattr(self, "_domain", None)
-        if cached is None:
-            cached = DomainEntity(self, None)
-            self._domain = cached
-        return cached
-
-    def Domain(self, data=None):
-        # Deprecated: use client.domain instead.
+    def Domain(self, data=None) -> "DomainEntity":
+        """Entity factory: client.Domain().list({}) / client.Domain().load({"id": ...})."""
         from entity.domain_entity import DomainEntity
         return DomainEntity(self, data)
 
 
-    @property
-    def email(self):
-        """Idiomatic facade: client.email.list() / client.email.load({"id": ...})."""
-        from entity.email_entity import EmailEntity
-        cached = getattr(self, "_email", None)
-        if cached is None:
-            cached = EmailEntity(self, None)
-            self._email = cached
-        return cached
-
-    def Email(self, data=None):
-        # Deprecated: use client.email instead.
+    def Email(self, data=None) -> "EmailEntity":
+        """Entity factory: client.Email().list({}) / client.Email().load({"id": ...})."""
         from entity.email_entity import EmailEntity
         return EmailEntity(self, data)
 
 
-    @property
-    def list(self):
-        """Idiomatic facade: client.list.list() / client.list.load({"id": ...})."""
-        from entity.list_entity import ListEntity
-        cached = getattr(self, "_list", None)
-        if cached is None:
-            cached = ListEntity(self, None)
-            self._list = cached
-        return cached
-
-    def List(self, data=None):
-        # Deprecated: use client.list instead.
+    def List(self, data=None) -> "ListEntity":
+        """Entity factory: client.List().list({}) / client.List().load({"id": ...})."""
         from entity.list_entity import ListEntity
         return ListEntity(self, data)
 
 
-    @property
-    def resolve(self):
-        """Idiomatic facade: client.resolve.list() / client.resolve.load({"id": ...})."""
-        from entity.resolve_entity import ResolveEntity
-        cached = getattr(self, "_resolve", None)
-        if cached is None:
-            cached = ResolveEntity(self, None)
-            self._resolve = cached
-        return cached
-
-    def Resolve(self, data=None):
-        # Deprecated: use client.resolve instead.
+    def Resolve(self, data=None) -> "ResolveEntity":
+        """Entity factory: client.Resolve().list({}) / client.Resolve().load({"id": ...})."""
         from entity.resolve_entity import ResolveEntity
         return ResolveEntity(self, data)
 
 
-    @property
-    def v2n(self):
-        """Idiomatic facade: client.v2n.list() / client.v2n.load({"id": ...})."""
-        from entity.v2n_entity import V2nEntity
-        cached = getattr(self, "_v2n", None)
-        if cached is None:
-            cached = V2nEntity(self, None)
-            self._v2n = cached
-        return cached
-
-    def V2n(self, data=None):
-        # Deprecated: use client.v2n instead.
+    def V2n(self, data=None) -> "V2nEntity":
+        """Entity factory: client.V2n().list({}) / client.V2n().load({"id": ...})."""
         from entity.v2n_entity import V2nEntity
         return V2nEntity(self, data)
 
 
-    @property
-    def v3n(self):
-        """Idiomatic facade: client.v3n.list() / client.v3n.load({"id": ...})."""
-        from entity.v3n_entity import V3nEntity
-        cached = getattr(self, "_v3n", None)
-        if cached is None:
-            cached = V3nEntity(self, None)
-            self._v3n = cached
-        return cached
-
-    def V3n(self, data=None):
-        # Deprecated: use client.v3n instead.
+    def V3n(self, data=None) -> "V3nEntity":
+        """Entity factory: client.V3n().list({}) / client.V3n().load({"id": ...})."""
         from entity.v3n_entity import V3nEntity
         return V3nEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "ThrowawayEmailSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -354,3 +284,15 @@ class ThrowawayEmailSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.dns_query_entity import DnsQueryEntity
+    from entity.domain_entity import DomainEntity
+    from entity.email_entity import EmailEntity
+    from entity.list_entity import ListEntity
+    from entity.resolve_entity import ResolveEntity
+    from entity.v2n_entity import V2nEntity
+    from entity.v3n_entity import V3nEntity

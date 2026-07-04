@@ -210,98 +210,49 @@ class ThrowawayEmailSDK {
 
 
 
-  _dns_query?: DnsQueryEntity
-
-  // Idiomatic facade: `client.dns_query.list()` / `client.dns_query.load({ id })`.
-  get dns_query(): DnsQueryEntity {
-    return (this._dns_query ??= new DnsQueryEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.dns_query` instead. */
+  // Entity access: `client.DnsQuery().list()` / `client.DnsQuery().load({ id })`.
   DnsQuery(data?: any) {
     const self = this
     return new DnsQueryEntity(self,data)
   }
 
 
-  _domain?: DomainEntity
-
-  // Idiomatic facade: `client.domain.list()` / `client.domain.load({ id })`.
-  get domain(): DomainEntity {
-    return (this._domain ??= new DomainEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.domain` instead. */
+  // Entity access: `client.Domain().list()` / `client.Domain().load({ id })`.
   Domain(data?: any) {
     const self = this
     return new DomainEntity(self,data)
   }
 
 
-  _email?: EmailEntity
-
-  // Idiomatic facade: `client.email.list()` / `client.email.load({ id })`.
-  get email(): EmailEntity {
-    return (this._email ??= new EmailEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.email` instead. */
+  // Entity access: `client.Email().list()` / `client.Email().load({ id })`.
   Email(data?: any) {
     const self = this
     return new EmailEntity(self,data)
   }
 
 
-  _list?: ListEntity
-
-  // Idiomatic facade: `client.list.list()` / `client.list.load({ id })`.
-  get list(): ListEntity {
-    return (this._list ??= new ListEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.list` instead. */
+  // Entity access: `client.List().list()` / `client.List().load({ id })`.
   List(data?: any) {
     const self = this
     return new ListEntity(self,data)
   }
 
 
-  _resolve?: ResolveEntity
-
-  // Idiomatic facade: `client.resolve.list()` / `client.resolve.load({ id })`.
-  get resolve(): ResolveEntity {
-    return (this._resolve ??= new ResolveEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.resolve` instead. */
+  // Entity access: `client.Resolve().list()` / `client.Resolve().load({ id })`.
   Resolve(data?: any) {
     const self = this
     return new ResolveEntity(self,data)
   }
 
 
-  _v2n?: V2nEntity
-
-  // Idiomatic facade: `client.v2n.list()` / `client.v2n.load({ id })`.
-  get v2n(): V2nEntity {
-    return (this._v2n ??= new V2nEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v2n` instead. */
+  // Entity access: `client.V2n().list()` / `client.V2n().load({ id })`.
   V2n(data?: any) {
     const self = this
     return new V2nEntity(self,data)
   }
 
 
-  _v3n?: V3nEntity
-
-  // Idiomatic facade: `client.v3n.list()` / `client.v3n.load({ id })`.
-  get v3n(): V3nEntity {
-    return (this._v3n ??= new V3nEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v3n` instead. */
+  // Entity access: `client.V3n().list()` / `client.V3n().load({ id })`.
   V3n(data?: any) {
     const self = this
     return new V3nEntity(self,data)

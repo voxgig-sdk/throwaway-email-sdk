@@ -34,16 +34,17 @@ local client = sdk.new()
 ### 3. Load a dnsquery
 
 ```lua
-local result, err = client:dnsquery():load({ id = "example_id" })
+local dnsquery, err = client:DnsQuery():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(dnsquery)
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:dnsquery():create({ name = "Example" })
+local created, err = client:DnsQuery():create({ name = "Example" })
+if err then error(err) end
 
 ```
 
@@ -90,8 +91,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:dnsquery():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:DnsQuery():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -171,7 +172,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
 | `DnsQuery` | `(data) -> DnsQueryEntity` | Create a DnsQuery entity instance. |
 | `Domain` | `(data) -> DomainEntity` | Create a Domain entity instance. |
-| `Email` | `(data) -> EmailEntity` | Create a Email entity instance. |
+| `Email` | `(data) -> EmailEntity` | Create an Email entity instance. |
 | `List` | `(data) -> ListEntity` | Create a List entity instance. |
 | `Resolve` | `(data) -> ResolveEntity` | Create a Resolve entity instance. |
 | `V2n` | `(data) -> V2nEntity` | Create a V2n entity instance. |
@@ -197,17 +198,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local dns_query, err = client:DnsQuery():load({ id = "example_id" })
+    if err then error(err) end
+    -- dns_query is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -290,7 +296,7 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `const dns_query = client.dns_query`
+Create an instance: `local dns_query = client:DnsQuery(nil)`
 
 #### Operations
 
@@ -301,21 +307,21 @@ Create an instance: `const dns_query = client.dns_query`
 
 #### Example: Load
 
-```ts
-const dns_query = await client.dns_query.load({ id: 'dns_query_id' })
+```lua
+local dns_query, err = client:DnsQuery():load({ id = "dns_query_id" })
 ```
 
 #### Example: Create
 
-```ts
-const dns_query = await client.dns_query.create({
+```lua
+local dns_query, err = client:DnsQuery():create({
 })
 ```
 
 
 ### Domain
 
-Create an instance: `const domain = client.domain`
+Create an instance: `local domain = client:Domain(nil)`
 
 #### Operations
 
@@ -332,14 +338,14 @@ Create an instance: `const domain = client.domain`
 
 #### Example: Load
 
-```ts
-const domain = await client.domain.load({ id: 'domain_id' })
+```lua
+local domain, err = client:Domain():load({ id = "domain_id" })
 ```
 
 
 ### Email
 
-Create an instance: `const email = client.email`
+Create an instance: `local email = client:Email(nil)`
 
 #### Operations
 
@@ -356,14 +362,14 @@ Create an instance: `const email = client.email`
 
 #### Example: Load
 
-```ts
-const email = await client.email.load({ id: 'email_id' })
+```lua
+local email, err = client:Email():load({ id = "email_id" })
 ```
 
 
 ### List
 
-Create an instance: `const list = client.list`
+Create an instance: `local list = client:List(nil)`
 
 #### Operations
 
@@ -374,20 +380,20 @@ Create an instance: `const list = client.list`
 
 #### Example: Load
 
-```ts
-const list = await client.list.load({ id: 'list_id' })
+```lua
+local list, err = client:List():load({ id = "list_id" })
 ```
 
 #### Example: List
 
-```ts
-const lists = await client.list.list()
+```lua
+local lists, err = client:List():list()
 ```
 
 
 ### Resolve
 
-Create an instance: `const resolve = client.resolve`
+Create an instance: `local resolve = client:Resolve(nil)`
 
 #### Operations
 
@@ -397,14 +403,14 @@ Create an instance: `const resolve = client.resolve`
 
 #### Example: Load
 
-```ts
-const resolve = await client.resolve.load({ id: 'resolve_id' })
+```lua
+local resolve, err = client:Resolve():load({ id = "resolve_id" })
 ```
 
 
 ### V2n
 
-Create an instance: `const v2n = client.v2n`
+Create an instance: `local v2n = client:V2n(nil)`
 
 #### Operations
 
@@ -421,14 +427,14 @@ Create an instance: `const v2n = client.v2n`
 
 #### Example: Load
 
-```ts
-const v2n = await client.v2n.load({ id: 'v2n_id' })
+```lua
+local v2n, err = client:V2n():load({ id = "v2n_id" })
 ```
 
 
 ### V3n
 
-Create an instance: `const v3n = client.v3n`
+Create an instance: `local v3n = client:V3n(nil)`
 
 #### Operations
 
@@ -446,8 +452,8 @@ Create an instance: `const v3n = client.v3n`
 
 #### Example: Load
 
-```ts
-const v3n = await client.v3n.load({ id: 'v3n_id' })
+```lua
+local v3n, err = client:V3n():load({ id = "v3n_id" })
 ```
 
 
@@ -522,7 +528,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local dnsquery = client:dnsquery()
+local dnsquery = client:DnsQuery()
 dnsquery:load({ id = "example_id" })
 
 -- dnsquery:data_get() now returns the loaded dnsquery data

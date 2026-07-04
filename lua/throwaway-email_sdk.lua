@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:dns_query():list() / client:dns_query():load({ id = ... })
-function ThrowawayEmailSDK:dns_query(data)
+-- Idiomatic facade: client:DnsQuery():list() / client:DnsQuery():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:DnsQuery(data)
   local EntityMod = require("entity.dns_query_entity")
   if data == nil then
     if self._dns_query == nil then
@@ -256,15 +257,10 @@ function ThrowawayEmailSDK:dns_query(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:dns_query() instead.
-function ThrowawayEmailSDK:DnsQuery(data)
-  local EntityMod = require("entity.dns_query_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:domain():list() / client:domain():load({ id = ... })
-function ThrowawayEmailSDK:domain(data)
+-- Idiomatic facade: client:Domain():list() / client:Domain():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:Domain(data)
   local EntityMod = require("entity.domain_entity")
   if data == nil then
     if self._domain == nil then
@@ -275,15 +271,10 @@ function ThrowawayEmailSDK:domain(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:domain() instead.
-function ThrowawayEmailSDK:Domain(data)
-  local EntityMod = require("entity.domain_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:email():list() / client:email():load({ id = ... })
-function ThrowawayEmailSDK:email(data)
+-- Idiomatic facade: client:Email():list() / client:Email():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:Email(data)
   local EntityMod = require("entity.email_entity")
   if data == nil then
     if self._email == nil then
@@ -294,15 +285,10 @@ function ThrowawayEmailSDK:email(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:email() instead.
-function ThrowawayEmailSDK:Email(data)
-  local EntityMod = require("entity.email_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:list():list() / client:list():load({ id = ... })
-function ThrowawayEmailSDK:list(data)
+-- Idiomatic facade: client:List():list() / client:List():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:List(data)
   local EntityMod = require("entity.list_entity")
   if data == nil then
     if self._list == nil then
@@ -313,15 +299,10 @@ function ThrowawayEmailSDK:list(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:list() instead.
-function ThrowawayEmailSDK:List(data)
-  local EntityMod = require("entity.list_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:resolve():list() / client:resolve():load({ id = ... })
-function ThrowawayEmailSDK:resolve(data)
+-- Idiomatic facade: client:Resolve():list() / client:Resolve():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:Resolve(data)
   local EntityMod = require("entity.resolve_entity")
   if data == nil then
     if self._resolve == nil then
@@ -332,15 +313,10 @@ function ThrowawayEmailSDK:resolve(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:resolve() instead.
-function ThrowawayEmailSDK:Resolve(data)
-  local EntityMod = require("entity.resolve_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v2n():list() / client:v2n():load({ id = ... })
-function ThrowawayEmailSDK:v2n(data)
+-- Idiomatic facade: client:V2n():list() / client:V2n():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:V2n(data)
   local EntityMod = require("entity.v2n_entity")
   if data == nil then
     if self._v2n == nil then
@@ -351,15 +327,10 @@ function ThrowawayEmailSDK:v2n(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:v2n() instead.
-function ThrowawayEmailSDK:V2n(data)
-  local EntityMod = require("entity.v2n_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v3n():list() / client:v3n():load({ id = ... })
-function ThrowawayEmailSDK:v3n(data)
+-- Idiomatic facade: client:V3n():list() / client:V3n():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ThrowawayEmailSDK:V3n(data)
   local EntityMod = require("entity.v3n_entity")
   if data == nil then
     if self._v3n == nil then
@@ -367,12 +338,6 @@ function ThrowawayEmailSDK:v3n(data)
     end
     return self._v3n
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:v3n() instead.
-function ThrowawayEmailSDK:V3n(data)
-  local EntityMod = require("entity.v3n_entity")
   return EntityMod.new(self, data)
 end
 
