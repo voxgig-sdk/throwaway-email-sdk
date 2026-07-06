@@ -4,6 +4,8 @@
 
 The Golang SDK for the ThrowawayEmail API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.DnsQuery(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -49,19 +51,48 @@ func main() {
     client := sdk.New()
 
     // Load a single dnsquery — the value is the loaded record.
-    dnsquery, err := client.DnsQuery(nil).Load(map[string]any{"id": "example_id"}, nil)
+    dnsquery, err := client.DnsQuery(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(dnsquery)
 
     // Create a dnsquery.
-    created, err := client.DnsQuery(nil).Create(map[string]any{"name": "Example"}, nil)
+    created, err := client.DnsQuery(nil).Create(map[string]any{}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+dnsquery, err := client.DnsQuery(nil).Load(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = dnsquery
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -112,12 +143,12 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 dnsquery, err := client.DnsQuery(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(dnsquery) // the loaded mock data
+fmt.Println(dnsquery) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -211,8 +242,6 @@ All entities implement the `ThrowawayEmailEntity` interface.
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
 | `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -225,16 +254,16 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `Load` / `Create` | the entity record (`map[string]any`) |
 | `List` | a `[]any` of entity records |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    dnsquery, err := client.DnsQuery(nil).Load(map[string]any{"id": "example_id"}, nil)
+    dnsquery, err := client.DnsQuery(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // dnsquery is the loaded record
+    // dnsquery is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -332,7 +361,7 @@ Create an instance: `dns_query := client.DnsQuery(nil)`
 #### Example: Load
 
 ```go
-dns_query, err := client.DnsQuery(nil).Load(map[string]any{"id": "dns_query_id"}, nil)
+dns_query, err := client.DnsQuery(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -361,8 +390,8 @@ Create an instance: `domain := client.Domain(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `bool` |  |
+| `success` | `bool` |  |
 
 #### Example: Load
 
@@ -389,8 +418,8 @@ Create an instance: `email := client.Email(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `bool` |  |
+| `success` | `bool` |  |
 
 #### Example: Load
 
@@ -417,7 +446,7 @@ Create an instance: `list := client.List(nil)`
 #### Example: Load
 
 ```go
-list, err := client.List(nil).Load(map[string]any{"id": "list_id"}, nil)
+list, err := client.List(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -448,7 +477,7 @@ Create an instance: `resolve := client.Resolve(nil)`
 #### Example: Load
 
 ```go
-resolve, err := client.Resolve(nil).Load(map[string]any{"id": "resolve_id"}, nil)
+resolve, err := client.Resolve(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -470,13 +499,13 @@ Create an instance: `v2n := client.V2n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `bool` |  |
+| `success` | `bool` |  |
 
 #### Example: Load
 
 ```go
-v2n, err := client.V2n(nil).Load(map[string]any{"id": "v2n_id"}, nil)
+v2n, err := client.V2n(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -498,14 +527,14 @@ Create an instance: `v3n := client.V3n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `trait` | ``$ARRAY`` |  |
+| `record` | `map[string]any` |  |
+| `success` | `bool` |  |
+| `trait` | `[]any` |  |
 
 #### Example: Load
 
 ```go
-v3n, err := client.V3n(nil).Load(map[string]any{"id": "v3n_id"}, nil)
+v3n, err := client.V3n(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -513,12 +542,16 @@ fmt.Println(v3n) // the loaded record
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -535,9 +568,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -583,9 +616,9 @@ stores the returned data and match criteria internally.
 
 ```go
 dnsquery := client.DnsQuery(nil)
-dnsquery.Load(map[string]any{"id": "example_id"}, nil)
+dnsquery.Load(nil, nil)
 
-// dnsquery.Data() now returns the loaded dnsquery data
+// dnsquery.Data() now returns the dnsquery data from the last load
 // dnsquery.Match() returns the last match criteria
 ```
 

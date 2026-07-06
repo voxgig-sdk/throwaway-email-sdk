@@ -12,13 +12,11 @@ import "encoding/json"
 type DnsQuery struct {
 }
 
-// DnsQueryLoadMatch mirrors the dns_query fields as an all-optional match
-// filter (Go analog of Partial<DnsQuery>).
+// DnsQueryLoadMatch is the typed request payload for DnsQuery.LoadTyped.
 type DnsQueryLoadMatch struct {
 }
 
-// DnsQueryCreateData mirrors the dns_query fields as an all-optional match
-// filter (Go analog of Partial<DnsQuery>).
+// DnsQueryCreateData is the typed request payload for DnsQuery.CreateTyped.
 type DnsQueryCreateData struct {
 }
 
@@ -48,13 +46,11 @@ type EmailLoadMatch struct {
 type List struct {
 }
 
-// ListLoadMatch mirrors the list fields as an all-optional match
-// filter (Go analog of Partial<List>).
+// ListLoadMatch is the typed request payload for List.LoadTyped.
 type ListLoadMatch struct {
 }
 
-// ListListMatch mirrors the list fields as an all-optional match
-// filter (Go analog of Partial<List>).
+// ListListMatch is the typed request payload for List.ListTyped.
 type ListListMatch struct {
 }
 
@@ -62,8 +58,7 @@ type ListListMatch struct {
 type Resolve struct {
 }
 
-// ResolveLoadMatch mirrors the resolve fields as an all-optional match
-// filter (Go analog of Partial<Resolve>).
+// ResolveLoadMatch is the typed request payload for Resolve.LoadTyped.
 type ResolveLoadMatch struct {
 }
 

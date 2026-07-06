@@ -8,7 +8,7 @@ Complete API reference for the ThrowawayEmail Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'throwaway-email_sdk'
+require_relative 'ThrowawayEmail_sdk'
 
 client = ThrowawayEmailSDK.new(options)
 ```
@@ -129,7 +129,7 @@ result = client.DnsQuery.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.DnsQuery.load({ "id" => "dns_query_id" })
+result = client.DnsQuery.load()
 ```
 
 ### Common Methods
@@ -172,8 +172,8 @@ domain = client.Domain
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `Boolean` | No |  |
+| `success` | `Boolean` | No |  |
 
 ### Operations
 
@@ -225,8 +225,8 @@ email = client.Email
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `Boolean` | No |  |
+| `success` | `Boolean` | No |  |
 
 ### Operations
 
@@ -276,12 +276,12 @@ list = client.List
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.List.list(nil)
+results = client.List.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -289,7 +289,7 @@ results = client.List.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.List.load({ "id" => "list_id" })
+result = client.List.load()
 ```
 
 ### Common Methods
@@ -335,7 +335,7 @@ resolve = client.Resolve
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Resolve.load({ "id" => "resolve_id" })
+result = client.Resolve.load()
 ```
 
 ### Common Methods
@@ -378,8 +378,8 @@ v2n = client.V2n
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `Boolean` | No |  |
+| `success` | `Boolean` | No |  |
 
 ### Operations
 
@@ -388,7 +388,7 @@ v2n = client.V2n
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.V2n.load({ "id" => "v2n_id" })
+result = client.V2n.load()
 ```
 
 ### Common Methods
@@ -431,9 +431,9 @@ v3n = client.V3n
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `trait` | ``$ARRAY`` | Yes |  |
+| `record` | `Hash` | No |  |
+| `success` | `Boolean` | Yes |  |
+| `trait` | `Array` | Yes |  |
 
 ### Operations
 
@@ -442,7 +442,7 @@ v3n = client.V3n
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.V3n.load({ "id" => "v3n_id" })
+result = client.V3n.load()
 ```
 
 ### Common Methods

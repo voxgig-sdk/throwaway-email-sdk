@@ -8,7 +8,7 @@ Complete API reference for the ThrowawayEmail PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/throwaway-email_sdk.php';
+require_once __DIR__ . '/throwawayemail_sdk.php';
 
 $client = new ThrowawayEmailSDK($options);
 ```
@@ -69,11 +69,11 @@ Create a new `V2nEntity` instance. Pass `null` for no initial data.
 
 Create a new `V3nEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): ThrowawayEmailUtility`
 
 Return a copy of the SDK utility object.
 
@@ -128,24 +128,24 @@ $result = $client->DnsQuery()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->DnsQuery()->load(["id" => "dns_query_id"]);
+$result = $client->DnsQuery()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -154,7 +154,7 @@ Set the entity match criteria.
 Create a new `DnsQueryEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -171,8 +171,8 @@ $domain = $client->Domain();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -186,19 +186,19 @@ $result = $client->Domain()->load(["id" => "domain_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -207,7 +207,7 @@ Set the entity match criteria.
 Create a new `DomainEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -224,8 +224,8 @@ $email = $client->Email();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -239,19 +239,19 @@ $result = $client->Email()->load(["id" => "email_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -260,7 +260,7 @@ Set the entity match criteria.
 Create a new `EmailEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -275,12 +275,12 @@ $list = $client->List();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->List()->list([]);
+$results = $client->List()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -288,24 +288,24 @@ $results = $client->List()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->List()->load(["id" => "list_id"]);
+$result = $client->List()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -314,7 +314,7 @@ Set the entity match criteria.
 Create a new `ListEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -334,24 +334,24 @@ $resolve = $client->Resolve();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Resolve()->load(["id" => "resolve_id"]);
+$result = $client->Resolve()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -360,7 +360,7 @@ Set the entity match criteria.
 Create a new `ResolveEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -377,8 +377,8 @@ $v2n = $client->V2n();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -387,24 +387,24 @@ $v2n = $client->V2n();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->V2n()->load(["id" => "v2n_id"]);
+$result = $client->V2n()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -413,7 +413,7 @@ Set the entity match criteria.
 Create a new `V2nEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -430,9 +430,9 @@ $v3n = $client->V3n();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `trait` | ``$ARRAY`` | Yes |  |
+| `record` | `array` | No |  |
+| `success` | `bool` | Yes |  |
+| `trait` | `array` | Yes |  |
 
 ### Operations
 
@@ -441,24 +441,24 @@ $v3n = $client->V3n();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->V3n()->load(["id" => "v3n_id"]);
+$result = $client->V3n()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -467,7 +467,7 @@ Set the entity match criteria.
 Create a new `V3nEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

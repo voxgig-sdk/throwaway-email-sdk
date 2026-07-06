@@ -126,7 +126,7 @@ local result, err = client:DnsQuery():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:DnsQuery():load({ id = "dns_query_id" })
+local result, err = client:DnsQuery():load()
 ```
 
 ### Common Methods
@@ -169,8 +169,8 @@ local domain = client:Domain(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `boolean` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -222,8 +222,8 @@ local email = client:Email(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `boolean` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -286,7 +286,7 @@ local results, err = client:List():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:List():load({ id = "list_id" })
+local result, err = client:List():load()
 ```
 
 ### Common Methods
@@ -332,7 +332,7 @@ local resolve = client:Resolve(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Resolve():load({ id = "resolve_id" })
+local result, err = client:Resolve():load()
 ```
 
 ### Common Methods
@@ -375,8 +375,8 @@ local v2n = client:V2n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `boolean` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -385,7 +385,7 @@ local v2n = client:V2n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V2n():load({ id = "v2n_id" })
+local result, err = client:V2n():load()
 ```
 
 ### Common Methods
@@ -428,9 +428,9 @@ local v3n = client:V3n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `trait` | ``$ARRAY`` | Yes |  |
+| `record` | `table` | No |  |
+| `success` | `boolean` | Yes |  |
+| `trait` | `table` | Yes |  |
 
 ### Operations
 
@@ -439,7 +439,7 @@ local v3n = client:V3n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V3n():load({ id = "v3n_id" })
+local result, err = client:V3n():load()
 ```
 
 ### Common Methods

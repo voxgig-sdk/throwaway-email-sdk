@@ -221,43 +221,43 @@ class ThrowawayEmailSDK:
 
 
     def DnsQuery(self, data=None) -> "DnsQueryEntity":
-        """Entity factory: client.DnsQuery().list({}) / client.DnsQuery().load({"id": ...})."""
+        """Entity factory: client.DnsQuery().list() / client.DnsQuery().load({"id": ...})."""
         from entity.dns_query_entity import DnsQueryEntity
         return DnsQueryEntity(self, data)
 
 
     def Domain(self, data=None) -> "DomainEntity":
-        """Entity factory: client.Domain().list({}) / client.Domain().load({"id": ...})."""
+        """Entity factory: client.Domain().list() / client.Domain().load({"id": ...})."""
         from entity.domain_entity import DomainEntity
         return DomainEntity(self, data)
 
 
     def Email(self, data=None) -> "EmailEntity":
-        """Entity factory: client.Email().list({}) / client.Email().load({"id": ...})."""
+        """Entity factory: client.Email().list() / client.Email().load({"id": ...})."""
         from entity.email_entity import EmailEntity
         return EmailEntity(self, data)
 
 
     def List(self, data=None) -> "ListEntity":
-        """Entity factory: client.List().list({}) / client.List().load({"id": ...})."""
+        """Entity factory: client.List().list() / client.List().load({"id": ...})."""
         from entity.list_entity import ListEntity
         return ListEntity(self, data)
 
 
     def Resolve(self, data=None) -> "ResolveEntity":
-        """Entity factory: client.Resolve().list({}) / client.Resolve().load({"id": ...})."""
+        """Entity factory: client.Resolve().list() / client.Resolve().load({"id": ...})."""
         from entity.resolve_entity import ResolveEntity
         return ResolveEntity(self, data)
 
 
     def V2n(self, data=None) -> "V2nEntity":
-        """Entity factory: client.V2n().list({}) / client.V2n().load({"id": ...})."""
+        """Entity factory: client.V2n().list() / client.V2n().load({"id": ...})."""
         from entity.v2n_entity import V2nEntity
         return V2nEntity(self, data)
 
 
     def V3n(self, data=None) -> "V3nEntity":
-        """Entity factory: client.V3n().list({}) / client.V3n().load({"id": ...})."""
+        """Entity factory: client.V3n().list() / client.V3n().load({"id": ...})."""
         from entity.v3n_entity import V3nEntity
         return V3nEntity(self, data)
 

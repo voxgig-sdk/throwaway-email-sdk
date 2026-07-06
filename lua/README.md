@@ -4,6 +4,8 @@
 
 The Lua SDK for the ThrowawayEmail API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:DnsQuery()` — each with the same small set of operations (`list`, `load`, `create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -34,7 +36,7 @@ local client = sdk.new()
 ### 3. Load a dnsquery
 
 ```lua
-local dnsquery, err = client:DnsQuery():load({ id = "example_id" })
+local dnsquery, err = client:DnsQuery():load()
 if err then error(err) end
 print(dnsquery)
 ```
@@ -43,9 +45,31 @@ print(dnsquery)
 
 ```lua
 -- Create
-local created, err = client:DnsQuery():create({ name = "Example" })
+local created, err = client:DnsQuery():create({  })
 if err then error(err) end
 
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local dnsquery, err = client:DnsQuery():load()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -91,8 +115,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:DnsQuery():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:DnsQuery():load()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -187,8 +211,6 @@ All entities share the same interface.
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
 | `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -203,12 +225,12 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `load` / `create` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local dns_query, err = client:DnsQuery():load({ id = "example_id" })
+    local dns_query, err = client:DnsQuery():load()
     if err then error(err) end
     -- dns_query is the loaded record
 
@@ -308,7 +330,7 @@ Create an instance: `local dns_query = client:DnsQuery(nil)`
 #### Example: Load
 
 ```lua
-local dns_query, err = client:DnsQuery():load({ id = "dns_query_id" })
+local dns_query, err = client:DnsQuery():load()
 ```
 
 #### Example: Create
@@ -333,8 +355,8 @@ Create an instance: `local domain = client:Domain(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `boolean` |  |
+| `success` | `boolean` |  |
 
 #### Example: Load
 
@@ -357,8 +379,8 @@ Create an instance: `local email = client:Email(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `boolean` |  |
+| `success` | `boolean` |  |
 
 #### Example: Load
 
@@ -381,7 +403,7 @@ Create an instance: `local list = client:List(nil)`
 #### Example: Load
 
 ```lua
-local list, err = client:List():load({ id = "list_id" })
+local list, err = client:List():load()
 ```
 
 #### Example: List
@@ -404,7 +426,7 @@ Create an instance: `local resolve = client:Resolve(nil)`
 #### Example: Load
 
 ```lua
-local resolve, err = client:Resolve():load({ id = "resolve_id" })
+local resolve, err = client:Resolve():load()
 ```
 
 
@@ -422,13 +444,13 @@ Create an instance: `local v2n = client:V2n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `boolean` |  |
+| `success` | `boolean` |  |
 
 #### Example: Load
 
 ```lua
-local v2n, err = client:V2n():load({ id = "v2n_id" })
+local v2n, err = client:V2n():load()
 ```
 
 
@@ -446,23 +468,27 @@ Create an instance: `local v3n = client:V3n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `trait` | ``$ARRAY`` |  |
+| `record` | `table` |  |
+| `success` | `boolean` |  |
+| `trait` | `table` |  |
 
 #### Example: Load
 
 ```lua
-local v3n, err = client:V3n():load({ id = "v3n_id" })
+local v3n, err = client:V3n():load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -479,8 +505,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -529,9 +556,9 @@ stores the returned data and match criteria internally.
 
 ```lua
 local dnsquery = client:DnsQuery()
-dnsquery:load({ id = "example_id" })
+dnsquery:load()
 
--- dnsquery:data_get() now returns the loaded dnsquery data
+-- dnsquery:data_get() now returns the dnsquery data from the last load
 -- dnsquery:match_get() returns the last match criteria
 ```
 

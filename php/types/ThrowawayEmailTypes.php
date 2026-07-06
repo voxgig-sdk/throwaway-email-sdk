@@ -17,12 +17,12 @@ class DnsQuery
 {
 }
 
-/** Match filter for DnsQuery#load (any subset of DnsQuery fields). */
+/** Request payload for DnsQuery#load. */
 class DnsQueryLoadMatch
 {
 }
 
-/** Match filter for DnsQuery#create (any subset of DnsQuery fields). */
+/** Request payload for DnsQuery#create. */
 class DnsQueryCreateData
 {
 }
@@ -58,12 +58,12 @@ class List
 {
 }
 
-/** Match filter for List#load (any subset of List fields). */
+/** Request payload for List#load. */
 class ListLoadMatch
 {
 }
 
-/** Match filter for List#list (any subset of List fields). */
+/** Request payload for List#list. */
 class ListListMatch
 {
 }
@@ -73,7 +73,7 @@ class Resolve
 {
 }
 
-/** Match filter for Resolve#load (any subset of Resolve fields). */
+/** Request payload for Resolve#load. */
 class ResolveLoadMatch
 {
 }

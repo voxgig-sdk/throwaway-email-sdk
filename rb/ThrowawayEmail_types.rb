@@ -12,11 +12,11 @@
 class DnsQuery
 end
 
-# Match filter for DnsQuery#load (any subset of DnsQuery fields).
+# Request payload for DnsQuery#load.
 class DnsQueryLoadMatch
 end
 
-# Match filter for DnsQuery#create (any subset of DnsQuery fields).
+# Request payload for DnsQuery#create.
 class DnsQueryCreateData
 end
 
@@ -68,11 +68,11 @@ EmailLoadMatch = Struct.new(
 class List
 end
 
-# Match filter for List#load (any subset of List fields).
+# Request payload for List#load.
 class ListLoadMatch
 end
 
-# Match filter for List#list (any subset of List fields).
+# Request payload for List#list.
 class ListListMatch
 end
 
@@ -80,7 +80,7 @@ end
 class Resolve
 end
 
-# Match filter for Resolve#load (any subset of Resolve fields).
+# Request payload for Resolve#load.
 class ResolveLoadMatch
 end
 

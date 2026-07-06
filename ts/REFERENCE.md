@@ -200,7 +200,7 @@ const result = await client.DnsQuery().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.DnsQuery().load({ id: 'dns_query_id' })
+const result = await client.DnsQuery().load()
 ```
 
 ### Common Methods
@@ -241,8 +241,8 @@ const domain = client.Domain()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `boolean` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -292,8 +292,8 @@ const email = client.Email()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `boolean` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -354,7 +354,7 @@ const results = await client.List().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.List().load({ id: 'list_id' })
+const result = await client.List().load()
 ```
 
 ### Common Methods
@@ -398,7 +398,7 @@ const resolve = client.Resolve()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Resolve().load({ id: 'resolve_id' })
+const result = await client.Resolve().load()
 ```
 
 ### Common Methods
@@ -439,8 +439,8 @@ const v2n = client.V2n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `boolean` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -449,7 +449,7 @@ const v2n = client.V2n()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2n().load({ id: 'v2n_id' })
+const result = await client.V2n().load()
 ```
 
 ### Common Methods
@@ -490,9 +490,9 @@ const v3n = client.V3n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `trait` | ``$ARRAY`` | Yes |  |
+| `record` | `Record<string, any>` | No |  |
+| `success` | `boolean` | Yes |  |
+| `trait` | `any[]` | Yes |  |
 
 ### Operations
 
@@ -501,7 +501,7 @@ const v3n = client.V3n()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V3n().load({ id: 'v3n_id' })
+const result = await client.V3n().load()
 ```
 
 ### Common Methods

@@ -133,7 +133,7 @@ result, err := client.DnsQuery(nil).Create(map[string]any{
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.DnsQuery(nil).Load(map[string]any{"id": "dns_query_id"}, nil)
+result, err := client.DnsQuery(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -170,8 +170,8 @@ domain := client.Domain(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -217,8 +217,8 @@ email := client.Email(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -275,7 +275,7 @@ results, err := client.List(nil).List(nil, nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.List(nil).Load(map[string]any{"id": "list_id"}, nil)
+result, err := client.List(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -315,7 +315,7 @@ resolve := client.Resolve(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Resolve(nil).Load(map[string]any{"id": "resolve_id"}, nil)
+result, err := client.Resolve(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -352,8 +352,8 @@ v2n := client.V2n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -362,7 +362,7 @@ v2n := client.V2n(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.V2n(nil).Load(map[string]any{"id": "v2n_id"}, nil)
+result, err := client.V2n(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -399,9 +399,9 @@ v3n := client.V3n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `trait` | ``$ARRAY`` | Yes |  |
+| `record` | `map[string]any` | No |  |
+| `success` | `bool` | Yes |  |
+| `trait` | `[]any` | Yes |  |
 
 ### Operations
 
@@ -410,7 +410,7 @@ v3n := client.V3n(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.V3n(nil).Load(map[string]any{"id": "v3n_id"}, nil)
+result, err := client.V3n(nil).Load(nil, nil)
 ```
 
 ### Common Methods

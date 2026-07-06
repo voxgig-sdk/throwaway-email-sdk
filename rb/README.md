@@ -4,6 +4,8 @@
 
 The Ruby SDK for the ThrowawayEmail API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.DnsQuery` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -33,7 +35,7 @@ client = ThrowawayEmailSDK.new
 ```ruby
 begin
   # load returns the bare DnsQuery record (raises on error).
-  dnsquery = client.DnsQuery.load({ "id" => "example_id" })
+  dnsquery = client.DnsQuery.load()
   puts dnsquery
 rescue => err
   warn "load failed: #{err}"
@@ -44,8 +46,35 @@ end
 
 ```ruby
 # create returns the bare created DnsQuery record.
-created = client.DnsQuery.create({ "name" => "Example" })
+created = client.DnsQuery.create({  })
 
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  dnsquery = client.DnsQuery.load()
+rescue => err
+  warn "load failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -66,7 +95,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -89,16 +120,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = ThrowawayEmailSDK.test({
-  "entity" => { "dnsquery" => { "test01" => { "id" => "test01" } } },
-})
+client = ThrowawayEmailSDK.test
 
-# load returns the bare mock record (raises on error).
-dnsquery = client.DnsQuery.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+dnsquery = client.DnsQuery.load()
 puts dnsquery
 ```
 
@@ -190,10 +218,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -312,7 +338,7 @@ Create an instance: `dns_query = client.DnsQuery`
 
 ```ruby
 # load returns the bare DnsQuery record (raises on error).
-dns_query = client.DnsQuery.load({ "id" => "dns_query_id" })
+dns_query = client.DnsQuery.load()
 ```
 
 #### Example: Create
@@ -337,8 +363,8 @@ Create an instance: `domain = client.Domain`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `Boolean` |  |
+| `success` | `Boolean` |  |
 
 #### Example: Load
 
@@ -362,8 +388,8 @@ Create an instance: `email = client.Email`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `Boolean` |  |
+| `success` | `Boolean` |  |
 
 #### Example: Load
 
@@ -388,7 +414,7 @@ Create an instance: `list = client.List`
 
 ```ruby
 # load returns the bare List record (raises on error).
-list = client.List.load({ "id" => "list_id" })
+list = client.List.load()
 ```
 
 #### Example: List
@@ -413,7 +439,7 @@ Create an instance: `resolve = client.Resolve`
 
 ```ruby
 # load returns the bare Resolve record (raises on error).
-resolve = client.Resolve.load({ "id" => "resolve_id" })
+resolve = client.Resolve.load()
 ```
 
 
@@ -431,14 +457,14 @@ Create an instance: `v2n = client.V2n`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `is_disposable` | `Boolean` |  |
+| `success` | `Boolean` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare V2n record (raises on error).
-v2n = client.V2n.load({ "id" => "v2n_id" })
+v2n = client.V2n.load()
 ```
 
 
@@ -456,24 +482,28 @@ Create an instance: `v3n = client.V3n`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `trait` | ``$ARRAY`` |  |
+| `record` | `Hash` |  |
+| `success` | `Boolean` |  |
+| `trait` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare V3n record (raises on error).
-v3n = client.V3n.load({ "id" => "v3n_id" })
+v3n = client.V3n.load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -490,8 +520,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -540,9 +571,9 @@ stores the returned data and match criteria internally.
 
 ```ruby
 dnsquery = client.DnsQuery
-dnsquery.load({ "id" => "example_id" })
+dnsquery.load()
 
-# dnsquery.data_get now returns the loaded dnsquery data
+# dnsquery.data_get now returns the dnsquery data from the last load
 # dnsquery.match_get returns the last match criteria
 ```
 

@@ -8,7 +8,7 @@ Complete API reference for the ThrowawayEmail Python SDK.
 ### Constructor
 
 ```python
-from throwaway-email_sdk import ThrowawayEmailSDK
+from throwawayemail_sdk import ThrowawayEmailSDK
 
 client = ThrowawayEmailSDK(options)
 ```
@@ -123,7 +123,7 @@ result = client.DnsQuery().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.DnsQuery().load({"id": "dns_query_id"})
+result = client.DnsQuery().load()
 ```
 
 ### Common Methods
@@ -165,8 +165,8 @@ domain = client.Domain()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -217,8 +217,8 @@ email = client.Email()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -267,12 +267,12 @@ list = client.List()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.List().list({})
+results = client.List().list()
 for list in results:
     print(list)
 ```
@@ -282,7 +282,7 @@ for list in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.List().load({"id": "list_id"})
+result = client.List().load()
 ```
 
 ### Common Methods
@@ -327,7 +327,7 @@ resolve = client.Resolve()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Resolve().load({"id": "resolve_id"})
+result = client.Resolve().load()
 ```
 
 ### Common Methods
@@ -369,8 +369,8 @@ v2n = client.V2n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | ``$BOOLEAN`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `is_disposable` | `bool` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -379,7 +379,7 @@ v2n = client.V2n()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.V2n().load({"id": "v2n_id"})
+result = client.V2n().load()
 ```
 
 ### Common Methods
@@ -421,9 +421,9 @@ v3n = client.V3n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `trait` | ``$ARRAY`` | Yes |  |
+| `record` | `dict` | No |  |
+| `success` | `bool` | Yes |  |
+| `trait` | `list` | Yes |  |
 
 ### Operations
 
@@ -432,7 +432,7 @@ v3n = client.V3n()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.V3n().load({"id": "v3n_id"})
+result = client.V3n().load()
 ```
 
 ### Common Methods

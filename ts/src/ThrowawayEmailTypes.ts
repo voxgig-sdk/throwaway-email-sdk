@@ -8,9 +8,11 @@
 export interface DnsQuery {
 }
 
-export type DnsQueryLoadMatch = Partial<DnsQuery>
+export interface DnsQueryLoadMatch {
+}
 
-export type DnsQueryCreateData = Partial<DnsQuery>
+export interface DnsQueryCreateData {
+}
 
 export interface Domain {
   is_disposable?: boolean
@@ -33,14 +35,17 @@ export interface EmailLoadMatch {
 export interface List {
 }
 
-export type ListLoadMatch = Partial<List>
+export interface ListLoadMatch {
+}
 
-export type ListListMatch = Partial<List>
+export interface ListListMatch {
+}
 
 export interface Resolve {
 }
 
-export type ResolveLoadMatch = Partial<Resolve>
+export interface ResolveLoadMatch {
+}
 
 export interface V2n {
   is_disposable?: boolean
