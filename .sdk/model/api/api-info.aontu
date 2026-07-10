@@ -24,9 +24,9 @@ main: {
           url: "https://staging.throwaway.cloud"
         }
       ]
+      summary: "API for detecting disposable/throwaway email domains with trait-based analysis"
       title: "throwaway.cloud API"
       version: "3.0.0"
+      website: "https://throwaway.cloud"
     }
   }
-}
-

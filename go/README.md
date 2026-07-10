@@ -50,14 +50,14 @@ import (
 func main() {
     client := sdk.New()
 
-    // Load a single dnsquery — the value is the loaded record.
-    dnsquery, err := client.DnsQuery(nil).Load(nil, nil)
+    // Load a single dnsQuery — the value is the loaded record.
+    dnsQuery, err := client.DnsQuery(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(dnsquery)
+    fmt.Println(dnsQuery)
 
-    // Create a dnsquery.
+    // Create a dnsQuery.
     created, err := client.DnsQuery(nil).Create(map[string]any{}, nil)
     if err != nil {
         panic(err)
@@ -142,13 +142,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-dnsquery, err := client.DnsQuery(nil).Load(
+dnsQuery, err := client.DnsQuery(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(dnsquery) // the returned mock data
+fmt.Println(dnsQuery) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -261,9 +261,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    dnsquery, err := client.DnsQuery(nil).Load(nil, nil)
+    dnsQuery, err := client.DnsQuery(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // dnsquery is the returned record
+    // dnsQuery is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -349,23 +349,23 @@ API path: `/api/v3/{subject}`
 
 ### DnsQuery
 
-Create an instance: `dns_query := client.DnsQuery(nil)`
+Create an instance: `dnsQuery := client.DnsQuery(nil)`
 
 #### Operations
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Example: Load
 
 ```go
-dns_query, err := client.DnsQuery(nil).Load(nil, nil)
+dnsQuery, err := client.DnsQuery(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(dns_query) // the loaded record
+fmt.Println(dnsQuery) // the loaded record
 ```
 
 #### Example: Create
@@ -373,6 +373,10 @@ fmt.Println(dns_query) // the loaded record
 ```go
 result, err := client.DnsQuery(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -505,7 +509,7 @@ Create an instance: `v2n := client.V2n(nil)`
 #### Example: Load
 
 ```go
-v2n, err := client.V2n(nil).Load(nil, nil)
+v2n, err := client.V2n(nil).Load(map[string]any{"subject": "subject"}, nil)
 if err != nil {
     panic(err)
 }
@@ -534,7 +538,7 @@ Create an instance: `v3n := client.V3n(nil)`
 #### Example: Load
 
 ```go
-v3n, err := client.V3n(nil).Load(nil, nil)
+v3n, err := client.V3n(nil).Load(map[string]any{"subject": "subject"}, nil)
 if err != nil {
     panic(err)
 }

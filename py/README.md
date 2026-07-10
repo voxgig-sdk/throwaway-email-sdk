@@ -36,14 +36,15 @@ from throwawayemail_sdk import ThrowawayEmailSDK
 client = ThrowawayEmailSDK()
 ```
 
-### 3. Load a dnsquery
+### 3. Load a v2n
 
+V2n is nested under subject, so provide the `subject`.
 `load()` returns the bare record (a `dict`) and raises on error.
 
 ```python
 try:
-    dnsquery = client.DnsQuery().load()
-    print(dnsquery)
+    v2n = client.V2n().load({"subject": "example_subject"})
+    print(v2n)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -463,7 +464,7 @@ Create an instance: `v2n = client.V2n()`
 #### Example: Load
 
 ```python
-v2n = client.V2n().load()
+v2n = client.V2n().load({"subject": "subject"})
 ```
 
 
@@ -488,7 +489,7 @@ Create an instance: `v3n = client.V3n()`
 #### Example: Load
 
 ```python
-v3n = client.V3n().load()
+v3n = client.V3n().load({"subject": "subject"})
 ```
 
 

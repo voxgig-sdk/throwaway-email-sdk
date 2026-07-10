@@ -387,7 +387,7 @@ $v2n = $client->V2n();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->V2n()->load();
+$result = $client->V2n()->load(["subject" => "subject"]);
 ```
 
 ### Common Methods
@@ -441,7 +441,7 @@ $v3n = $client->V3n();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->V3n()->load();
+$result = $client->V3n()->load(["subject" => "subject"]);
 ```
 
 ### Common Methods

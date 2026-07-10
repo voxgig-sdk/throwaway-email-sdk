@@ -449,7 +449,7 @@ const v2n = client.V2n()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2n().load()
+const result = await client.V2n().load({ subject: 'subject' })
 ```
 
 ### Common Methods
@@ -501,7 +501,7 @@ const v3n = client.V3n()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V3n().load()
+const result = await client.V3n().load({ subject: 'subject' })
 ```
 
 ### Common Methods

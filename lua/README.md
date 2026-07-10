@@ -33,12 +33,14 @@ local sdk = require("throwaway-email_sdk")
 local client = sdk.new()
 ```
 
-### 3. Load a dnsquery
+### 3. Load a v2n
+
+V2n is nested under subject, so provide the `subject`.
 
 ```lua
-local dnsquery, err = client:DnsQuery():load()
+local v2n, err = client:V2n():load({ subject = "example_subject" })
 if err then error(err) end
-print(dnsquery)
+print(v2n)
 ```
 
 ### 4. Create, update, and remove
@@ -450,7 +452,7 @@ Create an instance: `local v2n = client:V2n(nil)`
 #### Example: Load
 
 ```lua
-local v2n, err = client:V2n():load()
+local v2n, err = client:V2n():load({ subject = "subject" })
 ```
 
 
@@ -475,7 +477,7 @@ Create an instance: `local v3n = client:V3n(nil)`
 #### Example: Load
 
 ```lua
-local v3n, err = client:V3n():load()
+local v3n, err = client:V3n():load({ subject = "subject" })
 ```
 
 

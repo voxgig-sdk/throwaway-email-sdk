@@ -385,7 +385,7 @@ local v2n = client:V2n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V2n():load()
+local result, err = client:V2n():load({ subject = "subject" })
 ```
 
 ### Common Methods
@@ -439,7 +439,7 @@ local v3n = client:V3n(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V3n():load()
+local result, err = client:V3n():load({ subject = "subject" })
 ```
 
 ### Common Methods

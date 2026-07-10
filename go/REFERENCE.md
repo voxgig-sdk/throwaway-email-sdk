@@ -114,10 +114,23 @@ same parameters as `Direct()`.
 ## DnsQueryEntity
 
 ```go
-dns_query := client.DnsQuery(nil)
+dnsQuery := client.DnsQuery(nil)
+fmt.Println(dnsQuery.GetName()) // "dns_query"
 ```
 
 ### Operations
+
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria.
+
+```go
+result, err := client.DnsQuery(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
@@ -126,14 +139,10 @@ Create a new entity with the given data.
 ```go
 result, err := client.DnsQuery(nil).Create(map[string]any{
 }, nil)
-```
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria.
-
-```go
-result, err := client.DnsQuery(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -164,6 +173,7 @@ Return the entity name.
 
 ```go
 domain := client.Domain(nil)
+fmt.Println(domain.GetName()) // "domain"
 ```
 
 ### Fields
@@ -181,6 +191,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Domain(nil).Load(map[string]any{"id": "domain_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -211,6 +225,7 @@ Return the entity name.
 
 ```go
 email := client.Email(nil)
+fmt.Println(email.GetName()) // "email"
 ```
 
 ### Fields
@@ -228,6 +243,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Email(nil).Load(map[string]any{"id": "email_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -258,6 +277,7 @@ Return the entity name.
 
 ```go
 list := client.List(nil)
+fmt.Println(list.GetName()) // "list"
 ```
 
 ### Operations
@@ -268,6 +288,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.List(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -276,6 +300,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.List(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -306,6 +334,7 @@ Return the entity name.
 
 ```go
 resolve := client.Resolve(nil)
+fmt.Println(resolve.GetName()) // "resolve"
 ```
 
 ### Operations
@@ -316,6 +345,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Resolve(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -346,6 +379,7 @@ Return the entity name.
 
 ```go
 v2n := client.V2n(nil)
+fmt.Println(v2n.GetName()) // "v2n"
 ```
 
 ### Fields
@@ -362,7 +396,11 @@ v2n := client.V2n(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.V2n(nil).Load(nil, nil)
+result, err := client.V2n(nil).Load(map[string]any{"subject": "subject"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -393,6 +431,7 @@ Return the entity name.
 
 ```go
 v3n := client.V3n(nil)
+fmt.Println(v3n.GetName()) // "v3n"
 ```
 
 ### Fields
@@ -410,7 +449,11 @@ v3n := client.V3n(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.V3n(nil).Load(nil, nil)
+result, err := client.V3n(nil).Load(map[string]any{"subject": "subject"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

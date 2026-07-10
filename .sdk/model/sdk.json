@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -871,6 +868,7 @@
           "name": "Apache-2.0",
           "url": "http://www.apache.org/licenses/LICENSE-2.0"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production",
@@ -881,8 +879,10 @@
             "url": "https://staging.throwaway.cloud"
           }
         ],
+        "summary": "API for detecting disposable/throwaway email domains with trait-based analysis",
         "title": "throwaway.cloud API",
-        "version": "3.0.0"
+        "version": "3.0.0",
+        "website": "https://throwaway.cloud"
       },
       "option": {},
       "target": {
@@ -935,6 +935,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -985,6 +988,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
