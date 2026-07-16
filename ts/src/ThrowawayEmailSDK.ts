@@ -47,7 +47,6 @@ class ThrowawayEmailSDK {
 
     const struct = this._utility.struct
     const getpath = struct.getpath
-    const items = struct.items
 
     if (true === getpath(this._options.feature, 'test.active')) {
       this._mode = 'test'
@@ -60,13 +59,18 @@ class ThrowawayEmailSDK {
     const featureAdd = this._utility.featureAdd
     const featureInit = this._utility.featureInit
 
-    items(this._options.feature, (fitem: [string, any]) => {
-      const fname = fitem[0]
-      const fopts = fitem[1]
+    // Add features in the resolved order (makeOptions puts an explicit
+    // array order first, else defaults to test-first). Ordering matters:
+    // the `test` feature installs the base mock transport and the transport
+    // features (retry/cache/netsim/proxy/ratelimit) wrap whatever is current,
+    // so `test` must be added before them to sit at the base of the chain.
+    const featureorder = getpath(this._options, '__derived__.featureorder') || []
+    for (const fname of featureorder) {
+      const fopts = this._options.feature[fname] || {}
       if (fopts.active) {
         featureAdd(this._rootctx, this._rootctx.config.makeFeature(fname))
       }
-    })
+    }
 
     if (null != this._options.extend) {
       for (let f of this._options.extend) {
@@ -307,6 +311,7 @@ const SDK = ThrowawayEmailSDK
 
 export {
   stdutil,
+  config,
 
   BaseFeature,
   ThrowawayEmailEntityBase,
