@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- ThrowawayEmail SDK exists test
 
 local sdk = require("throwaway-email_sdk")
 

@@ -1,4 +1,4 @@
--- ProjectName SDK configuration
+-- ThrowawayEmail SDK configuration
 
 local function make_config()
   return {
