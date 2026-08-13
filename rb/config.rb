@@ -40,6 +40,7 @@ module ThrowawayEmailConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/dns-query",
                   "parts" => [
@@ -74,6 +75,7 @@ module ThrowawayEmailConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/dns-query",
                   "parts" => [
@@ -102,7 +104,7 @@ module ThrowawayEmailConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "is_disposable",
+              "name" => "isDisposable",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 0,
@@ -137,6 +139,7 @@ module ThrowawayEmailConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v1/domain/{domain}",
                   "parts" => [
@@ -173,7 +176,7 @@ module ThrowawayEmailConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "is_disposable",
+              "name" => "isDisposable",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 0,
@@ -208,6 +211,7 @@ module ThrowawayEmailConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v1/email/{email}",
                   "parts" => [
@@ -251,6 +255,7 @@ module ThrowawayEmailConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/list.json",
                   "parts" => [
@@ -273,6 +278,7 @@ module ThrowawayEmailConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/list.txt",
                   "parts" => [
@@ -288,6 +294,7 @@ module ThrowawayEmailConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/list.yaml",
                   "parts" => [
@@ -358,6 +365,7 @@ module ThrowawayEmailConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/resolve",
                   "parts" => [
@@ -389,7 +397,7 @@ module ThrowawayEmailConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "is_disposable",
+              "name" => "isDisposable",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 0,
@@ -424,6 +432,7 @@ module ThrowawayEmailConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v2/{subject}",
                   "parts" => [
@@ -458,7 +467,7 @@ module ThrowawayEmailConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "record",
+              "name" => "records",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 0,
@@ -472,7 +481,7 @@ module ThrowawayEmailConfig
             },
             {
               "active" => true,
-              "name" => "trait",
+              "name" => "traits",
               "req" => true,
               "type" => "`$ARRAY`",
               "index$" => 2,
@@ -500,6 +509,7 @@ module ThrowawayEmailConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/{subject}",
                   "parts" => [

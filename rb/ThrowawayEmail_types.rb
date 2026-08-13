@@ -22,13 +22,13 @@ end
 
 # Domain entity data model.
 #
-# @!attribute [rw] is_disposable
+# @!attribute [rw] isDisposable
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] success
 #   @return [Boolean, nil]
 Domain = Struct.new(
-  :is_disposable,
+  :isDisposable,
   :success,
   keyword_init: true
 )
@@ -44,13 +44,13 @@ DomainLoadMatch = Struct.new(
 
 # Email entity data model.
 #
-# @!attribute [rw] is_disposable
+# @!attribute [rw] isDisposable
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] success
 #   @return [Boolean, nil]
 Email = Struct.new(
-  :is_disposable,
+  :isDisposable,
   :success,
   keyword_init: true
 )
@@ -86,13 +86,13 @@ end
 
 # V2n entity data model.
 #
-# @!attribute [rw] is_disposable
+# @!attribute [rw] isDisposable
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] success
 #   @return [Boolean, nil]
 V2n = Struct.new(
-  :is_disposable,
+  :isDisposable,
   :success,
   keyword_init: true
 )
@@ -108,18 +108,18 @@ V2nLoadMatch = Struct.new(
 
 # V3n entity data model.
 #
-# @!attribute [rw] record
+# @!attribute [rw] records
 #   @return [Hash, nil]
 #
 # @!attribute [rw] success
 #   @return [Boolean]
 #
-# @!attribute [rw] trait
+# @!attribute [rw] traits
 #   @return [Array]
 V3n = Struct.new(
-  :record,
+  :records,
   :success,
-  :trait,
+  :traits,
   keyword_init: true
 )
 

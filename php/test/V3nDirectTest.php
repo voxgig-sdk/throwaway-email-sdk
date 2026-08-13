@@ -73,11 +73,11 @@ function v3n_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "THROWAWAYEMAIL_TEST_V_N_ENTID" => [],
-        "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
+        "THROWAWAY_EMAIL_TEST_V3N_ENTID" => [],
+        "THROWAWAY_EMAIL_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["THROWAWAYEMAIL_TEST_LIVE"] === "TRUE";
+    $live = $env["THROWAWAY_EMAIL_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

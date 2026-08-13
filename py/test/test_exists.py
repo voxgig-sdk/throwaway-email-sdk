@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# ThrowawayEmail SDK exists test
 
 import pytest
 from throwawayemail_sdk import ThrowawayEmailSDK

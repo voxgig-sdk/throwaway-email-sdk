@@ -2,17 +2,17 @@
   "existing": {
     "domain": {
       "DOMAIN00": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "id": "DOMAIN00"
       },
       "DOMAIN01": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "id": "DOMAIN01"
       },
       "DOMAIN02": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "id": "DOMAIN02"
       }
@@ -21,7 +21,7 @@
   "new": {
     "domain": {
       "domain_ref01": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false
       }
     }

@@ -180,7 +180,7 @@ fmt.Println(domain.GetName()) // "domain"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -232,7 +232,7 @@ fmt.Println(email.GetName()) // "email"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -386,7 +386,7 @@ fmt.Println(v2n.GetName()) // "v2n"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -438,9 +438,9 @@ fmt.Println(v3n.GetName()) // "v3n"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | `map[string]any` | No |  |
+| `records` | `map[string]any` | No |  |
 | `success` | `bool` | Yes |  |
-| `trait` | `[]any` | Yes |  |
+| `traits` | `[]any` | Yes |  |
 
 ### Operations
 

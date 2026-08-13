@@ -104,11 +104,11 @@ def list_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "THROWAWAYEMAIL_TEST_LIST_ENTID" => {},
-    "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
+    "THROWAWAY_EMAIL_TEST_LIST_ENTID" => {},
+    "THROWAWAY_EMAIL_TEST_LIVE" => "FALSE",
   })
 
-  live = env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
+  live = env["THROWAWAY_EMAIL_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

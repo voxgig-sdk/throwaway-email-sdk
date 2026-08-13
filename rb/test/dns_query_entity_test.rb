@@ -26,7 +26,7 @@ class DnsQueryEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set THROWAWAY_EMAIL_TEST_DNS_QUERY_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -37,7 +37,7 @@ class DnsQueryEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.dns_query"), "dns_query_ref01"))
 
     dns_query_ref01_data_result = dns_query_ref01_ent.create(dns_query_ref01_data, nil)
-    dns_query_ref01_data = Helpers.to_map(dns_query_ref01_data_result)
+    dns_query_ref01_data = Helpers.to_map(dns_query_ref01_data_result.respond_to?(:data_get) ? dns_query_ref01_data_result.data_get : dns_query_ref01_data_result)
     assert !dns_query_ref01_data.nil?
 
     # LOAD
@@ -74,22 +74,22 @@ def dns_query_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID"]
+  entid_env_raw = ENV["THROWAWAY_EMAIL_TEST_DNS_QUERY_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID" => idmap,
-    "THROWAWAYEMAIL_TEST_LIVE" => "FALSE",
-    "THROWAWAYEMAIL_TEST_EXPLAIN" => "FALSE",
+    "THROWAWAY_EMAIL_TEST_DNS_QUERY_ENTID" => idmap,
+    "THROWAWAY_EMAIL_TEST_LIVE" => "FALSE",
+    "THROWAWAY_EMAIL_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["THROWAWAYEMAIL_TEST_DNS_QUERY_ENTID"])
+    env["THROWAWAY_EMAIL_TEST_DNS_QUERY_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
+  if env["THROWAWAY_EMAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -98,13 +98,13 @@ def dns_query_basic_setup(extra)
     client = ThrowawayEmailSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
+  live = env["THROWAWAY_EMAIL_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["THROWAWAYEMAIL_TEST_EXPLAIN"] == "TRUE",
+    explain: env["THROWAWAY_EMAIL_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

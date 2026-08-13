@@ -15,7 +15,7 @@ export interface DnsQueryCreateData {
 }
 
 export interface Domain {
-  is_disposable?: boolean
+  isDisposable?: boolean
   success?: boolean
 }
 
@@ -24,7 +24,7 @@ export interface DomainLoadMatch {
 }
 
 export interface Email {
-  is_disposable?: boolean
+  isDisposable?: boolean
   success?: boolean
 }
 
@@ -48,7 +48,7 @@ export interface ResolveLoadMatch {
 }
 
 export interface V2n {
-  is_disposable?: boolean
+  isDisposable?: boolean
   success?: boolean
 }
 
@@ -57,9 +57,9 @@ export interface V2nLoadMatch {
 }
 
 export interface V3n {
-  record?: Record<string, any>
+  records?: Record<string, any>
   success: boolean
-  trait: any[]
+  traits: any[]
 }
 
 export interface V3nLoadMatch {

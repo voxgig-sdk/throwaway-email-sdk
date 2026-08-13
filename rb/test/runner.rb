@@ -23,8 +23,8 @@ module ThrowawayEmailTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("THROWAWAYEMAIL_TEST_LIVE")
-    override = getenv("THROWAWAYEMAIL_TEST_OVERRIDE")
+    live = getenv("THROWAWAY_EMAIL_TEST_LIVE")
+    override = getenv("THROWAWAY_EMAIL_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module ThrowawayEmailTestRunner
       end
     end
 
-    explain = getenv("THROWAWAYEMAIL_TEST_EXPLAIN")
-    m["THROWAWAYEMAIL_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("THROWAWAY_EMAIL_TEST_EXPLAIN")
+    m["THROWAWAY_EMAIL_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

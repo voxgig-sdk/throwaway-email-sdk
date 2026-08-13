@@ -169,7 +169,7 @@ local domain = client:Domain(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `boolean` | No |  |
+| `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations
@@ -222,7 +222,7 @@ local email = client:Email(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `boolean` | No |  |
+| `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations
@@ -375,7 +375,7 @@ local v2n = client:V2n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `boolean` | No |  |
+| `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations
@@ -428,9 +428,9 @@ local v3n = client:V3n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | `table` | No |  |
+| `records` | `table` | No |  |
 | `success` | `boolean` | Yes |  |
-| `trait` | `table` | Yes |  |
+| `traits` | `table` | Yes |  |
 
 ### Operations
 

@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'ThrowawayEmail',
   }
 
 
@@ -81,6 +81,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/dns-query",
               "parts": [
@@ -115,6 +116,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/dns-query",
               "parts": [
@@ -143,7 +145,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "is_disposable",
+          "name": "isDisposable",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 0
@@ -178,6 +180,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/v1/domain/{domain}",
               "parts": [
@@ -214,7 +217,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "is_disposable",
+          "name": "isDisposable",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 0
@@ -249,6 +252,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/v1/email/{email}",
               "parts": [
@@ -292,6 +296,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/list.json",
               "parts": [
@@ -314,6 +319,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/list.txt",
               "parts": [
@@ -329,6 +335,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/list.yaml",
               "parts": [
@@ -399,6 +406,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/resolve",
               "parts": [
@@ -430,7 +438,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "is_disposable",
+          "name": "isDisposable",
           "req": false,
           "type": "`$BOOLEAN`",
           "index$": 0
@@ -465,6 +473,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/v2/{subject}",
               "parts": [
@@ -499,7 +508,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "record",
+          "name": "records",
           "req": false,
           "type": "`$OBJECT`",
           "index$": 0
@@ -513,7 +522,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "trait",
+          "name": "traits",
           "req": true,
           "type": "`$ARRAY`",
           "index$": 2
@@ -541,6 +550,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/v3/{subject}",
               "parts": [

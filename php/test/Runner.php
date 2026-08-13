@@ -43,8 +43,8 @@ class ThrowawayEmailTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('THROWAWAYEMAIL_TEST_LIVE');
-        $override = self::getenv('THROWAWAYEMAIL_TEST_OVERRIDE');
+        $live = self::getenv('THROWAWAY_EMAIL_TEST_LIVE');
+        $override = self::getenv('THROWAWAY_EMAIL_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class ThrowawayEmailTestRunner
             }
         }
 
-        $explain = self::getenv('THROWAWAYEMAIL_TEST_EXPLAIN');
+        $explain = self::getenv('THROWAWAY_EMAIL_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['THROWAWAYEMAIL_TEST_EXPLAIN'] = $explain;
+            $m['THROWAWAY_EMAIL_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

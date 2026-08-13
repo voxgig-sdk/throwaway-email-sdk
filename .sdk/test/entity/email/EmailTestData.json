@@ -2,17 +2,17 @@
   "existing": {
     "email": {
       "EMAIL00": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "id": "EMAIL00"
       },
       "EMAIL01": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "id": "EMAIL01"
       },
       "EMAIL02": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "id": "EMAIL02"
       }
@@ -21,7 +21,7 @@
   "new": {
     "email": {
       "email_ref01": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false
       }
     }

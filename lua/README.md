@@ -59,7 +59,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local dnsquery, err = client:DnsQuery():load()
+local email, err = client:Email():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -117,7 +117,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:DnsQuery():load()
+local result, err = client:Email():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -254,7 +254,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -265,7 +265,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -294,7 +294,7 @@ API path: `/resolve`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -305,9 +305,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `record` |  |
+| `records` |  |
 | `success` |  |
-| `trait` |  |
+| `traits` |  |
 
 Operations: Load.
 
@@ -357,7 +357,7 @@ Create an instance: `local domain = client:Domain(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `boolean` |  |
+| `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -381,7 +381,7 @@ Create an instance: `local email = client:Email(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `boolean` |  |
+| `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -446,7 +446,7 @@ Create an instance: `local v2n = client:V2n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `boolean` |  |
+| `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -470,9 +470,9 @@ Create an instance: `local v3n = client:V3n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | `table` |  |
+| `records` | `table` |  |
 | `success` | `boolean` |  |
-| `trait` | `table` |  |
+| `traits` | `table` |  |
 
 #### Example: Load
 
@@ -557,11 +557,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local dnsquery = client:DnsQuery()
-dnsquery:load()
+local email = client:Email()
+email:load({ id = "example_id" })
 
--- dnsquery:data_get() now returns the dnsquery data from the last load
--- dnsquery:match_get() returns the last match criteria
+-- email:data_get() now returns the email data from the last load
+-- email:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -6,7 +6,7 @@ main: kit: entity: v3n: {
 
   fields: [
     {
-      name: "record"
+      name: "records"
       req: false
       type: "`$OBJECT`"
     }
@@ -16,7 +16,7 @@ main: kit: entity: v3n: {
       type: "`$BOOLEAN`"
     }
     {
-      name: "trait"
+      name: "traits"
       req: true
       type: "`$ARRAY`"
     }

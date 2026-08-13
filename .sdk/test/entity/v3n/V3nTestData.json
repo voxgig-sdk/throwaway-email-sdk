@@ -2,23 +2,23 @@
   "existing": {
     "v3n": {
       "V3N00": {
-        "record": {},
+        "records": {},
         "success": false,
-        "trait": [],
+        "traits": [],
         "subject": "SUBJECT01",
         "id": "V3N00"
       },
       "V3N01": {
-        "record": {},
+        "records": {},
         "success": false,
-        "trait": [],
+        "traits": [],
         "subject": "SUBJECT01",
         "id": "V3N01"
       },
       "V3N02": {
-        "record": {},
+        "records": {},
         "success": false,
-        "trait": [],
+        "traits": [],
         "subject": "SUBJECT01",
         "id": "V3N02"
       }
@@ -27,9 +27,9 @@
   "new": {
     "v3n": {
       "v3n_ref01": {
-        "record": {},
+        "records": {},
         "success": false,
-        "trait": []
+        "traits": []
       }
     }
   }

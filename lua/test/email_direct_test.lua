@@ -68,11 +68,11 @@ function email_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["THROWAWAYEMAIL_TEST_EMAIL_ENTID"] = {},
-    ["THROWAWAYEMAIL_TEST_LIVE"] = "FALSE",
+    ["THROWAWAY_EMAIL_TEST_EMAIL_ENTID"] = {},
+    ["THROWAWAY_EMAIL_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["THROWAWAYEMAIL_TEST_LIVE"] == "TRUE"
+  local live = env["THROWAWAY_EMAIL_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

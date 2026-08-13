@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ ThrowawayEmailUtility::setRegistrar(function (ThrowawayEmailUtility $u): void {
     $u->prepare_params = [ThrowawayEmailPrepareParams::class, 'call'];
     $u->prepare_path = [ThrowawayEmailPreparePath::class, 'call'];
     $u->prepare_query = [ThrowawayEmailPrepareQuery::class, 'call'];
+    $u->graphql_body = [ThrowawayEmailGraphql::class, 'body'];
+    $u->graphql_errors = [ThrowawayEmailGraphql::class, 'errors'];
     $u->result_basic = [ThrowawayEmailResultBasic::class, 'call'];
     $u->result_body = [ThrowawayEmailResultBody::class, 'call'];
     $u->result_headers = [ThrowawayEmailResultHeaders::class, 'call'];

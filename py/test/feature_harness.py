@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import ThrowawayEmailControl
-from core.error import ThrowawayEmailError
-from core.result import ThrowawayEmailResult
-from core.spec import ThrowawayEmailSpec
+from throwawayemail_sdk.config import make_config
+from throwawayemail_sdk.features import _make_feature
+from throwawayemail_sdk.core.control import ThrowawayEmailControl
+from throwawayemail_sdk.core.error import ThrowawayEmailError
+from throwawayemail_sdk.core.result import ThrowawayEmailResult
+from throwawayemail_sdk.core.spec import ThrowawayEmailSpec
 
 
 # True when this SDK was generated with the named feature.

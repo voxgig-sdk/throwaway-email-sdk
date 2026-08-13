@@ -30,7 +30,7 @@ class DnsQueryCreateData
 /** Domain entity data model. */
 class Domain
 {
-    public ?bool $is_disposable = null;
+    public ?bool $isDisposable = null;
     public ?bool $success = null;
 }
 
@@ -43,7 +43,7 @@ class DomainLoadMatch
 /** Email entity data model. */
 class Email
 {
-    public ?bool $is_disposable = null;
+    public ?bool $isDisposable = null;
     public ?bool $success = null;
 }
 
@@ -81,7 +81,7 @@ class ResolveLoadMatch
 /** V2n entity data model. */
 class V2n
 {
-    public ?bool $is_disposable = null;
+    public ?bool $isDisposable = null;
     public ?bool $success = null;
 }
 
@@ -94,9 +94,9 @@ class V2nLoadMatch
 /** V3n entity data model. */
 class V3n
 {
-    public ?array $record = null;
+    public ?array $records = null;
     public bool $success;
-    public array $trait;
+    public array $traits;
 }
 
 /** Request payload for V3n#load. */

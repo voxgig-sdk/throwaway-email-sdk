@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from throwawayemail_sdk.utility.voxgig_struct import voxgig_struct as vs
 from throwawayemail_sdk import ThrowawayEmailSDK
-from core import helpers
+from throwawayemail_sdk.core import helpers
 from test import runner
 
 
@@ -95,11 +95,11 @@ def _list_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "THROWAWAYEMAIL_TEST_LIST_ENTID": {},
-        "THROWAWAYEMAIL_TEST_LIVE": "FALSE",
+        "THROWAWAY_EMAIL_TEST_LIST_ENTID": {},
+        "THROWAWAY_EMAIL_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("THROWAWAYEMAIL_TEST_LIVE") == "TRUE"
+    live = env.get("THROWAWAY_EMAIL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

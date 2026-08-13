@@ -6,7 +6,7 @@ main: kit: entity: email: {
 
   fields: [
     {
-      name: "is_disposable"
+      name: "isDisposable"
       req: false
       type: "`$BOOLEAN`"
     }

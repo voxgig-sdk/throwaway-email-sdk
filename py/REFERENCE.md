@@ -165,7 +165,7 @@ domain = client.Domain()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -217,7 +217,7 @@ email = client.Email()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -369,7 +369,7 @@ v2n = client.V2n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -421,9 +421,9 @@ v3n = client.V3n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | `dict` | No |  |
+| `records` | `dict` | No |  |
 | `success` | `bool` | Yes |  |
-| `trait` | `list` | Yes |  |
+| `traits` | `list` | Yes |  |
 
 ### Operations
 

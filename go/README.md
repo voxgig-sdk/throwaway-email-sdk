@@ -73,12 +73,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-dnsquery, err := client.DnsQuery(nil).Load(nil, nil)
+email, err := client.Email(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = dnsquery
+_ = email
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -142,13 +142,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-dnsQuery, err := client.DnsQuery(nil).Load(
-    nil, nil,
+email, err := client.Email(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(dnsQuery) // the returned mock data
+fmt.Println(email) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -283,7 +283,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
-| `"is_disposable"` |  |
+| `"isDisposable"` |  |
 | `"success"` |  |
 
 Operations: Load.
@@ -294,7 +294,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
-| `"is_disposable"` |  |
+| `"isDisposable"` |  |
 | `"success"` |  |
 
 Operations: Load.
@@ -323,7 +323,7 @@ API path: `/resolve`
 
 | Field | Description |
 | --- | --- |
-| `"is_disposable"` |  |
+| `"isDisposable"` |  |
 | `"success"` |  |
 
 Operations: Load.
@@ -334,9 +334,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `"record"` |  |
+| `"records"` |  |
 | `"success"` |  |
-| `"trait"` |  |
+| `"traits"` |  |
 
 Operations: Load.
 
@@ -394,7 +394,7 @@ Create an instance: `domain := client.Domain(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `bool` |  |
+| `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
 #### Example: Load
@@ -422,7 +422,7 @@ Create an instance: `email := client.Email(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `bool` |  |
+| `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
 #### Example: Load
@@ -503,7 +503,7 @@ Create an instance: `v2n := client.V2n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `bool` |  |
+| `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
 #### Example: Load
@@ -531,9 +531,9 @@ Create an instance: `v3n := client.V3n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | `map[string]any` |  |
+| `records` | `map[string]any` |  |
 | `success` | `bool` |  |
-| `trait` | `[]any` |  |
+| `traits` | `[]any` |  |
 
 #### Example: Load
 
@@ -619,11 +619,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-dnsquery := client.DnsQuery(nil)
-dnsquery.Load(nil, nil)
+email := client.Email(nil)
+email.Load(map[string]any{"id": "example_id"}, nil)
 
-// dnsquery.Data() now returns the dnsquery data from the last load
-// dnsquery.Match() returns the last match criteria
+// email.Data() now returns the email data from the last load
+// email.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

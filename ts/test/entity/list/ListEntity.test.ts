@@ -26,8 +26,8 @@ import {
 describe('ListEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THROWAWAYEMAIL_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THROWAWAYEMAIL_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THROWAWAY_EMAIL_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THROWAWAY_EMAIL_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ThrowawayEmailSDK.test()
@@ -63,12 +63,12 @@ describe('ListEntity', async () => {
     const list_ref01_ent = client.List()
     const list_ref01_match: any = {}
 
-    const list_ref01_list = await list_ref01_ent.list(list_ref01_match)
+    const list_ref01_list = (await list_ref01_ent.list(list_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const list_ref01_match_dt0: any = {}
-    const list_ref01_data_dt0 = await list_ref01_ent.load(list_ref01_match_dt0)
+    const list_ref01_data_dt0 = (await list_ref01_ent.load(list_ref01_match_dt0)).data()
     assert(null != list_ref01_data_dt0)
 
 

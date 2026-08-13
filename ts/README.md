@@ -52,7 +52,7 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created DnsQuery
+// Create — returns the created DnsQuery ENTITY (.data() for the record)
 const created = await client.DnsQuery().create({})
 
 ```
@@ -64,8 +64,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const dnsquery = await client.DnsQuery().load()
-  console.log(dnsquery)
+  const email = await client.Email().load({ id: "example_id" })
+  console.log(email)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -131,9 +131,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ThrowawayEmailSDK.test()
 
-const dnsquery = await client.DnsQuery().load()
-// dnsquery is a bare entity populated with mock response data
-console.log(dnsquery)
+const email = await client.Email().load({ id: 'test01' })
+// email is the entity, populated with mock response data
+// — call email.data() for the record itself
+console.log(email)
 ```
 
 You can also use the instance method:
@@ -148,10 +149,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.DnsQuery()
+const entity = client.Email()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -314,7 +315,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: load.
@@ -325,7 +326,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: load.
@@ -354,7 +355,7 @@ API path: `/resolve`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: load.
@@ -365,9 +366,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `record` |  |
+| `records` |  |
 | `success` |  |
-| `trait` |  |
+| `traits` |  |
 
 Operations: load.
 
@@ -417,7 +418,7 @@ Create an instance: `const domain = client.Domain()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `boolean` |  |
+| `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -441,7 +442,7 @@ Create an instance: `const email = client.Email()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `boolean` |  |
+| `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -506,7 +507,7 @@ Create an instance: `const v2n = client.V2n()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `boolean` |  |
+| `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -530,9 +531,9 @@ Create an instance: `const v3n = client.V3n()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | `Record<string, any>` |  |
+| `records` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
-| `trait` | `any[]` |  |
+| `traits` | `any[]` |  |
 
 #### Example: Load
 
@@ -610,11 +611,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const dnsquery = client.DnsQuery()
-await dnsquery.load()
+const email = client.Email()
+await email.load({ id: "example_id" })
 
-// dnsquery.data() now returns the dnsquery data from the last `load`
-// dnsquery.match() returns the last match criteria
+// email.data() now returns the email data from the last `load`
+// email.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

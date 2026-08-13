@@ -241,7 +241,7 @@ const domain = client.Domain()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `boolean` | No |  |
+| `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations
@@ -292,7 +292,7 @@ const email = client.Email()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `boolean` | No |  |
+| `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations
@@ -439,7 +439,7 @@ const v2n = client.V2n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `boolean` | No |  |
+| `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations
@@ -490,9 +490,9 @@ const v3n = client.V3n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | `Record<string, any>` | No |  |
+| `records` | `Record<string, any>` | No |  |
 | `success` | `boolean` | Yes |  |
-| `trait` | `any[]` | Yes |  |
+| `traits` | `any[]` | Yes |  |
 
 ### Operations
 

@@ -26,8 +26,8 @@ import {
 describe('DnsQueryEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THROWAWAYEMAIL_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THROWAWAYEMAIL_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THROWAWAY_EMAIL_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THROWAWAY_EMAIL_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ThrowawayEmailSDK.test()
@@ -62,13 +62,13 @@ describe('DnsQueryEntity', async () => {
     const dns_query_ref01_ent = client.DnsQuery()
     let dns_query_ref01_data = setup.data.new.dns_query['dns_query_ref01']
 
-    dns_query_ref01_data = await dns_query_ref01_ent.create(dns_query_ref01_data)
+    dns_query_ref01_data = (await dns_query_ref01_ent.create(dns_query_ref01_data)).data()
     assert(null != dns_query_ref01_data)
 
 
     // LOAD
     const dns_query_ref01_match_dt0: any = {}
-    const dns_query_ref01_data_dt0 = await dns_query_ref01_ent.load(dns_query_ref01_match_dt0)
+    const dns_query_ref01_data_dt0 = (await dns_query_ref01_ent.load(dns_query_ref01_match_dt0)).data()
     assert(null != dns_query_ref01_data_dt0)
 
 

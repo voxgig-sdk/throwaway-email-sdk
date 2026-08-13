@@ -36,7 +36,7 @@ V2n is nested under subject, so provide the `subject`.
 
 ```ruby
 begin
-  # load returns the bare V2n record (raises on error).
+  # load returns the ENTITY — call data_get for the V2n record (raises on error).
   v2n = client.V2n.load({ "subject" => "example_subject" })
   puts v2n
 rescue => err
@@ -47,7 +47,7 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created DnsQuery record.
+# create returns the ENTITY — call data_get for the created DnsQuery record.
 created = client.DnsQuery.create({  })
 
 ```
@@ -59,7 +59,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  dnsquery = client.DnsQuery.load()
+  email = client.Email.load({ "id" => "example_id" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -122,14 +122,18 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = ThrowawayEmailSDK.test
+client = ThrowawayEmailSDK.test({
+  "entity" => { "email" => { "test01" => { "id" => "test01" } } },
+})
 
-# Entity ops return the bare mock record (raises on error).
-dnsquery = client.DnsQuery.load()
-puts dnsquery
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+email = client.Email.load({ "id" => "test01" })
+puts email
 ```
 
 ### Use a custom fetch function
@@ -261,7 +265,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -272,7 +276,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -301,7 +305,7 @@ API path: `/resolve`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -312,9 +316,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `record` |  |
+| `records` |  |
 | `success` |  |
-| `trait` |  |
+| `traits` |  |
 
 Operations: Load.
 
@@ -339,7 +343,7 @@ Create an instance: `dns_query = client.DnsQuery`
 #### Example: Load
 
 ```ruby
-# load returns the bare DnsQuery record (raises on error).
+# load returns the ENTITY — call data_get for the DnsQuery record (raises on error).
 dns_query = client.DnsQuery.load()
 ```
 
@@ -365,13 +369,13 @@ Create an instance: `domain = client.Domain`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `Boolean` |  |
+| `isDisposable` | `Boolean` |  |
 | `success` | `Boolean` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Domain record (raises on error).
+# load returns the ENTITY — call data_get for the Domain record (raises on error).
 domain = client.Domain.load({ "id" => "domain_id" })
 ```
 
@@ -390,13 +394,13 @@ Create an instance: `email = client.Email`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `Boolean` |  |
+| `isDisposable` | `Boolean` |  |
 | `success` | `Boolean` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Email record (raises on error).
+# load returns the ENTITY — call data_get for the Email record (raises on error).
 email = client.Email.load({ "id" => "email_id" })
 ```
 
@@ -415,7 +419,7 @@ Create an instance: `list = client.List`
 #### Example: Load
 
 ```ruby
-# load returns the bare List record (raises on error).
+# load returns the ENTITY — call data_get for the List record (raises on error).
 list = client.List.load()
 ```
 
@@ -440,7 +444,7 @@ Create an instance: `resolve = client.Resolve`
 #### Example: Load
 
 ```ruby
-# load returns the bare Resolve record (raises on error).
+# load returns the ENTITY — call data_get for the Resolve record (raises on error).
 resolve = client.Resolve.load()
 ```
 
@@ -459,13 +463,13 @@ Create an instance: `v2n = client.V2n`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `Boolean` |  |
+| `isDisposable` | `Boolean` |  |
 | `success` | `Boolean` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare V2n record (raises on error).
+# load returns the ENTITY — call data_get for the V2n record (raises on error).
 v2n = client.V2n.load({ "subject" => "subject" })
 ```
 
@@ -484,14 +488,14 @@ Create an instance: `v3n = client.V3n`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | `Hash` |  |
+| `records` | `Hash` |  |
 | `success` | `Boolean` |  |
-| `trait` | `Array` |  |
+| `traits` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare V3n record (raises on error).
+# load returns the ENTITY — call data_get for the V3n record (raises on error).
 v3n = client.V3n.load({ "subject" => "subject" })
 ```
 
@@ -572,11 +576,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-dnsquery = client.DnsQuery
-dnsquery.load()
+email = client.Email
+email.load({ "id" => "example_id" })
 
-# dnsquery.data_get now returns the dnsquery data from the last load
-# dnsquery.match_get returns the last match criteria
+# email.data_get now returns the email data from the last load
+# email.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

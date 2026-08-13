@@ -26,8 +26,8 @@ import {
 describe('EmailEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THROWAWAYEMAIL_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THROWAWAYEMAIL_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THROWAWAY_EMAIL_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THROWAWAY_EMAIL_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ThrowawayEmailSDK.test()

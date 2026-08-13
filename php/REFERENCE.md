@@ -171,7 +171,7 @@ $domain = $client->Domain();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -224,7 +224,7 @@ $email = $client->Email();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -377,7 +377,7 @@ $v2n = $client->V2n();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `is_disposable` | `bool` | No |  |
+| `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
@@ -430,9 +430,9 @@ $v3n = $client->V3n();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | `array` | No |  |
+| `records` | `array` | No |  |
 | `success` | `bool` | Yes |  |
-| `trait` | `array` | Yes |  |
+| `traits` | `array` | Yes |  |
 
 ### Operations
 

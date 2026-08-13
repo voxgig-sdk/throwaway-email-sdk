@@ -26,8 +26,8 @@ import {
 describe('V3nEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THROWAWAYEMAIL_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THROWAWAYEMAIL_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THROWAWAY_EMAIL_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THROWAWAY_EMAIL_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ThrowawayEmailSDK.test()
@@ -48,7 +48,7 @@ describe('V3nEntity', async () => {
     // fixture (entity TestData.json). Those don't exist on the live API.
     // Skip live runs unless the user provided a real ENTID env override.
     if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set THROWAWAY_EMAIL_TEST_V_N_ENTID JSON to run live')
+      t.skip('live entity test uses synthetic IDs from fixture — set THROWAWAY_EMAIL_TEST_V3N_ENTID JSON to run live')
       return
     }
     const client = setup.client
@@ -104,16 +104,16 @@ function basicSetup(extra?: any) {
   // basic flow consumes synthetic IDs from the fixture file; without an
   // override those synthetic IDs reach the live API and 4xx. Surface this
   // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['THROWAWAY_EMAIL_TEST_V_N_ENTID']
+  const idmapEnvVal = process.env['THROWAWAY_EMAIL_TEST_V3N_ENTID']
   const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
 
   const env = envOverride({
-    'THROWAWAY_EMAIL_TEST_V_N_ENTID': idmap,
+    'THROWAWAY_EMAIL_TEST_V3N_ENTID': idmap,
     'THROWAWAY_EMAIL_TEST_LIVE': 'FALSE',
     'THROWAWAY_EMAIL_TEST_EXPLAIN': 'FALSE',
   })
 
-  idmap = env['THROWAWAY_EMAIL_TEST_V_N_ENTID']
+  idmap = env['THROWAWAY_EMAIL_TEST_V3N_ENTID']
 
   const live = 'TRUE' === env.THROWAWAY_EMAIL_TEST_LIVE
 

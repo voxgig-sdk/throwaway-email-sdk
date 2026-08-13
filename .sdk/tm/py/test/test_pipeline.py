@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import ThrowawayEmailSDK
-from core.error import ThrowawayEmailError
-from core.result import ThrowawayEmailResult
-from core.response import ThrowawayEmailResponse
-from core.spec import ThrowawayEmailSpec
-from feature.base_feature import ThrowawayEmailBaseFeature
+from projectname_sdk.core.error import ThrowawayEmailError
+from projectname_sdk.core.result import ThrowawayEmailResult
+from projectname_sdk.core.response import ThrowawayEmailResponse
+from projectname_sdk.core.spec import ThrowawayEmailSpec
+from projectname_sdk.feature.base_feature import ThrowawayEmailBaseFeature
 
 
 def _client():

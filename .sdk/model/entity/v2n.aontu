@@ -6,7 +6,7 @@ main: kit: entity: v2n: {
 
   fields: [
     {
-      name: "is_disposable"
+      name: "isDisposable"
       req: false
       type: "`$BOOLEAN`"
     }

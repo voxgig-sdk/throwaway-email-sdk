@@ -13,14 +13,14 @@
 ---@class DnsQueryCreateData
 
 ---@class Domain
----@field is_disposable? boolean
+---@field isDisposable? boolean
 ---@field success? boolean
 
 ---@class DomainLoadMatch
 ---@field id string
 
 ---@class Email
----@field is_disposable? boolean
+---@field isDisposable? boolean
 ---@field success? boolean
 
 ---@class EmailLoadMatch
@@ -37,16 +37,16 @@
 ---@class ResolveLoadMatch
 
 ---@class V2n
----@field is_disposable? boolean
+---@field isDisposable? boolean
 ---@field success? boolean
 
 ---@class V2nLoadMatch
 ---@field subject string
 
 ---@class V3n
----@field record? table
+---@field records? table
 ---@field success boolean
----@field trait table
+---@field traits table
 
 ---@class V3nLoadMatch
 ---@field subject string

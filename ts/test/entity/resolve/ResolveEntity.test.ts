@@ -26,8 +26,8 @@ import {
 describe('ResolveEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THROWAWAYEMAIL_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THROWAWAYEMAIL_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THROWAWAY_EMAIL_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THROWAWAY_EMAIL_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ThrowawayEmailSDK.test()
@@ -62,7 +62,7 @@ describe('ResolveEntity', async () => {
     // LOAD
     const resolve_ref01_ent = client.Resolve()
     const resolve_ref01_match_dt0: any = {}
-    const resolve_ref01_data_dt0 = await resolve_ref01_ent.load(resolve_ref01_match_dt0)
+    const resolve_ref01_data_dt0 = (await resolve_ref01_ent.load(resolve_ref01_match_dt0)).data()
     assert(null != resolve_ref01_data_dt0)
 
 

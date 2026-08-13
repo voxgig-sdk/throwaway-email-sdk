@@ -39,6 +39,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/dns-query",
                 ["parts"] = {
@@ -73,6 +74,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/dns-query",
                 ["parts"] = {
@@ -101,7 +103,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "is_disposable",
+            ["name"] = "isDisposable",
             ["req"] = false,
             ["type"] = "`$BOOLEAN`",
             ["index$"] = 0,
@@ -136,6 +138,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v1/domain/{domain}",
                 ["parts"] = {
@@ -172,7 +175,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "is_disposable",
+            ["name"] = "isDisposable",
             ["req"] = false,
             ["type"] = "`$BOOLEAN`",
             ["index$"] = 0,
@@ -207,6 +210,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v1/email/{email}",
                 ["parts"] = {
@@ -250,6 +254,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.json",
                 ["parts"] = {
@@ -272,6 +277,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.txt",
                 ["parts"] = {
@@ -287,6 +293,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.yaml",
                 ["parts"] = {
@@ -357,6 +364,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/resolve",
                 ["parts"] = {
@@ -388,7 +396,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "is_disposable",
+            ["name"] = "isDisposable",
             ["req"] = false,
             ["type"] = "`$BOOLEAN`",
             ["index$"] = 0,
@@ -423,6 +431,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v2/{subject}",
                 ["parts"] = {
@@ -457,7 +466,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "record",
+            ["name"] = "records",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 0,
@@ -471,7 +480,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "trait",
+            ["name"] = "traits",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
             ["index$"] = 2,
@@ -499,6 +508,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/{subject}",
                 ["parts"] = {

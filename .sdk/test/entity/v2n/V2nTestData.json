@@ -2,19 +2,19 @@
   "existing": {
     "v2n": {
       "V2N00": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "subject": "SUBJECT01",
         "id": "V2N00"
       },
       "V2N01": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "subject": "SUBJECT01",
         "id": "V2N01"
       },
       "V2N02": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false,
         "subject": "SUBJECT01",
         "id": "V2N02"
@@ -24,7 +24,7 @@
   "new": {
     "v2n": {
       "v2n_ref01": {
-        "is_disposable": true,
+        "isDisposable": true,
         "success": false
       }
     }

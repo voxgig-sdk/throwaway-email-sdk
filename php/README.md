@@ -37,7 +37,7 @@ V2n is nested under subject, so provide the `subject`.
 
 ```php
 try {
-    // load() returns the bare V2n record (throws on error).
+    // load() returns the ENTITY — call data_get() for the V2n record (throws on error).
     $v2n = $client->V2n()->load(["subject" => "example_subject"]);
     print_r($v2n);
 } catch (\Throwable $err) {
@@ -48,7 +48,7 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created DnsQuery record.
+// create() returns the ENTITY — call data_get() for the created DnsQuery record.
 $created = $client->DnsQuery()->create([]);
 
 ```
@@ -61,7 +61,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $dnsquery = $client->DnsQuery()->load();
+    $email = $client->Email()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -128,14 +128,18 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = ThrowawayEmailSDK::test();
+$client = ThrowawayEmailSDK::test([
+    "entity" => ["email" => ["test01" => ["id" => "test01"]]],
+]);
 
-// Entity ops return the bare mock record (throws on error).
-$dnsquery = $client->DnsQuery()->load();
-print_r($dnsquery);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$email = $client->Email()->load(["id" => "test01"]);
+print_r($email);
 ```
 
 ### Use a custom fetch function
@@ -240,7 +244,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -271,7 +275,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -282,7 +286,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -311,7 +315,7 @@ API path: `/resolve`
 
 | Field | Description |
 | --- | --- |
-| `is_disposable` |  |
+| `isDisposable` |  |
 | `success` |  |
 
 Operations: Load.
@@ -322,9 +326,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `record` |  |
+| `records` |  |
 | `success` |  |
-| `trait` |  |
+| `traits` |  |
 
 Operations: Load.
 
@@ -349,7 +353,7 @@ Create an instance: `$dns_query = $client->DnsQuery();`
 #### Example: Load
 
 ```php
-// load() returns the bare DnsQuery record (throws on error).
+// load() returns the ENTITY — call data_get() for the DnsQuery record (throws on error).
 $dns_query = $client->DnsQuery()->load();
 ```
 
@@ -375,13 +379,13 @@ Create an instance: `$domain = $client->Domain();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `bool` |  |
+| `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Domain record (throws on error).
+// load() returns the ENTITY — call data_get() for the Domain record (throws on error).
 $domain = $client->Domain()->load(["id" => "domain_id"]);
 ```
 
@@ -400,13 +404,13 @@ Create an instance: `$email = $client->Email();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `bool` |  |
+| `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Email record (throws on error).
+// load() returns the ENTITY — call data_get() for the Email record (throws on error).
 $email = $client->Email()->load(["id" => "email_id"]);
 ```
 
@@ -425,7 +429,7 @@ Create an instance: `$list = $client->List();`
 #### Example: Load
 
 ```php
-// load() returns the bare List record (throws on error).
+// load() returns the ENTITY — call data_get() for the List record (throws on error).
 $list = $client->List()->load();
 ```
 
@@ -450,7 +454,7 @@ Create an instance: `$resolve = $client->Resolve();`
 #### Example: Load
 
 ```php
-// load() returns the bare Resolve record (throws on error).
+// load() returns the ENTITY — call data_get() for the Resolve record (throws on error).
 $resolve = $client->Resolve()->load();
 ```
 
@@ -469,13 +473,13 @@ Create an instance: `$v2n = $client->V2n();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `is_disposable` | `bool` |  |
+| `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare V2n record (throws on error).
+// load() returns the ENTITY — call data_get() for the V2n record (throws on error).
 $v2n = $client->V2n()->load(["subject" => "subject"]);
 ```
 
@@ -494,14 +498,14 @@ Create an instance: `$v3n = $client->V3n();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `record` | `array` |  |
+| `records` | `array` |  |
 | `success` | `bool` |  |
-| `trait` | `array` |  |
+| `traits` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare V3n record (throws on error).
+// load() returns the ENTITY — call data_get() for the V3n record (throws on error).
 $v3n = $client->V3n()->load(["subject" => "subject"]);
 ```
 
@@ -582,11 +586,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$dnsquery = $client->DnsQuery();
-$dnsquery->load();
+$email = $client->Email();
+$email->load(["id" => "example_id"]);
 
-// $dnsquery->data_get() now returns the dnsquery data from the last load
-// $dnsquery->match_get() returns the last match criteria
+// $email->data_get() now returns the email data from the last load
+// $email->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

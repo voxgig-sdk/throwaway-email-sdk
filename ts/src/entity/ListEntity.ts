@@ -37,7 +37,7 @@ class ListEntity extends ThrowawayEmailEntityBase<List> {
 
 
 
-  async load(this: any, reqmatch?: ListLoadMatch, ctrl?: Control): Promise<List> {
+  async load(this: any, reqmatch?: ListLoadMatch, ctrl?: Control): Promise<ListEntity> {
 
     const utility = this._utility
 
@@ -128,7 +128,15 @@ class ListEntity extends ThrowawayEmailEntityBase<List> {
         }
       }
 
-      return done(ctx)
+      const out = done(ctx)
+
+      // An operation resolves to the ENTITY, not the raw data — the record
+      // has just been absorbed into this instance and is reached through
+      // data(). `done` still runs: it completes the pipeline and raises on
+      // failure, and when throwing is disabled it hands back the error
+      // payload, which passes through unchanged. See AGENTS.md "Entity
+      // operations return ENTITIES".
+      return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err: any) {
 
@@ -150,7 +158,7 @@ class ListEntity extends ThrowawayEmailEntityBase<List> {
 
 
 
-  async list(this: any, reqmatch?: ListListMatch, ctrl?: Control): Promise<List[]> {
+  async list(this: any, reqmatch?: ListListMatch, ctrl?: Control): Promise<ListEntity[]> {
 
     const utility = this._utility
 

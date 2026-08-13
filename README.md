@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = ThrowawayEmailSDK.test()
-const dnsquery = await client.DnsQuery().load()
-// dnsquery is a bare DnsQuery populated with mock data
-console.log(dnsquery)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = ThrowawayEmailSDK.test({
+  entity: {
+    email: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const email = await client.Email().load({ id: 'test01' })
+// email is the Email entity, populated with mock data
+// — call email.data() for the record itself
+console.log(email)
 ```
 
 ### Python
 
 ```python
 client = ThrowawayEmailSDK.test()
-dnsquery = client.DnsQuery().load()
-print(dnsquery)
+email = client.Email().load({"id": "test01"})
+print(email)
 ```
 
 ### PHP
@@ -57,17 +66,17 @@ print(dnsquery)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = ThrowawayEmailSDK::test([
-    "entity" => ["dnsquery" => ["test01" => []]],
+    "entity" => ["email" => ["test01" => ["id" => "test01"]]],
 ]);
-$dnsquery = $client->DnsQuery()->load();
+$email = $client->Email()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.DnsQuery(nil).Load(
-    nil, nil,
+result, err := client.Email(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 ```
 
@@ -76,16 +85,16 @@ result, err := client.DnsQuery(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = ThrowawayEmailSDK.test({
-  "entity" => { "dnsquery" => { "test01" => {} } },
+  "entity" => { "email" => { "test01" => { "id" => "test01" } } },
 })
-dnsquery = client.DnsQuery.load()
+email = client.Email.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:DnsQuery():load()
+local result, err = client:Email():load({ id = "test01" })
 ```
 
 ## Packages
@@ -191,7 +200,7 @@ require_once 'throwawayemail_sdk.php';
 $client = new ThrowawayEmailSDK();
 
 
-// Load a specific dnsquery (returns the bare record; throws on error)
+// Load a specific dnsquery (returns the ENTITY; call data_get() for the record; throws on error)
 $dnsquery = $client->DnsQuery()->load();
 print_r($dnsquery);
 ```
@@ -222,7 +231,7 @@ require_relative "ThrowawayEmail_sdk"
 client = ThrowawayEmailSDK.new
 
 
-# Load a specific dnsquery (returns the bare record; raises on error)
+# Load a specific dnsquery (returns the ENTITY; call data_get for the record)
 dnsquery = client.DnsQuery.load()
 puts dnsquery
 ```
@@ -356,6 +365,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://throwaway.cloud](https://throwaway.cloud)
 
