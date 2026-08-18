@@ -54,7 +54,7 @@ class EmailLoadMatch
 }
 
 /** List entity data model. */
-class List
+class ListType
 {
 }
 

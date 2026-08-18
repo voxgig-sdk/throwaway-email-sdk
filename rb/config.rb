@@ -1,6 +1,20 @@
 # ThrowawayEmail SDK configuration
 
 module ThrowawayEmailConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -38,7 +52,6 @@ module ThrowawayEmailConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -51,21 +64,17 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
                         "kind" => "query",
                         "name" => "dns",
@@ -90,10 +99,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -103,18 +110,12 @@ module ThrowawayEmailConfig
         "domain" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "isDisposable",
-              "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "success",
-              "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
           ],
           "name" => "domain",
@@ -124,18 +125,15 @@ module ThrowawayEmailConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "example" => "example.com",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "domain",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -162,10 +160,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -175,18 +171,12 @@ module ThrowawayEmailConfig
         "email" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "isDisposable",
-              "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "success",
-              "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
           ],
           "name" => "email",
@@ -196,18 +186,15 @@ module ThrowawayEmailConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "example" => "test@example.com",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "email",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -234,10 +221,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -253,7 +238,6 @@ module ThrowawayEmailConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -266,17 +250,14 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -289,10 +270,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -305,10 +284,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -324,29 +301,23 @@ module ThrowawayEmailConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => false,
                         "kind" => "query",
                         "name" => "cd",
                         "orig" => "cd",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                       {
-                        "active" => true,
                         "example" => false,
                         "kind" => "query",
                         "name" => "do",
                         "orig" => "do",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                       {
-                        "active" => true,
                         "example" => "testmail.ares",
                         "kind" => "query",
                         "name" => "name",
@@ -355,12 +326,10 @@ module ThrowawayEmailConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "example" => "A",
                         "kind" => "query",
                         "name" => "type",
                         "orig" => "type",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -383,10 +352,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -396,18 +363,12 @@ module ThrowawayEmailConfig
         "v2n" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "isDisposable",
-              "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "success",
-              "req" => false,
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
           ],
           "name" => "v2n",
@@ -417,18 +378,15 @@ module ThrowawayEmailConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "example" => "test@example.com",
                         "kind" => "param",
                         "name" => "subject",
                         "orig" => "subject",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -449,10 +407,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -466,25 +422,18 @@ module ThrowawayEmailConfig
         "v3n" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "records",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "success",
               "req" => true,
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "traits",
               "req" => true,
               "type" => "`$ARRAY`",
-              "index$" => 2,
             },
           ],
           "name" => "v3n",
@@ -494,18 +443,15 @@ module ThrowawayEmailConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "example" => "test@example.com",
                         "kind" => "param",
                         "name" => "subject",
                         "orig" => "subject",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -526,10 +472,8 @@ module ThrowawayEmailConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {

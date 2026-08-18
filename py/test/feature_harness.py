@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from throwawayemail_sdk.config import make_config
+from throwawayemail_sdk.config import shared_config
 from throwawayemail_sdk.features import _make_feature
 from throwawayemail_sdk.core.control import ThrowawayEmailControl
 from throwawayemail_sdk.core.error import ThrowawayEmailError
@@ -24,7 +24,7 @@ from throwawayemail_sdk.core.spec import ThrowawayEmailSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

@@ -40,7 +40,7 @@ class ThrowawayEmailSDK
         $utility = new ThrowawayEmailUtility();
         $this->_utility = $utility;
 
-        $config = ThrowawayEmailConfig::make_config();
+        $config = ThrowawayEmailConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

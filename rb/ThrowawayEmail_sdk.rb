@@ -28,7 +28,7 @@ class ThrowawayEmailSDK
     utility = ThrowawayEmailUtility.new
     @_utility = utility
 
-    config = ThrowawayEmailConfig.make_config
+    config = ThrowawayEmailConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

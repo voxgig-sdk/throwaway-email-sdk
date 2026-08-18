@@ -15,7 +15,7 @@ require_relative "../ThrowawayEmail_sdk"
 module ThrowawayEmailFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = ThrowawayEmailConfig.make_config["feature"]
+    f = ThrowawayEmailConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
