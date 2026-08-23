@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "ThrowawayEmail",
+            "slug": "throwaway-email",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -432,6 +435,7 @@ def make_config():
         "fields": [
           {
             "name": "records",
+            "short": "DNS records for the domain (when available)",
             "type": "`$OBJECT`",
           },
           {
@@ -442,6 +446,7 @@ def make_config():
           {
             "name": "traits",
             "req": True,
+            "short": "Array of traits identified for the domain",
             "type": "`$ARRAY`",
           },
         ],

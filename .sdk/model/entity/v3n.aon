@@ -8,6 +8,7 @@ main: kit: entity: v3n: {
     {
       name: "records"
       req: false
+      short: "DNS records for the domain (when available)"
       type: "`$OBJECT`"
     }
     {
@@ -18,6 +19,7 @@ main: kit: entity: v3n: {
     {
       name: "traits"
       req: true
+      short: "Array of traits identified for the domain"
       type: "`$ARRAY`"
     }
   ]

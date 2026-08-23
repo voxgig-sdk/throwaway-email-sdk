@@ -421,9 +421,9 @@ v3n = client.V3n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `records` | `dict` | No |  |
+| `records` | `dict` | No | DNS records for the domain (when available) |
 | `success` | `bool` | Yes |  |
-| `traits` | `list` | Yes |  |
+| `traits` | `list` | Yes | Array of traits identified for the domain |
 
 ### Operations
 

@@ -428,9 +428,9 @@ local v3n = client:V3n(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `records` | `table` | No |  |
+| `records` | `table` | No | DNS records for the domain (when available) |
 | `success` | `boolean` | Yes |  |
-| `traits` | `table` | Yes |  |
+| `traits` | `table` | Yes | Array of traits identified for the domain |
 
 ### Operations
 

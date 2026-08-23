@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'ThrowawayEmail',
+        slug: "throwaway-email",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -450,6 +461,7 @@ class Config {
       "fields": [
         {
           "name": "records",
+          "short": "DNS records for the domain (when available)",
           "type": "`$OBJECT`"
         },
         {
@@ -460,6 +472,7 @@ class Config {
         {
           "name": "traits",
           "req": true,
+          "short": "Array of traits identified for the domain",
           "type": "`$ARRAY`"
         }
       ],

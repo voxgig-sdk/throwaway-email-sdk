@@ -305,9 +305,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `records` |  |
+| `records` | DNS records for the domain (when available) |
 | `success` |  |
-| `traits` |  |
+| `traits` | Array of traits identified for the domain |
 
 Operations: Load.
 
@@ -470,9 +470,9 @@ Create an instance: `local v3n = client:V3n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `records` | `table` |  |
+| `records` | `table` | DNS records for the domain (when available) |
 | `success` | `boolean` |  |
-| `traits` | `table` |  |
+| `traits` | `table` | Array of traits identified for the domain |
 
 #### Example: Load
 

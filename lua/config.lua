@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "ThrowawayEmail",
+      slug = "throwaway-email",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -411,6 +414,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "records",
+            ["short"] = "DNS records for the domain (when available)",
             ["type"] = "`$OBJECT`",
           },
           {
@@ -421,6 +425,7 @@ local function make_config()
           {
             ["name"] = "traits",
             ["req"] = true,
+            ["short"] = "Array of traits identified for the domain",
             ["type"] = "`$ARRAY`",
           },
         },

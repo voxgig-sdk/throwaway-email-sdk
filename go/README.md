@@ -6,7 +6,7 @@ The Golang SDK for the ThrowawayEmail API — an entity-oriented client using st
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.DnsQuery(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -334,9 +334,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `"records"` |  |
+| `"records"` | DNS records for the domain (when available) |
 | `"success"` |  |
-| `"traits"` |  |
+| `"traits"` | Array of traits identified for the domain |
 
 Operations: Load.
 
@@ -531,9 +531,9 @@ Create an instance: `v3n := client.V3n(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `records` | `map[string]any` |  |
+| `records` | `map[string]any` | DNS records for the domain (when available) |
 | `success` | `bool` |  |
-| `traits` | `[]any` |  |
+| `traits` | `[]any` | Array of traits identified for the domain |
 
 #### Example: Load
 

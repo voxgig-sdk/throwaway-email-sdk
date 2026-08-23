@@ -431,9 +431,9 @@ v3n = client.V3n
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `records` | `Hash` | No |  |
+| `records` | `Hash` | No | DNS records for the domain (when available) |
 | `success` | `Boolean` | Yes |  |
-| `traits` | `Array` | Yes |  |
+| `traits` | `Array` | Yes | Array of traits identified for the domain |
 
 ### Operations
 

@@ -33,6 +33,9 @@ class ThrowawayEmailConfig
         return [
             "main" => [
                 "name" => "ThrowawayEmail",
+                "slug" => "throwaway-email",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -437,6 +440,7 @@ class ThrowawayEmailConfig
           'fields' => [
             [
               'name' => 'records',
+              'short' => 'DNS records for the domain (when available)',
               'type' => '`$OBJECT`',
             ],
             [
@@ -447,6 +451,7 @@ class ThrowawayEmailConfig
             [
               'name' => 'traits',
               'req' => true,
+              'short' => 'Array of traits identified for the domain',
               'type' => '`$ARRAY`',
             ],
           ],

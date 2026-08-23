@@ -19,6 +19,9 @@ module ThrowawayEmailConfig
     {
       "main" => {
         "name" => "ThrowawayEmail",
+        "slug" => "throwaway-email",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -423,6 +426,7 @@ module ThrowawayEmailConfig
           "fields" => [
             {
               "name" => "records",
+              "short" => "DNS records for the domain (when available)",
               "type" => "`$OBJECT`",
             },
             {
@@ -433,6 +437,7 @@ module ThrowawayEmailConfig
             {
               "name" => "traits",
               "req" => true,
+              "short" => "Array of traits identified for the domain",
               "type" => "`$ARRAY`",
             },
           ],

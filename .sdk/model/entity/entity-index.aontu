@@ -1,9 +1,0 @@
-# Entity Models
-
-@"dns_query.aontu"
-@"domain.aontu"
-@"email.aontu"
-@"list.aontu"
-@"resolve.aontu"
-@"v2n.aontu"
-@"v3n.aontu"

@@ -438,9 +438,9 @@ fmt.Println(v3n.GetName()) // "v3n"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `records` | `map[string]any` | No |  |
+| `records` | `map[string]any` | No | DNS records for the domain (when available) |
 | `success` | `bool` | Yes |  |
-| `traits` | `[]any` | Yes |  |
+| `traits` | `[]any` | Yes | Array of traits identified for the domain |
 
 ### Operations
 

@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "ThrowawayEmail",
+			"slug": "throwaway-email",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -415,6 +418,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "records",
+						"short": "DNS records for the domain (when available)",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
@@ -425,6 +429,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "traits",
 						"req": true,
+						"short": "Array of traits identified for the domain",
 						"type": "`$ARRAY`",
 					},
 				},

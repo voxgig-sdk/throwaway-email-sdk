@@ -430,9 +430,9 @@ $v3n = $client->V3n();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `records` | `array` | No |  |
+| `records` | `array` | No | DNS records for the domain (when available) |
 | `success` | `bool` | Yes |  |
-| `traits` | `array` | Yes |  |
+| `traits` | `array` | Yes | Array of traits identified for the domain |
 
 ### Operations
 

@@ -326,9 +326,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `records` |  |
+| `records` | DNS records for the domain (when available) |
 | `success` |  |
-| `traits` |  |
+| `traits` | Array of traits identified for the domain |
 
 Operations: Load.
 
@@ -498,9 +498,9 @@ Create an instance: `$v3n = $client->V3n();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `records` | `array` |  |
+| `records` | `array` | DNS records for the domain (when available) |
 | `success` | `bool` |  |
-| `traits` | `array` |  |
+| `traits` | `array` | Array of traits identified for the domain |
 
 #### Example: Load
 

@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -366,9 +366,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `records` |  |
+| `records` | DNS records for the domain (when available) |
 | `success` |  |
-| `traits` |  |
+| `traits` | Array of traits identified for the domain |
 
 Operations: load.
 
@@ -531,9 +531,9 @@ Create an instance: `const v3n = client.V3n()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `records` | `Record<string, any>` |  |
+| `records` | `Record<string, any>` | DNS records for the domain (when available) |
 | `success` | `boolean` |  |
-| `traits` | `any[]` |  |
+| `traits` | `any[]` | Array of traits identified for the domain |
 
 #### Example: Load
 

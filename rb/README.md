@@ -316,9 +316,9 @@ API path: `/api/v2/{subject}`
 
 | Field | Description |
 | --- | --- |
-| `records` |  |
+| `records` | DNS records for the domain (when available) |
 | `success` |  |
-| `traits` |  |
+| `traits` | Array of traits identified for the domain |
 
 Operations: Load.
 
@@ -488,9 +488,9 @@ Create an instance: `v3n = client.V3n`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `records` | `Hash` |  |
+| `records` | `Hash` | DNS records for the domain (when available) |
 | `success` | `Boolean` |  |
-| `traits` | `Array` |  |
+| `traits` | `Array` | Array of traits identified for the domain |
 
 #### Example: Load
 

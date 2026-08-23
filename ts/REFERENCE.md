@@ -490,9 +490,9 @@ const v3n = client.V3n()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `records` | `Record<string, any>` | No |  |
+| `records` | `Record<string, any>` | No | DNS records for the domain (when available) |
 | `success` | `boolean` | Yes |  |
-| `traits` | `any[]` | Yes |  |
+| `traits` | `any[]` | Yes | Array of traits identified for the domain |
 
 ### Operations
 
