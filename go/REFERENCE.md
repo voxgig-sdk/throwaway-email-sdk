@@ -180,6 +180,7 @@ fmt.Println(domain.GetName()) // "domain"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
@@ -232,6 +233,7 @@ fmt.Println(email.GetName()) // "email"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 

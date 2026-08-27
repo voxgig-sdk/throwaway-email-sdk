@@ -28,6 +28,7 @@ module ThrowawayEmailConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -113,6 +114,10 @@ module ThrowawayEmailConfig
         "domain" => {
           "fields" => [
             {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+            {
               "name" => "isDisposable",
               "type" => "`$BOOLEAN`",
             },
@@ -173,6 +178,10 @@ module ThrowawayEmailConfig
         },
         "email" => {
           "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
             {
               "name" => "isDisposable",
               "type" => "`$BOOLEAN`",

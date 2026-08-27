@@ -22,12 +22,16 @@ end
 
 # Domain entity data model.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] isDisposable
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] success
 #   @return [Boolean, nil]
 Domain = Struct.new(
+  :id,
   :isDisposable,
   :success,
   keyword_init: true
@@ -44,12 +48,16 @@ DomainLoadMatch = Struct.new(
 
 # Email entity data model.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] isDisposable
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] success
 #   @return [Boolean, nil]
 Email = Struct.new(
+  :id,
   :isDisposable,
   :success,
   keyword_init: true

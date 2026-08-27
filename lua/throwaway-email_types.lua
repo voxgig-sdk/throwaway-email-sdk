@@ -13,6 +13,7 @@
 ---@class DnsQueryCreateData
 
 ---@class Domain
+---@field id? string
 ---@field isDisposable? boolean
 ---@field success? boolean
 
@@ -20,6 +21,7 @@
 ---@field id string
 
 ---@class Email
+---@field id? string
 ---@field isDisposable? boolean
 ---@field success? boolean
 

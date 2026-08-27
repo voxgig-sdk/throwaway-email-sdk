@@ -169,6 +169,7 @@ local domain = client:Domain(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
@@ -222,6 +223,7 @@ local email = client:Email(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 

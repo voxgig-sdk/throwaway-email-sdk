@@ -42,6 +42,7 @@ class ThrowawayEmailConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -127,6 +128,10 @@ class ThrowawayEmailConfig
         'domain' => [
           'fields' => [
             [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+            [
               'name' => 'isDisposable',
               'type' => '`$BOOLEAN`',
             ],
@@ -187,6 +192,10 @@ class ThrowawayEmailConfig
         ],
         'email' => [
           'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
             [
               'name' => 'isDisposable',
               'type' => '`$BOOLEAN`',

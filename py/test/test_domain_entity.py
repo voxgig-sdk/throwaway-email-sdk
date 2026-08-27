@@ -48,9 +48,13 @@ class TestDomainEntity:
 
         # LOAD
         domain_ref01_ent = client.Domain(None)
-        domain_ref01_match_dt0 = {}
+        domain_ref01_match_dt0 = {
+            "id": domain_ref01_data["id"],
+        }
         domain_ref01_data_dt0_loaded = domain_ref01_ent.load(domain_ref01_match_dt0, None)
-        assert domain_ref01_data_dt0_loaded is not None
+        domain_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(domain_ref01_data_dt0_loaded))
+        assert domain_ref01_data_dt0_load_result is not None
+        assert domain_ref01_data_dt0_load_result["id"] == domain_ref01_data["id"]
 
 
 

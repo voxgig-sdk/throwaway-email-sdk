@@ -30,6 +30,7 @@ class DnsQueryCreateData
 /** Domain entity data model. */
 class Domain
 {
+    public ?string $id = null;
     public ?bool $isDisposable = null;
     public ?bool $success = null;
 }
@@ -43,6 +44,7 @@ class DomainLoadMatch
 /** Email entity data model. */
 class Email
 {
+    public ?string $id = null;
     public ?bool $isDisposable = null;
     public ?bool $success = null;
 }

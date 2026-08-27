@@ -6,6 +6,11 @@ main: kit: entity: email: {
 
   fields: [
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "isDisposable"
       req: false
       type: "`$BOOLEAN`"
@@ -16,6 +21,11 @@ main: kit: entity: email: {
       type: "`$BOOLEAN`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "email"
   op: {

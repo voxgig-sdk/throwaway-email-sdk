@@ -59,7 +59,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  email = client.Email.load({ "id" => "example_id" })
+  v2n = client.V2n.load({ "subject" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -122,18 +122,15 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = ThrowawayEmailSDK.test({
-  "entity" => { "email" => { "test01" => { "id" => "test01" } } },
-})
+client = ThrowawayEmailSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-email = client.Email.load({ "id" => "test01" })
-puts email
+v2n = client.V2n.load({ "subject" => "example" })
+puts v2n
 ```
 
 ### Use a custom fetch function
@@ -265,6 +262,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -276,6 +274,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -369,6 +368,7 @@ Create an instance: `domain = client.Domain`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `String` |  |
 | `isDisposable` | `Boolean` |  |
 | `success` | `Boolean` |  |
 
@@ -394,6 +394,7 @@ Create an instance: `email = client.Email`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `String` |  |
 | `isDisposable` | `Boolean` |  |
 | `success` | `Boolean` |  |
 
@@ -576,11 +577,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-email = client.Email
-email.load({ "id" => "example_id" })
+v2n = client.V2n
+v2n.load({ "subject" => "example" })
 
-# email.data_get now returns the email data from the last load
-# email.match_get returns the last match criteria
+# v2n.data_get now returns the v2n data from the last load
+# v2n.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

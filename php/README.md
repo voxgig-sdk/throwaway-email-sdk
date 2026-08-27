@@ -61,7 +61,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $email = $client->Email()->load(["id" => "example_id"]);
+    $v2n = $client->V2n()->load(["subject" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -128,18 +128,15 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = ThrowawayEmailSDK::test([
-    "entity" => ["email" => ["test01" => ["id" => "test01"]]],
-]);
+$client = ThrowawayEmailSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$email = $client->Email()->load(["id" => "test01"]);
-print_r($email);
+$v2n = $client->V2n()->load(["subject" => "example"]);
+print_r($v2n);
 ```
 
 ### Use a custom fetch function
@@ -275,6 +272,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -286,6 +284,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -379,6 +378,7 @@ Create an instance: `$domain = $client->Domain();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
@@ -404,6 +404,7 @@ Create an instance: `$email = $client->Email();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
@@ -586,11 +587,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$email = $client->Email();
-$email->load(["id" => "example_id"]);
+$v2n = $client->V2n();
+$v2n->load(["subject" => "example"]);
 
-// $email->data_get() now returns the email data from the last load
-// $email->match_get() returns the last match criteria
+// $v2n->data_get() now returns the v2n data from the last load
+// $v2n->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

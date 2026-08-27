@@ -59,9 +59,12 @@ describe('DomainEntity', async () => {
 
     let domain_ref01_data = Object.values(setup.data.existing.domain)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const domain_ref01_ent = client.Domain()
+    const domain_ref01_match_dt0: any = {}
+    domain_ref01_match_dt0.id = domain_ref01_data.id
+    const domain_ref01_data_dt0 = (await domain_ref01_ent.load(domain_ref01_match_dt0)).data()
+    assert(domain_ref01_data_dt0.id === domain_ref01_data.id)
 
 
   })

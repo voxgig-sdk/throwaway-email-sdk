@@ -48,9 +48,13 @@ class DomainEntityTest extends TestCase
 
         // LOAD
         $domain_ref01_ent = $client->Domain(null);
-        $domain_ref01_match_dt0 = [];
+        $domain_ref01_match_dt0 = [
+            "id" => $domain_ref01_data["id"],
+        ];
         $domain_ref01_data_dt0_loaded = $domain_ref01_ent->load($domain_ref01_match_dt0, null);
-        $this->assertNotNull($domain_ref01_data_dt0_loaded);
+        $domain_ref01_data_dt0_load_result = Helpers::to_map(is_object($domain_ref01_data_dt0_loaded) && method_exists($domain_ref01_data_dt0_loaded, 'data_get') ? $domain_ref01_data_dt0_loaded->data_get() : $domain_ref01_data_dt0_loaded);
+        $this->assertNotNull($domain_ref01_data_dt0_load_result);
+        $this->assertEquals($domain_ref01_data_dt0_load_result["id"], $domain_ref01_data["id"]);
 
     }
 }

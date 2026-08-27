@@ -16,6 +16,7 @@ local function make_config()
         ["options"] = {
           ["active"] = false,
         },
+        ["transport"] = "base",
       },
     },
     options = {
@@ -101,6 +102,10 @@ local function make_config()
       ["domain"] = {
         ["fields"] = {
           {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+          {
             ["name"] = "isDisposable",
             ["type"] = "`$BOOLEAN`",
           },
@@ -161,6 +166,10 @@ local function make_config()
       },
       ["email"] = {
         ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
           {
             ["name"] = "isDisposable",
             ["type"] = "`$BOOLEAN`",

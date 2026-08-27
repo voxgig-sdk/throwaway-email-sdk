@@ -64,8 +64,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    email = client.Email().load({"id": "example_id"})
-    print(email)
+    v2n = client.V2n().load({"subject": "example"})
+    print(v2n)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -133,8 +133,8 @@ client = ThrowawayEmailSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-email = client.Email().load({"id": "test01"})
-# email contains the mock response record
+v2n = client.V2n().load({"subject": "example"})
+# v2n contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -267,6 +267,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -278,6 +279,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -370,6 +372,7 @@ Create an instance: `domain = client.Domain()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `str` |  |
 | `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
@@ -394,6 +397,7 @@ Create an instance: `email = client.Email()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `str` |  |
 | `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
@@ -569,11 +573,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-email = client.Email()
-email.load({"id": "example_id"})
+v2n = client.V2n()
+v2n.load({"subject": "example"})
 
-# email.data_get() now returns the email data from the last load
-# email.match_get() returns the last match criteria
+# v2n.data_get() now returns the v2n data from the last load
+# v2n.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

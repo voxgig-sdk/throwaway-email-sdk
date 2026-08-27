@@ -37,6 +37,7 @@ def make_config():
         "options": {
           "active": False,
         },
+        "transport": "base",
       },
         },
         "options": {
@@ -122,6 +123,10 @@ def make_config():
       "domain": {
         "fields": [
           {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+          {
             "name": "isDisposable",
             "type": "`$BOOLEAN`",
           },
@@ -182,6 +187,10 @@ def make_config():
       },
       "email": {
         "fields": [
+          {
+            "name": "id",
+            "type": "`$STRING`",
+          },
           {
             "name": "isDisposable",
             "type": "`$BOOLEAN`",

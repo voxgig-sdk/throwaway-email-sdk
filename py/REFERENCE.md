@@ -165,6 +165,7 @@ domain = client.Domain()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `str` | No |  |
 | `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 
@@ -217,6 +218,7 @@ email = client.Email()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `str` | No |  |
 | `isDisposable` | `bool` | No |  |
 | `success` | `bool` | No |  |
 

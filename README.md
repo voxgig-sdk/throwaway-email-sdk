@@ -42,23 +42,23 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = ThrowawayEmailSDK.test({
   entity: {
-    email: {
+    v2n: {
       test01: { id: 'test01' },
     },
   },
 })
-const email = await client.Email().load({ id: 'test01' })
-// email is the Email entity, populated with mock data
-// — call email.data() for the record itself
-console.log(email)
+const v2n = await client.V2n().load({ subject: 'example_subject' })
+// v2n is the V2n entity, populated with mock data
+// — call v2n.data() for the record itself
+console.log(v2n)
 ```
 
 ### Python
 
 ```python
 client = ThrowawayEmailSDK.test()
-email = client.Email().load({"id": "test01"})
-print(email)
+v2n = client.V2n().load({"subject": "example"})
+print(v2n)
 ```
 
 ### PHP
@@ -66,17 +66,17 @@ print(email)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = ThrowawayEmailSDK::test([
-    "entity" => ["email" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["v2n" => ["test01" => []]],
 ]);
-$email = $client->Email()->load(["id" => "test01"]);
+$v2n = $client->V2n()->load(["subject" => "example"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Email(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.V2n(nil).Load(
+    nil, nil,
 )
 ```
 
@@ -85,16 +85,16 @@ result, err := client.Email(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = ThrowawayEmailSDK.test({
-  "entity" => { "email" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "v2n" => { "test01" => {} } },
 })
-email = client.Email.load({ "id" => "test01" })
+v2n = client.V2n.load({ "subject" => "example" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Email():load({ id = "test01" })
+local result, err = client:V2n():load({ subject = "example" })
 ```
 
 ## Packages

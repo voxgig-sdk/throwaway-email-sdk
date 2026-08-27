@@ -64,8 +64,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const email = await client.Email().load({ id: "example_id" })
-  console.log(email)
+  const v2n = await client.V2n().load({ subject: "example" })
+  console.log(v2n)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -131,10 +131,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ThrowawayEmailSDK.test()
 
-const email = await client.Email().load({ id: 'test01' })
-// email is the entity, populated with mock response data
-// — call email.data() for the record itself
-console.log(email)
+const v2n = await client.V2n().load({ subject: 'example_subject' })
+// v2n is the entity, populated with mock response data
+// — call v2n.data() for the record itself
+console.log(v2n)
 ```
 
 You can also use the instance method:
@@ -149,10 +149,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Email()
+const entity = client.V2n()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 'example' })
+await entity.load({ subject: 'example_subject' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -315,6 +315,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -326,6 +327,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -418,6 +420,7 @@ Create an instance: `const domain = client.Domain()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
@@ -442,6 +445,7 @@ Create an instance: `const email = client.Email()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
@@ -611,11 +615,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const email = client.Email()
-await email.load({ id: "example_id" })
+const v2n = client.V2n()
+await v2n.load({ subject: "example" })
 
-// email.data() now returns the email data from the last `load`
-// email.match() returns { id: "example_id" }
+// v2n.data() now returns the v2n data from the last `load`
+// v2n.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

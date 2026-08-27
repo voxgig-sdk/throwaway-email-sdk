@@ -2,27 +2,27 @@
   "existing": {
     "domain": {
       "DOMAIN00": {
-        "isDisposable": true,
-        "success": false,
-        "id": "DOMAIN00"
+        "id": "DOMAIN00",
+        "isDisposable": false,
+        "success": true
       },
       "DOMAIN01": {
-        "isDisposable": true,
-        "success": false,
-        "id": "DOMAIN01"
+        "id": "DOMAIN01",
+        "isDisposable": false,
+        "success": true
       },
       "DOMAIN02": {
-        "isDisposable": true,
-        "success": false,
-        "id": "DOMAIN02"
+        "id": "DOMAIN02",
+        "isDisposable": false,
+        "success": true
       }
     }
   },
   "new": {
     "domain": {
       "domain_ref01": {
-        "isDisposable": true,
-        "success": false
+        "isDisposable": false,
+        "success": true
       }
     }
   }

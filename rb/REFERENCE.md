@@ -172,6 +172,7 @@ domain = client.Domain
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `String` | No |  |
 | `isDisposable` | `Boolean` | No |  |
 | `success` | `Boolean` | No |  |
 
@@ -225,6 +226,7 @@ email = client.Email
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `String` | No |  |
 | `isDisposable` | `Boolean` | No |  |
 | `success` | `Boolean` | No |  |
 

@@ -48,9 +48,13 @@ class TestEmailEntity:
 
         # LOAD
         email_ref01_ent = client.Email(None)
-        email_ref01_match_dt0 = {}
+        email_ref01_match_dt0 = {
+            "id": email_ref01_data["id"],
+        }
         email_ref01_data_dt0_loaded = email_ref01_ent.load(email_ref01_match_dt0, None)
-        assert email_ref01_data_dt0_loaded is not None
+        email_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(email_ref01_data_dt0_loaded))
+        assert email_ref01_data_dt0_load_result is not None
+        assert email_ref01_data_dt0_load_result["id"] == email_ref01_data["id"]
 
 
 

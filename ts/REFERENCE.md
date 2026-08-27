@@ -241,6 +241,7 @@ const domain = client.Domain()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 
@@ -292,6 +293,7 @@ const email = client.Email()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `isDisposable` | `boolean` | No |  |
 | `success` | `boolean` | No |  |
 

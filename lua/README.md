@@ -59,7 +59,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local email, err = client:Email():load({ id = "example_id" })
+local v2n, err = client:V2n():load({ subject = "example" })
 if err then error(err) end
 ```
 
@@ -117,7 +117,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Email():load({ id = "test01" })
+local result, err = client:V2n():load({ subject = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -254,6 +254,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -265,6 +266,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `isDisposable` |  |
 | `success` |  |
 
@@ -357,6 +359,7 @@ Create an instance: `local domain = client:Domain(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
@@ -381,6 +384,7 @@ Create an instance: `local email = client:Email(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `boolean` |  |
 | `success` | `boolean` |  |
 
@@ -557,11 +561,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local email = client:Email()
-email:load({ id = "example_id" })
+local v2n = client:V2n()
+v2n:load({ subject = "example" })
 
--- email:data_get() now returns the email data from the last load
--- email:match_get() returns the last match criteria
+-- v2n:data_get() now returns the v2n data from the last load
+-- v2n:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

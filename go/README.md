@@ -73,12 +73,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-email, err := client.Email(nil).Load(map[string]any{"id": "example_id"}, nil)
+v2n, err := client.V2n(nil).Load(map[string]any{"subject": "example"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = email
+_ = v2n
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -142,13 +142,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-email, err := client.Email(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+v2n, err := client.V2n(nil).Load(
+    map[string]any{"subject": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(email) // the returned mock data
+fmt.Println(v2n) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -283,6 +283,7 @@ API path: `/dns-query`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"isDisposable"` |  |
 | `"success"` |  |
 
@@ -294,6 +295,7 @@ API path: `/api/v1/domain/{domain}`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"isDisposable"` |  |
 | `"success"` |  |
 
@@ -394,6 +396,7 @@ Create an instance: `domain := client.Domain(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
@@ -422,6 +425,7 @@ Create an instance: `email := client.Email(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `isDisposable` | `bool` |  |
 | `success` | `bool` |  |
 
@@ -619,11 +623,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-email := client.Email(nil)
-email.Load(map[string]any{"id": "example_id"}, nil)
+v2n := client.V2n(nil)
+v2n.Load(map[string]any{"subject": "example"}, nil)
 
-// email.Data() now returns the email data from the last load
-// email.Match() returns the last match criteria
+// v2n.Data() now returns the v2n data from the last load
+// v2n.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

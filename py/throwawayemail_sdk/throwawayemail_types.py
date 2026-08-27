@@ -29,6 +29,7 @@ class DnsQueryCreateData(TypedDict):
 
 
 class Domain(TypedDict, total=False):
+    id: str
     isDisposable: bool
     success: bool
 
@@ -38,6 +39,7 @@ class DomainLoadMatch(TypedDict):
 
 
 class Email(TypedDict, total=False):
+    id: str
     isDisposable: bool
     success: bool
 

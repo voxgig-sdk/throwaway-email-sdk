@@ -61,13 +61,19 @@ func TestDomainEntity(t *testing.T) {
 
 		// LOAD
 		domainRef01Ent := client.Domain(nil)
-		domainRef01MatchDt0 := map[string]any{}
+		domainRef01MatchDt0 := map[string]any{
+			"id": domainRef01Data["id"],
+		}
 		domainRef01DataDt0Loaded, err := domainRef01Ent.Load(domainRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if domainRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		domainRef01DataDt0LoadResult := core.ToMapAny(entityData(domainRef01DataDt0Loaded))
+		if domainRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if domainRef01DataDt0LoadResult["id"] != domainRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

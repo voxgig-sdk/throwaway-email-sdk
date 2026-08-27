@@ -41,9 +41,13 @@ class DomainEntityTest < Minitest::Test
 
     # LOAD
     domain_ref01_ent = client.Domain(nil)
-    domain_ref01_match_dt0 = {}
+    domain_ref01_match_dt0 = {
+      "id" => domain_ref01_data["id"],
+    }
     domain_ref01_data_dt0_loaded = domain_ref01_ent.load(domain_ref01_match_dt0, nil)
-    assert !domain_ref01_data_dt0_loaded.nil?
+    domain_ref01_data_dt0_load_result = Helpers.to_map(domain_ref01_data_dt0_loaded.respond_to?(:data_get) ? domain_ref01_data_dt0_loaded.data_get : domain_ref01_data_dt0_loaded)
+    assert !domain_ref01_data_dt0_load_result.nil?
+    assert_equal domain_ref01_data_dt0_load_result["id"], domain_ref01_data["id"]
 
   end
 end

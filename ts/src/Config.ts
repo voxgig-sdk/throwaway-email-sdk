@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -148,6 +149,10 @@ class Config {
     "domain": {
       "fields": [
         {
+          "name": "id",
+          "type": "`$STRING`"
+        },
+        {
           "name": "isDisposable",
           "type": "`$BOOLEAN`"
         },
@@ -208,6 +213,10 @@ class Config {
     },
     "email": {
       "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        },
         {
           "name": "isDisposable",
           "type": "`$BOOLEAN`"

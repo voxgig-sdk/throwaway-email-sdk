@@ -26,6 +26,7 @@ type DnsQueryCreateData struct {
 
 // Domain is the typed data model for the domain entity.
 type Domain struct {
+	Id *string `json:"id,omitempty"`
 	IsDisposable *bool `json:"isDisposable,omitempty"`
 	Success *bool `json:"success,omitempty"`
 }
@@ -37,6 +38,7 @@ type DomainLoadMatch struct {
 
 // Email is the typed data model for the email entity.
 type Email struct {
+	Id *string `json:"id,omitempty"`
 	IsDisposable *bool `json:"isDisposable,omitempty"`
 	Success *bool `json:"success,omitempty"`
 }

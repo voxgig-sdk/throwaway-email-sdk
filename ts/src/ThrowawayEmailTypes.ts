@@ -15,6 +15,7 @@ export interface DnsQueryCreateData {
 }
 
 export interface Domain {
+  id?: string
   isDisposable?: boolean
   success?: boolean
 }
@@ -24,6 +25,7 @@ export interface DomainLoadMatch {
 }
 
 export interface Email {
+  id?: string
   isDisposable?: boolean
   success?: boolean
 }
