@@ -13,8 +13,13 @@ class DnsQuery
 end
 
 # Request payload for DnsQuery#load.
-class DnsQueryLoadMatch
-end
+#
+# @!attribute [rw] dns
+#   @return [String]
+DnsQueryLoadMatch = Struct.new(
+  :dns,
+  keyword_init: true
+)
 
 # Request payload for DnsQuery#create.
 class DnsQueryCreateData
@@ -89,8 +94,25 @@ class Resolve
 end
 
 # Request payload for Resolve#load.
-class ResolveLoadMatch
-end
+#
+# @!attribute [rw] cd
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] do
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] type
+#   @return [String, nil]
+ResolveLoadMatch = Struct.new(
+  :cd,
+  :do,
+  :name,
+  :type,
+  keyword_init: true
+)
 
 # V2n entity data model.
 #

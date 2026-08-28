@@ -347,7 +347,7 @@ Create an instance: `dns_query = client.DnsQuery()`
 #### Example: Load
 
 ```python
-dns_query = client.DnsQuery().load()
+dns_query = client.DnsQuery().load({"dns": "dns"})
 ```
 
 #### Example: Create
@@ -445,7 +445,7 @@ Create an instance: `resolve = client.Resolve()`
 #### Example: Load
 
 ```python
-resolve = client.Resolve().load()
+resolve = client.Resolve().load({"name": "name"})
 ```
 
 
@@ -496,6 +496,29 @@ Create an instance: `v3n = client.V3n()`
 ```python
 v3n = client.V3n().load({"subject": "subject"})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

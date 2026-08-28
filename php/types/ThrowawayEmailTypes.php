@@ -20,6 +20,7 @@ class DnsQuery
 /** Request payload for DnsQuery#load. */
 class DnsQueryLoadMatch
 {
+    public string $dns;
 }
 
 /** Request payload for DnsQuery#create. */
@@ -78,6 +79,10 @@ class Resolve
 /** Request payload for Resolve#load. */
 class ResolveLoadMatch
 {
+    public ?bool $cd = null;
+    public ?bool $do = null;
+    public string $name;
+    public ?string $type = null;
 }
 
 /** V2n entity data model. */

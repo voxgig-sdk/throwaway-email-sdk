@@ -21,7 +21,7 @@ class DnsQuery(TypedDict):
 
 
 class DnsQueryLoadMatch(TypedDict):
-    pass
+    dns: str
 
 
 class DnsQueryCreateData(TypedDict):
@@ -64,8 +64,14 @@ class Resolve(TypedDict):
     pass
 
 
-class ResolveLoadMatch(TypedDict):
-    pass
+class ResolveLoadMatchRequired(TypedDict):
+    name: str
+
+
+class ResolveLoadMatch(ResolveLoadMatchRequired, total=False):
+    cd: bool
+    do: bool
+    type: str
 
 
 class V2n(TypedDict, total=False):

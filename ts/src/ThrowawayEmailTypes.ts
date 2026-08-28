@@ -9,6 +9,7 @@ export interface DnsQuery {
 }
 
 export interface DnsQueryLoadMatch {
+  dns: string
 }
 
 export interface DnsQueryCreateData {
@@ -47,6 +48,10 @@ export interface Resolve {
 }
 
 export interface ResolveLoadMatch {
+  cd?: boolean
+  do?: boolean
+  name: string
+  type?: string
 }
 
 export interface V2n {

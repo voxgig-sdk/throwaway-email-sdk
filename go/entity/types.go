@@ -18,6 +18,7 @@ type DnsQuery struct {
 
 // DnsQueryLoadMatch is the typed request payload for DnsQuery.LoadTyped.
 type DnsQueryLoadMatch struct {
+	Dns string `json:"dns"`
 }
 
 // DnsQueryCreateData is the typed request payload for DnsQuery.CreateTyped.
@@ -66,6 +67,10 @@ type Resolve struct {
 
 // ResolveLoadMatch is the typed request payload for Resolve.LoadTyped.
 type ResolveLoadMatch struct {
+	Cd *bool `json:"cd,omitempty"`
+	Do *bool `json:"do,omitempty"`
+	Name string `json:"name"`
+	Type *string `json:"type,omitempty"`
 }
 
 // V2n is the typed data model for the v2n entity.

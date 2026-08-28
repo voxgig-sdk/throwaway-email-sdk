@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single dnsQuery — the value is the loaded record.
-    dnsQuery, err := client.DnsQuery(nil).Load(nil, nil)
+    dnsQuery, err := client.DnsQuery(nil).Load(map[string]any{"dns": "example_dns"}, nil)
     if err != nil {
         panic(err)
     }
@@ -363,7 +363,7 @@ Create an instance: `dnsQuery := client.DnsQuery(nil)`
 #### Example: Load
 
 ```go
-dnsQuery, err := client.DnsQuery(nil).Load(nil, nil)
+dnsQuery, err := client.DnsQuery(nil).Load(map[string]any{"dns": "dns"}, nil)
 if err != nil {
     panic(err)
 }
@@ -485,7 +485,7 @@ Create an instance: `resolve := client.Resolve(nil)`
 #### Example: Load
 
 ```go
-resolve, err := client.Resolve(nil).Load(nil, nil)
+resolve, err := client.Resolve(nil).Load(map[string]any{"name": "name"}, nil)
 if err != nil {
     panic(err)
 }
@@ -548,6 +548,29 @@ if err != nil {
 }
 fmt.Println(v3n) // the loaded record
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

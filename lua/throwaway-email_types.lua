@@ -9,6 +9,7 @@
 ---@class DnsQuery
 
 ---@class DnsQueryLoadMatch
+---@field dns string
 
 ---@class DnsQueryCreateData
 
@@ -37,6 +38,10 @@
 ---@class Resolve
 
 ---@class ResolveLoadMatch
+---@field cd? boolean
+---@field do? boolean
+---@field name string
+---@field type? string
 
 ---@class V2n
 ---@field isDisposable? boolean

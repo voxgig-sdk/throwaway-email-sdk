@@ -14,6 +14,10 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
+> **Features:** `test` — opt-in,
+> inactive until switched on, and configured per client. See the Features
+> section of any SDK README below for what each one does.
+
 ## Entities, not endpoints
 
 This SDK exposes the API as **7 semantic entities** that you
@@ -23,7 +27,7 @@ support (`list`, `load`, `create`):
 
 ```ts
 const client = new ThrowawayEmailSDK()
-const dnsquery = await client.DnsQuery().load()
+const dnsquery = await client.DnsQuery().load({ dns: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -187,7 +191,7 @@ client = ThrowawayEmailSDK()
 
 
 # Load a specific dnsquery (returns the record, raises on error)
-dnsquery = client.DnsQuery().load()
+dnsquery = client.DnsQuery().load({"dns": "example_dns"})
 print(dnsquery)
 ```
 
@@ -201,7 +205,7 @@ $client = new ThrowawayEmailSDK();
 
 
 // Load a specific dnsquery (returns the ENTITY; call data_get() for the record; throws on error)
-$dnsquery = $client->DnsQuery()->load();
+$dnsquery = $client->DnsQuery()->load(["dns" => "example_dns"]);
 print_r($dnsquery);
 ```
 
@@ -232,7 +236,7 @@ client = ThrowawayEmailSDK.new
 
 
 # Load a specific dnsquery (returns the ENTITY; call data_get for the record)
-dnsquery = client.DnsQuery.load()
+dnsquery = client.DnsQuery.load({ "dns" => "example_dns" })
 puts dnsquery
 ```
 
@@ -245,7 +249,7 @@ local client = sdk.new()
 
 
 -- Load a specific dnsquery
-local dnsquery, err = client:DnsQuery():load()
+local dnsquery, err = client:DnsQuery():load({ dns = "example_dns" })
 print(dnsquery)
 ```
 
@@ -351,6 +355,32 @@ forking the SDK.
 | **TestFeature** | In-memory mock transport for testing without a live server |
 
 Pass custom features via the `extend` option at construction time.
+
+## Customizing this SDK
+
+This repository contains its own generator (`.sdk/`), so the SDK is
+customizable without forking any upstream tool:
+
+- **The model** (`.sdk/model/`) declares everything this project owns:
+  package names, versions, active features, per-target settings. It is
+  written in [aontu](https://github.com/aontu-lang/aontu), a JSON-based
+  specification language designed for building ontologies: easy to edit
+  by hand, and files unify rather than override, so small declarations
+  compose into one model. Regeneration re-reads it every time.
+- **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
+  the two layers of generation, copied into this repo: templates are the
+  literal per-language source, components generate the API-shaped parts.
+- **Regeneration merges.** By default, newly generated content is
+  three-way merged into existing files, so generator updates and local
+  edits usually converge without manual conflict handling. A project can
+  opt for plain overwrite instead.
+- **Custom features and entire custom targets** arrive through sdkgen
+  packages (`voxgig-sdkgen package add`), on the same rails as the
+  bundled languages, and `voxgig-sdkgen doctor` reports any drift from
+  what a resync would write.
+
+How-to: [customize and propagate templates](https://github.com/voxgig/sdkgen/blob/main/docs/how-to/customize-and-propagate-templates.md).
+The full story: [voxgig.com/sdk/custom](https://voxgig.com/sdk/custom).
 
 ## Per-language documentation
 
