@@ -47,17 +47,25 @@ main: kit: entity: email: {
           }
           method: "GET"
           orig: "/api/v1/email/{email}"
-          parts: [
-            "api"
-            "v1"
-            "email"
-            "{id}"
-          ]
           rename: {
             param: {
               email: "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "email"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

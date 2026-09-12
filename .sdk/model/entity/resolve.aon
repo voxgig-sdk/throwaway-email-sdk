@@ -48,8 +48,10 @@ main: kit: entity: resolve: {
           }
           method: "GET"
           orig: "/resolve"
-          parts: [
-            "resolve"
+          segments: [
+            {
+              lit: "resolve"
+            }
           ]
           select: {
             exist: [

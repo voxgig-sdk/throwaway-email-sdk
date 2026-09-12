@@ -12,8 +12,10 @@ main: kit: entity: dns_query: {
         {
           method: "POST"
           orig: "/dns-query"
-          parts: [
-            "dns-query"
+          segments: [
+            {
+              lit: "dns-query"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -40,8 +42,10 @@ main: kit: entity: dns_query: {
           }
           method: "GET"
           orig: "/dns-query"
-          parts: [
-            "dns-query"
+          segments: [
+            {
+              lit: "dns-query"
+            }
           ]
           select: {
             exist: [

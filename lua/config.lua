@@ -48,13 +48,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/dns-query",
-                ["parts"] = {
-                  "dns-query",
+                ["segments"] = {
+                  {
+                    ["lit"] = "dns-query",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "dns-query",
                 },
               },
             },
@@ -79,8 +84,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/dns-query",
-                ["parts"] = {
-                  "dns-query",
+                ["segments"] = {
+                  {
+                    ["lit"] = "dns-query",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -90,6 +97,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "dns-query",
                 },
               },
             },
@@ -114,6 +124,10 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "domain",
         ["op"] = {
           ["load"] = {
@@ -136,15 +150,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v1/domain/{domain}",
-                ["parts"] = {
-                  "api",
-                  "v1",
-                  "domain",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["domain"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v1",
+                  },
+                  {
+                    ["lit"] = "domain",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -155,6 +177,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v1",
+                  "domain",
+                  "{id}",
                 },
               },
             },
@@ -179,6 +207,10 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "email",
         ["op"] = {
           ["load"] = {
@@ -201,15 +233,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v1/email/{email}",
-                ["parts"] = {
-                  "api",
-                  "v1",
-                  "email",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["email"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v1",
+                  },
+                  {
+                    ["lit"] = "email",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -220,6 +260,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v1",
+                  "email",
+                  "{id}",
                 },
               },
             },
@@ -242,13 +288,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.json",
-                ["parts"] = {
-                  "list.json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "list.json",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "list.json",
                 },
               },
             },
@@ -262,13 +313,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.txt",
-                ["parts"] = {
-                  "list.txt",
+                ["segments"] = {
+                  {
+                    ["lit"] = "list.txt",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "list.txt",
                 },
               },
               {
@@ -276,13 +332,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.yaml",
-                ["parts"] = {
-                  "list.yaml",
+                ["segments"] = {
+                  {
+                    ["lit"] = "list.yaml",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "list.yaml",
                 },
               },
             },
@@ -337,8 +398,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/resolve",
-                ["parts"] = {
-                  "resolve",
+                ["segments"] = {
+                  {
+                    ["lit"] = "resolve",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -351,6 +414,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "resolve",
                 },
               },
             },
@@ -393,10 +459,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v2/{subject}",
-                ["parts"] = {
-                  "api",
-                  "v2",
-                  "{subject}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v2",
+                  },
+                  {
+                    ["var"] = "subject",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -406,6 +478,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v2",
+                  "{subject}",
                 },
               },
             },
@@ -460,10 +537,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/{subject}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "{subject}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["var"] = "subject",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -473,6 +556,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "{subject}",
                 },
               },
             },

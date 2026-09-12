@@ -37,10 +37,16 @@ main: kit: entity: v2n: {
           }
           method: "GET"
           orig: "/api/v2/{subject}"
-          parts: [
-            "api"
-            "v2"
-            "{subject}"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              var: "subject"
+            }
           ]
           select: {
             exist: [

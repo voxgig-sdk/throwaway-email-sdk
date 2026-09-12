@@ -52,7 +52,7 @@ func TestDnsQueryEntity(t *testing.T) {
 		// CREATE
 		dnsQueryRef01Ent := client.DnsQuery(nil)
 		dnsQueryRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "dns_query"}, setup.data), "dns_query_ref01"))
+			vs.GetPath(setup.data, []any{"new", "dns_query"}), "dns_query_ref01"))
 
 		dnsQueryRef01DataResult, err := dnsQueryRef01Ent.Create(dnsQueryRef01Data, nil)
 		if err != nil {
@@ -100,7 +100,7 @@ func dns_queryBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"dns_query01", "dns_query02", "dns_query03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -128,10 +128,22 @@ func dns_queryBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["THROWAWAY_EMAIL_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewThrowawayEmailSDK(core.ToMapAny(mergedOpts))
 	}

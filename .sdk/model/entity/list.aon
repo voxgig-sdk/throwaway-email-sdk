@@ -12,8 +12,10 @@ main: kit: entity: list: {
         {
           method: "GET"
           orig: "/list.json"
-          parts: [
-            "list.json"
+          segments: [
+            {
+              lit: "list.json"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -28,8 +30,10 @@ main: kit: entity: list: {
         {
           method: "GET"
           orig: "/list.txt"
-          parts: [
-            "list.txt"
+          segments: [
+            {
+              lit: "list.txt"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -39,8 +43,10 @@ main: kit: entity: list: {
         {
           method: "GET"
           orig: "/list.yaml"
-          parts: [
-            "list.yaml"
+          segments: [
+            {
+              lit: "list.yaml"
+            }
           ]
           transform: {
             req: "`reqdata`"
