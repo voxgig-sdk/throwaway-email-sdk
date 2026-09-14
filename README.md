@@ -105,7 +105,7 @@ local result, err = client:V2n():load({ subject = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
+| TypeScript | `@voxgig-sdk/throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
 | Python | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
 | PHP | `voxgig-sdk/throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/throwaway-email-sdk/go` | `go get github.com/voxgig-sdk/throwaway-email-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:V2n():load({ subject = "example" })
 ### TypeScript
 
 ```ts
-import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email'
+import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email-sdk'
 
 const client = new ThrowawayEmailSDK()
 

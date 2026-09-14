@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email'
+import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email-sdk'
 
 const client = new ThrowawayEmailSDK()
 ```
@@ -628,7 +628,7 @@ throwaway-email/
 Import the SDK from the package root:
 
 ```ts
-import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email'
+import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email-sdk'
 ```
 
 ### Entity state
