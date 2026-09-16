@@ -25,5 +25,46 @@
         "success": true
       }
     }
+  },
+  "requests": {
+    "GET /api/v1/domain/{domain}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "description": "Domain name to check",
+            "in": "path",
+            "name": "domain",
+            "required": true,
+            "schema": {
+              "example": "example.com",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "isDisposable": {
+                      "type": "boolean"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Check result"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

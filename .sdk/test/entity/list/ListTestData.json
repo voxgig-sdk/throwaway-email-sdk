@@ -16,5 +16,70 @@
     "list": {
       "list_ref01": {}
     }
+  },
+  "requests": {
+    "GET /list.json": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Domain list"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /list.txt": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Domain list"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /list.yaml": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Domain list"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

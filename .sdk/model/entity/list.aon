@@ -10,6 +10,12 @@ main: kit: entity: list: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /list.json"
+            json: "{\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}}},\"description\":\"Domain list\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/list.json"
           segments: [
@@ -28,6 +34,12 @@ main: kit: entity: list: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /list.txt"
+            json: "{\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"text/plain\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Domain list\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/list.txt"
           segments: [
@@ -41,6 +53,12 @@ main: kit: entity: list: {
           }
         }
         {
+          contract: {
+            id: "GET /list.yaml"
+            json: "{\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/yaml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Domain list\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/list.yaml"
           segments: [

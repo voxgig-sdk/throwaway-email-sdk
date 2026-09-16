@@ -1,12 +1,18 @@
 # ThrowawayEmail SDK feature factory
 
 from throwawayemail_sdk.feature.base_feature import ThrowawayEmailBaseFeature
+from throwawayemail_sdk.feature.ratelimit_feature import ThrowawayEmailRatelimitFeature
+from throwawayemail_sdk.feature.retry_feature import ThrowawayEmailRetryFeature
 from throwawayemail_sdk.feature.test_feature import ThrowawayEmailTestFeature
+from throwawayemail_sdk.feature.timeout_feature import ThrowawayEmailTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ThrowawayEmailBaseFeature(),
+    "ratelimit": lambda: ThrowawayEmailRatelimitFeature(),
+    "retry": lambda: ThrowawayEmailRetryFeature(),
     "test": lambda: ThrowawayEmailTestFeature(),
+    "timeout": lambda: ThrowawayEmailTimeoutFeature(),
 }
 
 

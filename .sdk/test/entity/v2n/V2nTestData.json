@@ -28,5 +28,96 @@
         "success": false
       }
     }
+  },
+  "requests": {
+    "GET /api/v2/{subject}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "description": "Email address or domain name to check",
+            "in": "path",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "example": "test@example.com",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "isDisposable": {
+                      "type": "boolean"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Check result",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "description": "Rate limit maximum requests",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-RateLimit-Remaining": {
+                "description": "Rate limit remaining requests",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-RateLimit-Reset": {
+                "description": "Rate limit reset time (unix timestamp)",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Invalid input"
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds to wait before retry",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

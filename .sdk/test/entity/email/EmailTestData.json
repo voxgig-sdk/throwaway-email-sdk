@@ -25,5 +25,46 @@
         "success": true
       }
     }
+  },
+  "requests": {
+    "GET /api/v1/email/{email}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "description": "Email address to check",
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "schema": {
+              "example": "test@example.com",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "isDisposable": {
+                      "type": "boolean"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Check result"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

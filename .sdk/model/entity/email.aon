@@ -45,6 +45,12 @@ main: kit: entity: email: {
               }
             ]
           }
+          contract: {
+            id: "GET /api/v1/email/{email}"
+            json: "{\"parameters\":[{\"description\":\"Email address to check\",\"in\":\"path\",\"name\":\"email\",\"required\":true,\"schema\":{\"example\":\"test@example.com\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"isDisposable\":{\"type\":\"boolean\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Check result\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/api/v1/email/{email}"
           rename: {

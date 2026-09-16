@@ -16,5 +16,80 @@
     "dns_query": {
       "dns_query_ref01": {}
     }
+  },
+  "requests": {
+    "POST /dns-query": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/dns-message": {
+              "schema": {
+                "description": "DNS query message in wire format",
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/dns-message": {
+                "schema": {
+                  "description": "DNS response message in wire format",
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "DNS response in wire format"
+          },
+          "400": {
+            "description": "Invalid DNS query format"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /dns-query": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "description": "Base64url-encoded DNS query message",
+            "in": "query",
+            "name": "dns",
+            "required": true,
+            "schema": {
+              "example": "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/dns-message": {
+                "schema": {
+                  "description": "DNS response message in wire format",
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "DNS response in wire format"
+          },
+          "400": {
+            "description": "Invalid DNS query format"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }
