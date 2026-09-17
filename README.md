@@ -105,12 +105,12 @@ local result, err = client:V2n():load({ subject = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
-| Python | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
-| PHP | `voxgig-sdk/throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
+| TypeScript | `@voxgig-sdk/throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
+| Python | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
+| PHP | `voxgig-sdk/throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/throwaway-email-sdk/go` | `go get github.com/voxgig-sdk/throwaway-email-sdk/go@latest` |
-| Ruby | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
-| Lua | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) |
+| Ruby | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
+| Lua | `voxgig-sdk-throwaway-email` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/throwaway-email-sdk/go-cli` | `go install github.com/voxgig-sdk/throwaway-email-sdk/go-cli/cmd/throwaway-email@latest` |
 | Go MCP server | `github.com/voxgig-sdk/throwaway-email-sdk/go-mcp` | `go get github.com/voxgig-sdk/throwaway-email-sdk/go-mcp@latest` |
 

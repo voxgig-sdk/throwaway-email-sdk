@@ -127,27 +127,27 @@ class Config {
 
     entity: {
       
-      dns_query: {
-      },
-
-      domain: {
-      },
-
-      email: {
-      },
-
-      list: {
-      },
-
-      resolve: {
-      },
-
-      v2n: {
-      },
-
-      v3n: {
-      },
-
+        dns_query: {
+        },
+  
+        domain: {
+        },
+  
+        email: {
+        },
+  
+        list: {
+        },
+  
+        resolve: {
+        },
+  
+        v2n: {
+        },
+  
+        v3n: {
+        },
+  
     }
   }
 
