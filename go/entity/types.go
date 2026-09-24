@@ -1,7 +1,7 @@
 // Typed models for the ThrowawayEmail SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -27,9 +27,6 @@ type DnsQueryCreateData struct {
 
 // Domain is the typed data model for the domain entity.
 type Domain struct {
-	Id *string `json:"id,omitempty"`
-	IsDisposable *bool `json:"isDisposable,omitempty"`
-	Success *bool `json:"success,omitempty"`
 }
 
 // DomainLoadMatch is the typed request payload for Domain.LoadTyped.
@@ -39,9 +36,6 @@ type DomainLoadMatch struct {
 
 // Email is the typed data model for the email entity.
 type Email struct {
-	Id *string `json:"id,omitempty"`
-	IsDisposable *bool `json:"isDisposable,omitempty"`
-	Success *bool `json:"success,omitempty"`
 }
 
 // EmailLoadMatch is the typed request payload for Email.LoadTyped.
@@ -75,8 +69,6 @@ type ResolveLoadMatch struct {
 
 // V2n is the typed data model for the v2n entity.
 type V2n struct {
-	IsDisposable *bool `json:"isDisposable,omitempty"`
-	Success *bool `json:"success,omitempty"`
 }
 
 // V2nLoadMatch is the typed request payload for V2n.LoadTyped.
@@ -86,9 +78,6 @@ type V2nLoadMatch struct {
 
 // V3n is the typed data model for the v3n entity.
 type V3n struct {
-	Records *map[string]any `json:"records,omitempty"`
-	Success bool `json:"success"`
-	Traits []any `json:"traits"`
 }
 
 // V3nLoadMatch is the typed request payload for V3n.LoadTyped.

@@ -1,0 +1,82 @@
+# Entity: v3n
+
+main: kit: entity: v3n: {
+
+  alias: field: {}
+
+  fields: {
+    records: {
+      h: "Records"
+      n: "records"
+      r: false
+      sh: "DNS records for the domain (when available)"
+      t: "`$OBJECT`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    traits: {
+      h: "Traits"
+      n: "traits"
+      r: true
+      sh: "Array of traits identified for the domain"
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "v3n"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v3/{subject}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "test@example.com"
+                k: "param"
+                n: "subject"
+                or: "subject"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v3/{subject}"
+          q: {
+            exist: [
+              "subject"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              var: "subject"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -20,66 +20,18 @@
   "requests": {
     "GET /list.json": {
       "provenance": "operation-contract",
-      "contract": {
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Domain list"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     },
     "GET /list.txt": {
       "provenance": "operation-contract",
-      "contract": {
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "Domain list"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     },
     "GET /list.yaml": {
       "provenance": "operation-contract",
-      "contract": {
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/yaml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "Domain list"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

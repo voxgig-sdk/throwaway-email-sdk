@@ -62,7 +62,7 @@ def v3n_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["v3n01", "v3n02", "v3n03", "v301", "v302", "v303"],
+    ["v3n01", "v3n02", "v3n03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

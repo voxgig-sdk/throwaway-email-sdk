@@ -1,0 +1,80 @@
+# Entity: list
+
+main: kit: entity: list: {
+
+  alias: field: {}
+
+  name: "list"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /list.json"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/list.json"
+          s: [
+            {
+              lit: "list.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /list.txt"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/list.txt"
+          s: [
+            {
+              lit: "list.txt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /list.yaml"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/list.yaml"
+          s: [
+            {
+              lit: "list.yaml"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

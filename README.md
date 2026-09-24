@@ -14,7 +14,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
+> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -123,12 +123,9 @@ import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email-sdk'
 
 const client = new ThrowawayEmailSDK()
 
-
-// Load a specific v2n (returns a V2n)
-const v2n = await client.V2n().load({
-  subject: 'example_subject',
-})
-console.log(v2n)
+// Load dnsquery data (returns a DnsQuery)
+const dnsquery = await client.DnsQuery().load()
+console.log(dnsquery)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -216,15 +213,12 @@ import sdk "github.com/voxgig-sdk/throwaway-email-sdk/go"
 
 client := sdk.New()
 
-
-// Load a specific v2n
-v2n, err := client.V2n(nil).Load(
-    map[string]any{"subject": "example_subject"}, nil,
-)
+// Load dnsquery data
+dnsQuery, err := client.DnsQuery(nil).Load(map[string]any{"dns": "example_dns"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v2n)
+fmt.Println(dnsQuery)
 ```
 
 ### Ruby

@@ -33,17 +33,14 @@ import { ThrowawayEmailSDK } from '@voxgig-sdk/throwaway-email-sdk'
 const client = new ThrowawayEmailSDK()
 ```
 
-### 3. Load a v2n
+### 3. Load a dnsquery
 
-V2n is nested under subject, so provide the `subject`.
 `load()` returns the entity directly and throws on failure:
 
 ```ts
 try {
-  const v2n = await client.V2n().load({
-    subject: 'example_subject',
-  })
-  console.log(v2n)
+  const dnsquery = await client.DnsQuery().load({ dns: 'example_dns' })
+  console.log(dnsquery)
 } catch (err) {
   console.error('load failed:', err)
 }

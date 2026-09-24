@@ -98,7 +98,7 @@ func v2nBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"v2n01", "v2n02", "v2n03", "v201", "v202", "v203"},
+		[]any{"v2n01", "v2n02", "v2n03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

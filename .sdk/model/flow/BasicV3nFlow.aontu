@@ -1,0 +1,32 @@
+# BasicV3nFlow
+
+main: kit: flow: BasicV3nFlow:
+{
+  entity: "v3n",
+  kind: "basic",
+  name: "BasicV3nFlow",
+  step: [
+    {
+      i: {
+        ref: "v3n_ref01",
+        srcdatavar: "v3n_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "v3n01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-v3n_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicV3nFlow"
+}

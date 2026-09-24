@@ -30,15 +30,13 @@ require_relative "ThrowawayEmail_sdk"
 client = ThrowawayEmailSDK.new
 ```
 
-### 3. Load a v2n
-
-V2n is nested under subject, so provide the `subject`.
+### 3. Load a dnsquery
 
 ```ruby
 begin
-  # load returns the ENTITY — call data_get for the V2n record (raises on error).
-  v2n = client.V2n.load({ "subject" => "example_subject" })
-  puts v2n
+  # load returns the ENTITY — call data_get for the DnsQuery record (raises on error).
+  dnsquery = client.DnsQuery.load({ "dns" => "example_dns" })
+  puts dnsquery
 rescue => err
   warn "load failed: #{err}"
 end

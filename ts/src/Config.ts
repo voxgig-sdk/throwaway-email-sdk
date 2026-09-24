@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -162,7 +155,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/dns-query",
@@ -171,14 +163,16 @@ class Config {
                   "lit": "dns-query"
                 }
               ],
-              "select": {},
+              "parts": [
+                "dns-query"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "dns-query"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -187,18 +181,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "example": "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
-                    "kind": "query",
-                    "name": "dns",
-                    "orig": "dns",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/dns-query",
@@ -207,18 +189,31 @@ class Config {
                   "lit": "dns-query"
                 }
               ],
-              "select": {
-                "exist": [
-                  "dns"
-                ]
-              },
+              "parts": [
+                "dns-query"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "dns-query"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "dns",
+                    "orig": "dns",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "reqd": true,
+                    "example": "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "dns"
+                ]
+              }
             }
           ]
         }
@@ -231,14 +226,17 @@ class Config {
       "fields": [
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "isDisposable",
+          "title": "Is Disposable",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "success",
+          "title": "Success",
           "type": "`$BOOLEAN`"
         }
       ],
@@ -253,26 +251,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "example.com",
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "domain",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/api/v1/domain/{domain}",
-              "rename": {
-                "param": {
-                  "domain": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "api"
@@ -287,21 +268,38 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "v1",
                 "domain",
                 "{id}"
-              ]
+              ],
+              "rename": {
+                "param": {
+                  "domain": "id"
+                }
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "domain",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "example.com"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -314,14 +312,17 @@ class Config {
       "fields": [
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "isDisposable",
+          "title": "Is Disposable",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "success",
+          "title": "Success",
           "type": "`$BOOLEAN`"
         }
       ],
@@ -336,26 +337,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "test@example.com",
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "email",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/api/v1/email/{email}",
-              "rename": {
-                "param": {
-                  "email": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "api"
@@ -370,21 +354,38 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "v1",
                 "email",
                 "{id}"
-              ]
+              ],
+              "rename": {
+                "param": {
+                  "email": "id"
+                }
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "email",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "test@example.com"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -402,7 +403,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/list.json",
@@ -411,14 +411,16 @@ class Config {
                   "lit": "list.json"
                 }
               ],
-              "select": {},
+              "parts": [
+                "list.json"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "list.json"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -427,7 +429,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/list.txt",
@@ -436,17 +437,18 @@ class Config {
                   "lit": "list.txt"
                 }
               ],
-              "select": {},
+              "parts": [
+                "list.txt"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "list.txt"
-              ]
+              "args": {},
+              "select": {}
             },
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/list.yaml",
@@ -455,14 +457,16 @@ class Config {
                   "lit": "list.yaml"
                 }
               ],
-              "select": {},
+              "parts": [
+                "list.yaml"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "list.yaml"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -480,39 +484,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "example": false,
-                    "kind": "query",
-                    "name": "cd",
-                    "orig": "cd",
-                    "type": "`$BOOLEAN`"
-                  },
-                  {
-                    "example": false,
-                    "kind": "query",
-                    "name": "do",
-                    "orig": "do",
-                    "type": "`$BOOLEAN`"
-                  },
-                  {
-                    "example": "testmail.ares",
-                    "kind": "query",
-                    "name": "name",
-                    "orig": "name",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "example": "A",
-                    "kind": "query",
-                    "name": "type",
-                    "orig": "type",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/resolve",
@@ -521,6 +492,47 @@ class Config {
                   "lit": "resolve"
                 }
               ],
+              "parts": [
+                "resolve"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "cd",
+                    "orig": "cd",
+                    "type": "`$BOOLEAN`",
+                    "kind": "query",
+                    "example": false
+                  },
+                  {
+                    "name": "do",
+                    "orig": "do",
+                    "type": "`$BOOLEAN`",
+                    "kind": "query",
+                    "example": false
+                  },
+                  {
+                    "name": "name",
+                    "orig": "name",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "reqd": true,
+                    "example": "testmail.ares"
+                  },
+                  {
+                    "name": "type",
+                    "orig": "type",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "example": "A"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "cd",
@@ -528,14 +540,7 @@ class Config {
                   "name",
                   "type"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "resolve"
-              ]
+              }
             }
           ]
         }
@@ -548,10 +553,12 @@ class Config {
       "fields": [
         {
           "name": "isDisposable",
+          "title": "Is Disposable",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "success",
+          "title": "Success",
           "type": "`$BOOLEAN`"
         }
       ],
@@ -562,18 +569,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "test@example.com",
-                    "kind": "param",
-                    "name": "subject",
-                    "orig": "subject",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/api/v2/{subject}",
@@ -588,49 +583,61 @@ class Config {
                   "var": "subject"
                 }
               ],
-              "select": {
-                "exist": [
-                  "subject"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "v2",
                 "{subject}"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "subject",
+                    "orig": "subject",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "test@example.com"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "subject"
+                ]
+              }
             }
           ]
         }
       },
       "relations": {
-        "ancestors": [
-          [
-            "v2"
-          ]
-        ]
+        "ancestors": []
       }
     },
     "v3n": {
       "fields": [
         {
           "name": "records",
-          "short": "DNS records for the domain (when available)",
-          "type": "`$OBJECT`"
+          "title": "Records",
+          "type": "`$OBJECT`",
+          "short": "DNS records for the domain (when available)"
         },
         {
           "name": "success",
-          "req": true,
-          "type": "`$BOOLEAN`"
+          "title": "Success",
+          "type": "`$BOOLEAN`",
+          "req": true
         },
         {
           "name": "traits",
+          "title": "Traits",
+          "type": "`$ARRAY`",
           "req": true,
-          "short": "Array of traits identified for the domain",
-          "type": "`$ARRAY`"
+          "short": "Array of traits identified for the domain"
         }
       ],
       "name": "v3n",
@@ -640,18 +647,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "test@example.com",
-                    "kind": "param",
-                    "name": "subject",
-                    "orig": "subject",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/{subject}",
@@ -666,30 +661,39 @@ class Config {
                   "var": "subject"
                 }
               ],
-              "select": {
-                "exist": [
-                  "subject"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "v3",
                 "{subject}"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "subject",
+                    "orig": "subject",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "test@example.com"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "subject"
+                ]
+              }
             }
           ]
         }
       },
       "relations": {
-        "ancestors": [
-          [
-            "v3"
-          ]
-        ]
+        "ancestors": []
       }
     }
   }

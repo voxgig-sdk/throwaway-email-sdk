@@ -1,0 +1,93 @@
+# Entity: domain
+
+main: kit: entity: domain: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    isDisposable: {
+      h: "Is Disposable"
+      n: "isDisposable"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "domain"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v1/domain/{domain}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "example.com"
+                k: "param"
+                n: "id"
+                or: "domain"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v1/domain/{domain}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              domain: "id"
+            }
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "domain"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

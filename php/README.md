@@ -31,15 +31,13 @@ require_once 'throwawayemail_sdk.php';
 $client = new ThrowawayEmailSDK();
 ```
 
-### 3. Load a v2n
-
-V2n is nested under subject, so provide the `subject`.
+### 3. Load a dnsquery
 
 ```php
 try {
-    // load() returns the ENTITY — call data_get() for the V2n record (throws on error).
-    $v2n = $client->V2n()->load(["subject" => "example_subject"]);
-    print_r($v2n->data_get());
+    // load() returns the ENTITY — call data_get() for the DnsQuery record (throws on error).
+    $dnsquery = $client->DnsQuery()->load(["dns" => "example_dns"]);
+    print_r($dnsquery->data_get());
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }

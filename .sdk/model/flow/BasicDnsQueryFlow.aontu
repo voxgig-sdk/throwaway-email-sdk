@@ -1,0 +1,36 @@
+# BasicDnsQueryFlow
+
+main: kit: flow: BasicDnsQueryFlow:
+{
+  entity: "dns_query",
+  kind: "basic",
+  name: "BasicDnsQueryFlow",
+  step: [
+    {
+      i: {
+        ref: "dns_query_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "dns_query_ref01",
+        srcdatavar: "dns_query_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-dns_query_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDnsQueryFlow"
+}

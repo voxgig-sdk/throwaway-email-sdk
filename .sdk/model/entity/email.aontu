@@ -1,0 +1,93 @@
+# Entity: email
+
+main: kit: entity: email: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    isDisposable: {
+      h: "Is Disposable"
+      n: "isDisposable"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "email"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v1/email/{email}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "test@example.com"
+                k: "param"
+                n: "id"
+                or: "email"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v1/email/{email}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              email: "id"
+            }
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "email"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

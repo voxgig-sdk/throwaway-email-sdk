@@ -25,10 +25,6 @@ import {
 } from '../../utility'
 
 
-// AFTER the imports on purpose: TypeScript hoists `import` above any
-// statement in the emitted CommonJS, so a loader placed above them would
-// run only after every imported module had already been evaluated - and
-// anything reading process.env at module scope would miss these values.
 loadEnvLocal(__dirname + '/../../../.env.local')
 
 
@@ -55,7 +51,7 @@ describe('V2nEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"isDisposable","req":false,"type":"`$BOOLEAN`","index$":0},{"active":true,"name":"success","req":false,"type":"`$BOOLEAN`","index$":1}],"name":"v2n","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"example":"test@example.com","kind":"param","name":"subject","orig":"subject","reqd":true,"type":"`$STRING`","index$":0}]},"contract":{"id":"GET /api/v2/{subject}","json":"{\"parameters\":[{\"description\":\"Email address or domain name to check\",\"in\":\"path\",\"name\":\"subject\",\"required\":true,\"schema\":{\"example\":\"test@example.com\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"isDisposable\":{\"type\":\"boolean\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Check result\",\"headers\":{\"X-RateLimit-Limit\":{\"description\":\"Rate limit maximum requests\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Remaining\":{\"description\":\"Rate limit remaining requests\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Reset\":{\"description\":\"Rate limit reset time (unix timestamp)\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"},\"429\":{\"description\":\"Rate limit exceeded\",\"headers\":{\"Retry-After\":{\"description\":\"Seconds to wait before retry\",\"schema\":{\"type\":\"integer\"}}}}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/api/v2/{subject}","segments":[{"lit":"api"},{"lit":"v2"},{"var":"subject"}],"select":{"exist":["subject"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[["v2"]]},"key$":"v2n","name__orig":"v2n","Name":"V2n","name_":"v2n","name-":"v2n","NAME":"V2N","index$":5}, {"active":true,"entity":"v2n","key$":"BasicV2nFlow","kind":"basic","name":"BasicV2nFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"v2n_ref01","srcdatavar":"v2n_ref01_data","suffix":"_dt0"},"match":{"id":"v2n01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-v2n_ref01"}}],"index$":0}]}, 'V2n')
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"isDisposable":{"a":true,"h":"Is Disposable","n":"isDisposable","r":false,"t":"`$BOOLEAN`","key$":"isDisposable","index$":0},"success":{"a":true,"h":"Success","n":"success","r":false,"t":"`$BOOLEAN`","key$":"success","index$":1}},"name":"v2n","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/v2/{subject}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"test@example.com","k":"param","n":"subject","or":"subject","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/v2/{subject}","q":{"exist":["subject"]},"r":{},"s":[{"lit":"api"},{"lit":"v2"},{"var":"subject"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"v2n","name__orig":"v2n","Name":"V2n","name_":"v2n","name-":"v2n","NAME":"V2N","index$":5}, {"active":true,"entity":"v2n","key$":"BasicV2nFlow","kind":"basic","name":"BasicV2nFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"v2n_ref01","srcdatavar":"v2n_ref01_data","suffix":"_dt0"},"m":{"id":"v2n01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-v2n_ref01"}}],"index$":0}]}, 'V2n', {"GET /api/v2/{subject}":{"protocol":"http","responses":{"200":{"description":"Check result","headers":{"X-RateLimit-Limit":{"description":"Rate limit maximum requests","schema":{"type":"integer"}},"X-RateLimit-Remaining":{"description":"Rate limit remaining requests","schema":{"type":"integer"}},"X-RateLimit-Reset":{"description":"Rate limit reset time (unix timestamp)","schema":{"type":"integer"}}},"content":{"application/json":{"schema":{"type":"object","properties":{"success":{"type":"boolean","key$":"success"},"isDisposable":{"type":"boolean","key$":"isDisposable"}},"index$":0}}}},"400":{"description":"Invalid input","content":{"application/json":{"schema":{"type":"object","properties":{"success":{"type":"boolean","example":false},"message":{"type":"string"}}}}}},"429":{"description":"Rate limit exceeded","headers":{"Retry-After":{"description":"Seconds to wait before retry","schema":{"type":"integer"}}}}},"parameters":[{"name":"subject","in":"path","required":true,"description":"Email address or domain name to check","schema":{"type":"string","example":"test@example.com"},"index$":0}],"securitySource":"unspecified"}})
     }
     const client = setup.client
     const struct = setup.struct
@@ -98,7 +94,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['v2n01','v2n02','v2n03','v201','v202','v203'],
+    ['v2n01','v2n02','v2n03'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

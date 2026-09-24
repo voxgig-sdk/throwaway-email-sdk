@@ -1,0 +1,83 @@
+# Entity: resolve
+
+main: kit: entity: resolve: {
+
+  alias: field: {}
+
+  name: "resolve"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /resolve"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "cd"
+                or: "cd"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "do"
+                or: "do"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "testmail.ares"
+                k: "query"
+                n: "name"
+                or: "name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "A"
+                k: "query"
+                n: "type"
+                or: "type"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/resolve"
+          q: {
+            exist: [
+              "cd"
+              "do"
+              "name"
+              "type"
+            ]
+          }
+          s: [
+            {
+              lit: "resolve"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

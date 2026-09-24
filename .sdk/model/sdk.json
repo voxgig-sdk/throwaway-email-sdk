@@ -24,13 +24,79 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "dns_query": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "dns_query",
           "op": {
             "create": {
@@ -38,24 +104,24 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /dns-query",
-                    "json": "{\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/dns-message\":{\"schema\":{\"description\":\"DNS query message in wire format\",\"format\":\"binary\",\"type\":\"string\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/dns-message\":{\"schema\":{\"description\":\"DNS response message in wire format\",\"format\":\"binary\",\"type\":\"string\"}}},\"description\":\"DNS response in wire format\"},\"400\":{\"description\":\"Invalid DNS query format\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/dns-query",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/dns-query",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "dns-query"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -67,40 +133,40 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /dns-query",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
-                        "kind": "query",
-                        "name": "dns",
-                        "orig": "dns",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
+                        "k": "query",
+                        "n": "dns",
+                        "or": "dns",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /dns-query",
-                    "json": "{\"parameters\":[{\"description\":\"Base64url-encoded DNS query message\",\"in\":\"query\",\"name\":\"dns\",\"required\":true,\"schema\":{\"example\":\"AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/dns-message\":{\"schema\":{\"description\":\"DNS response message in wire format\",\"format\":\"binary\",\"type\":\"string\"}}},\"description\":\"DNS response in wire format\"},\"400\":{\"description\":\"Invalid DNS query format\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/dns-query",
-                  "segments": [
-                    {
-                      "lit": "dns-query"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/dns-query",
+                  "q": {
                     "exist": [
                       "dns"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "dns-query"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -117,26 +183,29 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "isDisposable",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "isDisposable": {
+              "a": true,
+              "h": "Is Disposable",
+              "n": "isDisposable",
+              "r": false,
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "success",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "success": {
+              "a": true,
+              "h": "Success",
+              "n": "success",
+              "r": false,
+              "t": "`$BOOLEAN`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -148,35 +217,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v1/domain/{domain}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "example.com",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "domain",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "example.com",
+                        "k": "param",
+                        "n": "id",
+                        "or": "domain",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/v1/domain/{domain}",
-                    "json": "{\"parameters\":[{\"description\":\"Domain name to check\",\"in\":\"path\",\"name\":\"domain\",\"required\":true,\"schema\":{\"example\":\"example.com\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"isDisposable\":{\"type\":\"boolean\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Check result\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v1/domain/{domain}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/v1/domain/{domain}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "domain": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -190,12 +263,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -212,26 +280,29 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "isDisposable",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "isDisposable": {
+              "a": true,
+              "h": "Is Disposable",
+              "n": "isDisposable",
+              "r": false,
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "success",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "success": {
+              "a": true,
+              "h": "Success",
+              "n": "success",
+              "r": false,
+              "t": "`$BOOLEAN`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -243,35 +314,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v1/email/{email}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "test@example.com",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "email",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "test@example.com",
+                        "k": "param",
+                        "n": "id",
+                        "or": "email",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/v1/email/{email}",
-                    "json": "{\"parameters\":[{\"description\":\"Email address to check\",\"in\":\"path\",\"name\":\"email\",\"required\":true,\"schema\":{\"example\":\"test@example.com\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"isDisposable\":{\"type\":\"boolean\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Check result\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v1/email/{email}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/v1/email/{email}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "email": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -285,12 +360,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -307,7 +377,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "list",
           "op": {
             "list": {
@@ -315,24 +385,24 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /list.json",
-                    "json": "{\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"}}},\"description\":\"Domain list\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/list.json",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/list.json",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "list.json"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -344,47 +414,47 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /list.txt",
-                    "json": "{\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"text/plain\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Domain list\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/list.txt",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/list.txt",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "list.txt"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /list.yaml",
-                    "json": "{\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/yaml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Domain list\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/list.yaml",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/list.yaml",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "list.yaml"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -401,7 +471,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "resolve",
           "op": {
             "load": {
@@ -409,62 +479,56 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /resolve",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": false,
-                        "kind": "query",
-                        "name": "cd",
-                        "orig": "cd",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "ex": false,
+                        "k": "query",
+                        "n": "cd",
+                        "or": "cd",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "example": false,
-                        "kind": "query",
-                        "name": "do",
-                        "orig": "do",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "ex": false,
+                        "k": "query",
+                        "n": "do",
+                        "or": "do",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "example": "testmail.ares",
-                        "kind": "query",
-                        "name": "name",
-                        "orig": "name",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "testmail.ares",
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "A",
-                        "kind": "query",
-                        "name": "type",
-                        "orig": "type",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "A",
+                        "k": "query",
+                        "n": "type",
+                        "or": "type",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /resolve",
-                    "json": "{\"parameters\":[{\"description\":\"Domain name to resolve\",\"in\":\"query\",\"name\":\"name\",\"required\":true,\"schema\":{\"example\":\"testmail.ares\",\"type\":\"string\"}},{\"description\":\"DNS record type (A, AAAA, MX, etc.)\",\"in\":\"query\",\"name\":\"type\",\"required\":false,\"schema\":{\"default\":\"A\",\"enum\":[\"A\",\"AAAA\",\"MX\",\"NS\",\"TXT\",\"CNAME\",\"SOA\"],\"type\":\"string\"}},{\"description\":\"Checking Disabled flag\",\"in\":\"query\",\"name\":\"cd\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"DNSSEC OK flag\",\"in\":\"query\",\"name\":\"do\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/dns-json\":{\"schema\":{\"properties\":{\"AD\":{\"description\":\"Authenticated Data\",\"type\":\"boolean\"},\"Answer\":{\"items\":{\"properties\":{\"TTL\":{\"type\":\"integer\"},\"data\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"CD\":{\"description\":\"Checking Disabled\",\"type\":\"boolean\"},\"Question\":{\"items\":{\"properties\":{\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"RA\":{\"description\":\"Recursion Available\",\"type\":\"boolean\"},\"RD\":{\"description\":\"Recursion Desired\",\"type\":\"boolean\"},\"Status\":{\"description\":\"DNS response code (0=NOERROR, 3=NXDOMAIN, etc.)\",\"type\":\"integer\"},\"TC\":{\"description\":\"Truncated response\",\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"DNS response in JSON format\"},\"400\":{\"description\":\"Invalid query parameters\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/resolve",
-                  "segments": [
-                    {
-                      "lit": "resolve"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/resolve",
+                  "q": {
                     "exist": [
                       "cd",
                       "do",
@@ -472,7 +536,13 @@
                       "type"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "resolve"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -489,20 +559,22 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "isDisposable",
-              "req": false,
-              "type": "`$BOOLEAN`"
+          "fields": {
+            "isDisposable": {
+              "a": true,
+              "h": "Is Disposable",
+              "n": "isDisposable",
+              "r": false,
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "success",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "success": {
+              "a": true,
+              "h": "Success",
+              "n": "success",
+              "r": false,
+              "t": "`$BOOLEAN`"
             }
-          ],
+          },
           "name": "v2n",
           "op": {
             "load": {
@@ -510,30 +582,35 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v2/{subject}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "test@example.com",
-                        "kind": "param",
-                        "name": "subject",
-                        "orig": "subject",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "test@example.com",
+                        "k": "param",
+                        "n": "subject",
+                        "or": "subject",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/v2/{subject}",
-                    "json": "{\"parameters\":[{\"description\":\"Email address or domain name to check\",\"in\":\"path\",\"name\":\"subject\",\"required\":true,\"schema\":{\"example\":\"test@example.com\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"isDisposable\":{\"type\":\"boolean\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Check result\",\"headers\":{\"X-RateLimit-Limit\":{\"description\":\"Rate limit maximum requests\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Remaining\":{\"description\":\"Rate limit remaining requests\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Reset\":{\"description\":\"Rate limit reset time (unix timestamp)\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"},\"429\":{\"description\":\"Rate limit exceeded\",\"headers\":{\"Retry-After\":{\"description\":\"Seconds to wait before retry\",\"schema\":{\"type\":\"integer\"}}}}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v2/{subject}",
+                  "q": {
+                    "exist": [
+                      "subject"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/v2/{subject}",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -544,12 +621,7 @@
                       "var": "subject"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "subject"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -558,11 +630,7 @@
             }
           },
           "relations": {
-            "ancestors": [
-              [
-                "v2"
-              ]
-            ]
+            "ancestors": []
           }
         },
         "v3n": {
@@ -570,28 +638,31 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "records",
-              "req": false,
-              "short": "DNS records for the domain (when available)",
-              "type": "`$OBJECT`"
+          "fields": {
+            "records": {
+              "a": true,
+              "h": "Records",
+              "n": "records",
+              "r": false,
+              "sh": "DNS records for the domain (when available)",
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "success",
-              "req": true,
-              "type": "`$BOOLEAN`"
+            "success": {
+              "a": true,
+              "h": "Success",
+              "n": "success",
+              "r": true,
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "traits",
-              "req": true,
-              "short": "Array of traits identified for the domain",
-              "type": "`$ARRAY`"
+            "traits": {
+              "a": true,
+              "h": "Traits",
+              "n": "traits",
+              "r": true,
+              "sh": "Array of traits identified for the domain",
+              "t": "`$ARRAY`"
             }
-          ],
+          },
           "name": "v3n",
           "op": {
             "load": {
@@ -599,30 +670,35 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v3/{subject}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "test@example.com",
-                        "kind": "param",
-                        "name": "subject",
-                        "orig": "subject",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "test@example.com",
+                        "k": "param",
+                        "n": "subject",
+                        "or": "subject",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/v3/{subject}",
-                    "json": "{\"parameters\":[{\"description\":\"Email address or domain name to analyze\",\"in\":\"path\",\"name\":\"subject\",\"required\":true,\"schema\":{\"example\":\"test@example.com\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"clean-domain\":{\"summary\":\"Clean domain with no issues\",\"value\":{\"records\":{\"mx_ips\":[{\"exchange\":\"mail.example.com\",\"ips\":[\"203.0.113.10\",\"2001:db8::1\"]}],\"mx_records\":[{\"exchange\":\"mail.example.com\",\"priority\":10}],\"nameservers\":[{\"nameserver\":\"ns1.example.com\"},{\"nameserver\":\"ns2.example.com\"}]},\"success\":true,\"traits\":[]}},\"disposable\":{\"summary\":\"Disposable domain\",\"value\":{\"records\":{\"mx_ips\":[{\"exchange\":\"mail.tempmail-service.com\",\"ips\":[\"192.168.1.100\"]}],\"mx_records\":[{\"exchange\":\"mail.tempmail-service.com\",\"priority\":10}],\"nameservers\":[{\"nameserver\":\"ns1.suspicious-provider.com\"}]},\"success\":true,\"traits\":[\"disposable\"]}},\"disposable-no-mx-ip\":{\"summary\":\"Disposable domain with MX but no A/AAAA records\",\"value\":{\"records\":{\"mx_ips\":[{\"exchange\":\"nonexistent.mail.com\",\"ips\":[]}],\"mx_records\":[{\"exchange\":\"nonexistent.mail.com\",\"priority\":10}],\"nameservers\":[{\"nameserver\":\"ns1.suspicious-provider.com\"}]},\"success\":true,\"traits\":[\"disposable\",\"no_mx_ip\"]}},\"legitimate-domain\":{\"summary\":\"Legitimate domain (allowlisted)\",\"value\":{\"records\":{\"mx_ips\":[{\"exchange\":\"smtp.gmail.com\",\"ips\":[\"142.251.30.27\",\"2a00:1450:400c:c09::1a\"]},{\"exchange\":\"alt1.gmail-smtp-in.l.google.com\",\"ips\":[\"172.253.113.26\"]}],\"mx_records\":[{\"exchange\":\"smtp.gmail.com\",\"priority\":10},{\"exchange\":\"alt1.gmail-smtp-in.l.google.com\",\"priority\":20}],\"nameservers\":[{\"nameserver\":\"ns1.google.com\"},{\"nameserver\":\"ns2.google.com\"}]},\"success\":true,\"traits\":[\"allowlist\"]}},\"minimal-response\":{\"summary\":\"Minimal response without DNS records\",\"value\":{\"success\":true,\"traits\":[\"suspicious_pattern\"]}},\"no-mx-domain\":{\"summary\":\"Domain with no MX record\",\"value\":{\"records\":{\"nameservers\":[{\"nameserver\":\"ns1.example.com\"}]},\"success\":true,\"traits\":[\"no_mx\"]}}},\"schema\":{\"properties\":{\"records\":{\"description\":\"DNS records for the domain (when available)\",\"properties\":{\"mx_ips\":{\"description\":\"IP addresses for MX records\",\"items\":{\"properties\":{\"exchange\":{\"description\":\"Mail exchange hostname\",\"example\":\"mail.example.com\",\"type\":\"string\"},\"ips\":{\"description\":\"IP addresses (IPv4 and IPv6) for the MX server\",\"example\":[\"192.168.1.100\",\"2001:db8::1\"],\"items\":{\"description\":\"IP address\",\"example\":\"192.168.1.100\",\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"exchange\",\"ips\"],\"type\":\"object\"},\"type\":\"array\"},\"mx_records\":{\"description\":\"MX records for the domain\",\"items\":{\"properties\":{\"exchange\":{\"description\":\"Mail exchange hostname\",\"example\":\"mail.example.com\",\"type\":\"string\"},\"priority\":{\"description\":\"MX priority value\",\"example\":10,\"type\":\"integer\"}},\"required\":[\"priority\",\"exchange\"],\"type\":\"object\"},\"type\":\"array\"},\"nameservers\":{\"description\":\"NS records for the domain\",\"items\":{\"properties\":{\"nameserver\":{\"description\":\"Nameserver hostname\",\"example\":\"ns1.example.com\",\"type\":\"string\"}},\"required\":[\"nameserver\"],\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"traits\":{\"description\":\"Array of traits identified for the domain\",\"examples\":[[\"allowlist\"],[\"disposable\"],[\"disposable\",\"no_mx_ip\"],[\"no_mx\"],[\"no_mx_ip\"],[\"suspicious_mx\"],[\"suspicious_ns\"],[\"suspicious_ip\"],[\"suspicious_pattern\"],[\"suspicious_tld\"],[\"rbl_listed\"],[]],\"items\":{\"enum\":[\"disposable\",\"allowlist\",\"no_mx\",\"no_mx_ip\",\"suspicious_mx\",\"suspicious_ns\",\"suspicious_ip\",\"suspicious_pattern\",\"suspicious_tld\",\"rbl_listed\"],\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"success\",\"traits\"],\"type\":\"object\"}}},\"description\":\"Trait analysis result\",\"headers\":{\"X-RateLimit-Limit\":{\"description\":\"Rate limit maximum requests\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Remaining\":{\"description\":\"Rate limit remaining requests\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Reset\":{\"description\":\"Rate limit reset time (unix timestamp)\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid input\"},\"429\":{\"description\":\"Rate limit exceeded\",\"headers\":{\"Retry-After\":{\"description\":\"Seconds to wait before retry\",\"schema\":{\"type\":\"integer\"}}}}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v3/{subject}",
+                  "q": {
+                    "exist": [
+                      "subject"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/v3/{subject}",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -633,12 +709,7 @@
                       "var": "subject"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "subject"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -647,11 +718,7 @@
             }
           },
           "relations": {
-            "ancestors": [
-              [
-                "v3"
-              ]
-            ]
+            "ancestors": []
           }
         }
       },
@@ -1071,28 +1138,28 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "dns_query_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "dns_query_ref01",
                 "srcdatavar": "dns_query_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1112,19 +1179,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "domain_ref01",
                 "srcdatavar": "domain_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "domain01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1144,19 +1211,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "email_ref01",
                 "srcdatavar": "email_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "email01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1176,13 +1243,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1192,17 +1259,17 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "list_ref01",
                 "srcdatavar": "list_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1222,17 +1289,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "resolve_ref01",
                 "srcdatavar": "resolve_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1252,19 +1319,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "v2n_ref01",
                 "srcdatavar": "v2n_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "v2n01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1284,19 +1351,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "v3n_ref01",
                 "srcdatavar": "v3n_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "v3n01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

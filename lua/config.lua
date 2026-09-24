@@ -98,7 +98,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/dns-query",
@@ -107,14 +106,16 @@ local function make_config()
                     ["lit"] = "dns-query",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "dns-query",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "dns-query",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -123,18 +124,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
-                      ["kind"] = "query",
-                      ["name"] = "dns",
-                      ["orig"] = "dns",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/dns-query",
@@ -143,17 +132,30 @@ local function make_config()
                     ["lit"] = "dns-query",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "dns",
-                  },
+                ["parts"] = {
+                  "dns-query",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "dns-query",
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "dns",
+                      ["orig"] = "dns",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "dns",
+                  },
                 },
               },
             },
@@ -167,14 +169,17 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "isDisposable",
+            ["title"] = "Is Disposable",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "success",
+            ["title"] = "Success",
             ["type"] = "`$BOOLEAN`",
           },
         },
@@ -189,26 +194,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "example.com",
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "domain",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v1/domain/{domain}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["domain"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "api",
@@ -223,20 +211,37 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "api",
+                  "v1",
+                  "domain",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["domain"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "api",
-                  "v1",
-                  "domain",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "domain",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "example.com",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -250,14 +255,17 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "isDisposable",
+            ["title"] = "Is Disposable",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "success",
+            ["title"] = "Success",
             ["type"] = "`$BOOLEAN`",
           },
         },
@@ -272,26 +280,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "test@example.com",
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "email",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v1/email/{email}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["email"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "api",
@@ -306,20 +297,37 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "api",
+                  "v1",
+                  "email",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["email"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "api",
-                  "v1",
-                  "email",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "email",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "test@example.com",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -338,7 +346,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.json",
@@ -347,14 +354,16 @@ local function make_config()
                     ["lit"] = "list.json",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "list.json",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "list.json",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -363,7 +372,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.txt",
@@ -372,17 +380,18 @@ local function make_config()
                     ["lit"] = "list.txt",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "list.txt",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "list.txt",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/list.yaml",
@@ -391,14 +400,16 @@ local function make_config()
                     ["lit"] = "list.yaml",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "list.yaml",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "list.yaml",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -416,45 +427,53 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = false,
-                      ["kind"] = "query",
-                      ["name"] = "cd",
-                      ["orig"] = "cd",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                    {
-                      ["example"] = false,
-                      ["kind"] = "query",
-                      ["name"] = "do",
-                      ["orig"] = "do",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                    {
-                      ["example"] = "testmail.ares",
-                      ["kind"] = "query",
-                      ["name"] = "name",
-                      ["orig"] = "name",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["example"] = "A",
-                      ["kind"] = "query",
-                      ["name"] = "type",
-                      ["orig"] = "type",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/resolve",
                 ["segments"] = {
                   {
                     ["lit"] = "resolve",
+                  },
+                },
+                ["parts"] = {
+                  "resolve",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "cd",
+                      ["orig"] = "cd",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = false,
+                    },
+                    {
+                      ["name"] = "do",
+                      ["orig"] = "do",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = false,
+                    },
+                    {
+                      ["name"] = "name",
+                      ["orig"] = "name",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "testmail.ares",
+                    },
+                    {
+                      ["name"] = "type",
+                      ["orig"] = "type",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["example"] = "A",
+                    },
                   },
                 },
                 ["select"] = {
@@ -464,13 +483,6 @@ local function make_config()
                     "name",
                     "type",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
-                ["parts"] = {
-                  "resolve",
                 },
               },
             },
@@ -484,10 +496,12 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "isDisposable",
+            ["title"] = "Is Disposable",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "success",
+            ["title"] = "Success",
             ["type"] = "`$BOOLEAN`",
           },
         },
@@ -498,18 +512,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "test@example.com",
-                      ["kind"] = "param",
-                      ["name"] = "subject",
-                      ["orig"] = "subject",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v2/{subject}",
@@ -524,49 +526,61 @@ local function make_config()
                     ["var"] = "subject",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "subject",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "v2",
                   "{subject}",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "subject",
+                      ["orig"] = "subject",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "test@example.com",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "subject",
+                  },
                 },
               },
             },
           },
         },
         ["relations"] = {
-          ["ancestors"] = {
-            {
-              "v2",
-            },
-          },
+          ["ancestors"] = {},
         },
       },
       ["v3n"] = {
         ["fields"] = {
           {
             ["name"] = "records",
-            ["short"] = "DNS records for the domain (when available)",
+            ["title"] = "Records",
             ["type"] = "`$OBJECT`",
+            ["short"] = "DNS records for the domain (when available)",
           },
           {
             ["name"] = "success",
-            ["req"] = true,
+            ["title"] = "Success",
             ["type"] = "`$BOOLEAN`",
+            ["req"] = true,
           },
           {
             ["name"] = "traits",
+            ["title"] = "Traits",
+            ["type"] = "`$ARRAY`",
             ["req"] = true,
             ["short"] = "Array of traits identified for the domain",
-            ["type"] = "`$ARRAY`",
           },
         },
         ["name"] = "v3n",
@@ -576,18 +590,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "test@example.com",
-                      ["kind"] = "param",
-                      ["name"] = "subject",
-                      ["orig"] = "subject",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/{subject}",
@@ -602,30 +604,39 @@ local function make_config()
                     ["var"] = "subject",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "subject",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "v3",
                   "{subject}",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "subject",
+                      ["orig"] = "subject",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "test@example.com",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "subject",
+                  },
                 },
               },
             },
           },
         },
         ["relations"] = {
-          ["ancestors"] = {
-            {
-              "v3",
-            },
-          },
+          ["ancestors"] = {},
         },
       },
     },

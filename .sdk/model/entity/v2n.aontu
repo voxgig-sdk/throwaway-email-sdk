@@ -1,0 +1,74 @@
+# Entity: v2n
+
+main: kit: entity: v2n: {
+
+  alias: field: {}
+
+  fields: {
+    isDisposable: {
+      h: "Is Disposable"
+      n: "isDisposable"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "v2n"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v2/{subject}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "test@example.com"
+                k: "param"
+                n: "subject"
+                or: "subject"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v2/{subject}"
+          q: {
+            exist: [
+              "subject"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              var: "subject"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
