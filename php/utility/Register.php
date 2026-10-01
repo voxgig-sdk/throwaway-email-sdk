@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 ThrowawayEmailUtility::setRegistrar(function (ThrowawayEmailUtility $u): void {
     $u->clean = [ThrowawayEmailClean::class, 'call'];
+    $u->clean_add = [ThrowawayEmailClean::class, 'add'];
+    $u->clean_explain = [ThrowawayEmailDone::class, 'clean_explain'];
     $u->done = [ThrowawayEmailDone::class, 'call'];
     $u->make_error = [ThrowawayEmailMakeError::class, 'call'];
     $u->feature_add = [ThrowawayEmailFeatureAdd::class, 'call'];

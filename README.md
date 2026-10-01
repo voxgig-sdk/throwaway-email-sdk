@@ -14,7 +14,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -105,12 +105,12 @@ local result, err = client:V2n():load({ subject = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
-| Python | `voxgig-sdk-throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
-| PHP | `voxgig-sdk/throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
+| TypeScript | `@voxgig-sdk/throwaway-email-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-throwaway-email-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/throwaway-email-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/throwaway-email-sdk/go` | `go get github.com/voxgig-sdk/throwaway-email-sdk/go@latest` |
-| Ruby | `voxgig-sdk-throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
-| Lua | `voxgig-sdk-throwaway-email-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) |
+| Ruby | `voxgig-sdk-throwaway-email-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-throwaway-email-sdk` | publish pending — [install from source](lua/README.md#install) |
 | Go CLI | `github.com/voxgig-sdk/throwaway-email-sdk/go-cli` | `go install github.com/voxgig-sdk/throwaway-email-sdk/go-cli/cmd/throwaway-email@latest` |
 | Go MCP server | `github.com/voxgig-sdk/throwaway-email-sdk/go-mcp` | `go get github.com/voxgig-sdk/throwaway-email-sdk/go-mcp@latest` |
 

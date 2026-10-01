@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 ThrowawayEmailUtility.registrar = ->(u) {
   u.clean = ThrowawayEmailUtilities::Clean
+  u.clean_add = ThrowawayEmailUtilities::CleanAdd
+  u.clean_explain = ThrowawayEmailUtilities::CleanExplain
   u.done = ThrowawayEmailUtilities::Done
   u.make_error = ThrowawayEmailUtilities::MakeError
   u.feature_add = ThrowawayEmailUtilities::FeatureAdd
