@@ -49,6 +49,10 @@ main: kit: entity: v2n: {
               "subject"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

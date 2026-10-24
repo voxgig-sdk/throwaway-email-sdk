@@ -84,9 +84,12 @@ class V3nEntity extends ThrowawayEmailEntityBase_1.ThrowawayEmailEntityBase {
         catch (err) {
             // What a hook throws here must not escape the cleaning below.
             try {
-                fres = featureHook(ctx, 'PreUnexpected');
-                if (fres instanceof Promise) {
-                    await fres;
+                // Once per operation: makeError fires it for its own error.
+                if (!ctx.unexpectedFired) {
+                    fres = featureHook(ctx, 'PreUnexpected');
+                    if (fres instanceof Promise) {
+                        await fres;
+                    }
                 }
             }
             catch (hookerr) {
@@ -98,7 +101,7 @@ class V3nEntity extends ThrowawayEmailEntityBase_1.ThrowawayEmailEntityBase {
             }
             else {
                 // Off-happy-path (throw disabled): typed as any so the method's
-                // Promise<V3n> return stays clean under strict null checks.
+                // Promise<V3nEntity> return stays clean under strict null checks.
                 return undefined;
             }
         }

@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -120,6 +121,16 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"body": map[string]any{
+									"binary": true,
+									"kind": "raw",
+									"media": "application/dns-message",
+								},
+								"response": map[string]any{
+									"binary": true,
+									"kind": "raw",
+									"media": "application/dns-message",
+								},
 							},
 						},
 					},
@@ -160,6 +171,11 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"dns",
 									},
+								},
+								"response": map[string]any{
+									"binary": true,
+									"kind": "raw",
+									"media": "application/dns-message",
 								},
 							},
 						},
@@ -247,6 +263,10 @@ func MakeConfig() map[string]any {
 										"id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -333,6 +353,10 @@ func MakeConfig() map[string]any {
 										"id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -368,6 +392,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -394,6 +422,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "raw",
+									"media": "text/plain",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -414,6 +446,11 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"binary": true,
+									"kind": "raw",
+									"media": "application/yaml",
+								},
 							},
 						},
 					},
@@ -482,11 +519,13 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"cd",
-										"do",
 										"name",
-										"type",
 									},
+								},
+								"response": map[string]any{
+									"binary": true,
+									"kind": "raw",
+									"media": "application/dns-json",
 								},
 							},
 						},
@@ -556,6 +595,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"subject",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -634,6 +677,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"subject",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

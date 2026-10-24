@@ -4,6 +4,7 @@ export interface DnsQueryLoadMatch {
     dns: string;
 }
 export interface DnsQueryCreateData {
+    $body?: Uint8Array | ArrayBuffer | Blob | ReadableStream | AsyncIterable<Uint8Array> | string;
 }
 export interface Domain {
     id?: string;

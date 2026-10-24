@@ -17,6 +17,16 @@ main: kit: entity: dns_query: {
           }
           m: "POST"
           o: "/dns-query"
+          rb: {
+            binary: true
+            kind: "raw"
+            media: "application/dns-message"
+          }
+          rs: {
+            binary: true
+            kind: "raw"
+            media: "application/dns-message"
+          }
           s: [
             {
               lit: "dns-query"
@@ -56,6 +66,11 @@ main: kit: entity: dns_query: {
             exist: [
               "dns"
             ]
+          }
+          rs: {
+            binary: true
+            kind: "raw"
+            media: "application/dns-message"
           }
           s: [
             {

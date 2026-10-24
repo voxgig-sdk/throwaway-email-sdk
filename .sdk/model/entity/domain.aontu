@@ -65,6 +65,10 @@ main: kit: entity: domain: {
               domain: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

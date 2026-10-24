@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Email();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.ThrowawayEmailSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Email().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.THROWAWAY_EMAIL_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "isDisposable": { "a": true, "h": "Is Disposable", "n": "isDisposable", "r": false, "t": "`$BOOLEAN`", "key$": "isDisposable", "index$": 1 }, "success": { "a": true, "h": "Success", "n": "success", "r": false, "t": "`$BOOLEAN`", "key$": "success", "index$": 2 } }, "id": { "field": "id", "name": "id" }, "name": "email", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/v1/email/{email}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "test@example.com", "k": "param", "n": "id", "or": "email", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/api/v1/email/{email}", "q": { "exist": ["id"] }, "r": { "param": { "email": "id" } }, "s": [{ "lit": "api" }, { "lit": "v1" }, { "lit": "email" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "email", "name__orig": "email", "Name": "Email", "name_": "email", "name-": "email", "NAME": "EMAIL", "index$": 2 }, { "active": true, "entity": "email", "key$": "BasicEmailFlow", "kind": "basic", "name": "BasicEmailFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "email_ref01", "srcdatavar": "email_ref01_data", "suffix": "_dt0" }, "m": { "id": "email01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-email_ref01" } }], "index$": 0 }] }, 'Email', { "GET /api/v1/email/{email}": { "protocol": "http", "parameters": [{ "name": "email", "in": "path", "required": true, "description": "Email address to check", "schema": { "type": "string", "example": "test@example.com" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 }, "isDisposable": { "a": true, "h": "Is Disposable", "n": "isDisposable", "r": false, "t": "`$BOOLEAN`", "key$": "isDisposable", "index$": 1 }, "success": { "a": true, "h": "Success", "n": "success", "r": false, "t": "`$BOOLEAN`", "key$": "success", "index$": 2 } }, "id": { "field": "id", "name": "id" }, "name": "email", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/v1/email/{email}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "test@example.com", "k": "param", "n": "id", "or": "email", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/api/v1/email/{email}", "q": { "exist": ["id"] }, "r": { "param": { "email": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "v1" }, { "lit": "email" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "email", "name__orig": "email", "Name": "Email", "name_": "email", "name-": "email", "NAME": "EMAIL", "index$": 2 }, { "active": true, "entity": "email", "key$": "BasicEmailFlow", "kind": "basic", "name": "BasicEmailFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "email_ref01", "srcdatavar": "email_ref01_data", "suffix": "_dt0" }, "m": { "id": "email01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-email_ref01" } }], "index$": 0 }] }, 'Email', { "GET /api/v1/email/{email}": { "protocol": "http", "parameters": [{ "name": "email", "in": "path", "required": true, "description": "Email address to check", "schema": { "type": "string", "example": "test@example.com" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -77,6 +85,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(email_ref01_data_dt0.id === email_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

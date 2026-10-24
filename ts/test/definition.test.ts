@@ -17,7 +17,18 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/dns-message"
+    ],
+    "rawBody": {
+      "media": [
+        "application/dns-message"
+      ],
+      "text": false
+    },
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": null,
@@ -34,8 +45,18 @@ const PLAN: any[] = [
       "dns": "AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/dns-message"
+    ],
     "query": [
       "dns"
+    ],
+    "queryArgs": [
+      {
+        "name": "dns",
+        "wire": "dns"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -57,7 +78,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": {
@@ -81,7 +107,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": {
@@ -99,7 +130,12 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": [
@@ -115,17 +151,39 @@ const PLAN: any[] = [
     "path": "/resolve",
     "args": [],
     "select": {
+      "name": "testmail.ares",
       "cd": "v1",
       "do": "v1",
-      "name": "testmail.ares",
-      "type": "v1"
+      "type": "A"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/dns-json"
+    ],
     "query": [
       "name",
       "type",
       "cd",
       "do"
+    ],
+    "queryArgs": [
+      {
+        "name": "cd",
+        "wire": "cd"
+      },
+      {
+        "name": "do",
+        "wire": "do"
+      },
+      {
+        "name": "name",
+        "wire": "name"
+      },
+      {
+        "name": "type",
+        "wire": "type"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -168,7 +226,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": {
@@ -192,7 +255,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": {

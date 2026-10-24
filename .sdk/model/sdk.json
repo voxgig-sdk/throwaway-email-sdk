@@ -116,6 +116,16 @@
                   "o": "/dns-query",
                   "q": {},
                   "r": {},
+                  "rb": {
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/dns-message"
+                  },
+                  "rs": {
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/dns-message"
+                  },
                   "s": [
                     {
                       "lit": "dns-query"
@@ -161,6 +171,11 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/dns-message"
+                  },
                   "s": [
                     {
                       "lit": "dns-query"
@@ -248,6 +263,10 @@
                     "param": {
                       "domain": "id"
                     }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
                   },
                   "s": [
                     {
@@ -346,6 +365,10 @@
                       "email": "id"
                     }
                   },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "api"
@@ -397,6 +420,10 @@
                   "o": "/list.json",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "list.json"
@@ -426,6 +453,10 @@
                   "o": "/list.txt",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "raw",
+                    "media": "text/plain"
+                  },
                   "s": [
                     {
                       "lit": "list.txt"
@@ -449,6 +480,11 @@
                   "o": "/list.yaml",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/yaml"
+                  },
                   "s": [
                     {
                       "lit": "list.yaml"
@@ -530,13 +566,15 @@
                   "o": "/resolve",
                   "q": {
                     "exist": [
-                      "cd",
-                      "do",
-                      "name",
-                      "type"
+                      "name"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/dns-json"
+                  },
                   "s": [
                     {
                       "lit": "resolve"
@@ -610,6 +648,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "api"
@@ -698,6 +740,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "api"
@@ -1044,6 +1090,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -1410,7 +1457,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -1463,6 +1510,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -1693,7 +1745,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -2070,6 +2125,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

@@ -54,6 +54,45 @@ const utility_1 = require("../../utility");
         const ent = testsdk.List();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('list hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.ThrowawayEmailSDK.test(offline).List().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.ThrowawayEmailSDK.test(offline).List()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.ThrowawayEmailSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.List().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.ThrowawayEmailSDK.test().List().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.ThrowawayEmailSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.List().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.List().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.THROWAWAY_EMAIL_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +101,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "list", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /list.json", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/list.json", "q": {}, "r": {}, "s": [{ "lit": "list.json" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /list.txt", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/list.txt", "q": {}, "r": {}, "s": [{ "lit": "list.txt" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }, { "a": true, "co": { "id": "GET /list.yaml", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/list.yaml", "q": {}, "r": {}, "s": [{ "lit": "list.yaml" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 1 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "list", "name__orig": "list", "Name": "List", "name_": "list", "name-": "list", "NAME": "LIST", "index$": 3 }, { "active": true, "entity": "list", "key$": "BasicListFlow", "kind": "basic", "name": "BasicListFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "list_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "list_ref01", "srcdatavar": "list_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-list_ref01" } }], "index$": 1 }] }, 'List', { "GET /list.json": { "protocol": "http", "parameters": [] }, "GET /list.txt": { "protocol": "http", "parameters": [] }, "GET /list.yaml": { "protocol": "http", "parameters": [] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "list", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /list.json", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/list.json", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "list.json" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /list.txt", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/list.txt", "q": {}, "r": {}, "rs": { "kind": "raw", "media": "text/plain" }, "s": [{ "lit": "list.txt" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }, { "a": true, "co": { "id": "GET /list.yaml", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/list.yaml", "q": {}, "r": {}, "rs": { "binary": true, "kind": "raw", "media": "application/yaml" }, "s": [{ "lit": "list.yaml" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 1 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "list", "name__orig": "list", "Name": "List", "name_": "list", "name-": "list", "NAME": "LIST", "index$": 3 }, { "active": true, "entity": "list", "key$": "BasicListFlow", "kind": "basic", "name": "BasicListFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "list_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "list_ref01", "srcdatavar": "list_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-list_ref01" } }], "index$": 1 }] }, 'List', { "GET /list.json": { "protocol": "http", "parameters": [] }, "GET /list.txt": { "protocol": "http", "parameters": [] }, "GET /list.yaml": { "protocol": "http", "parameters": [] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -79,6 +118,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(null != list_ref01_data_dt0);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

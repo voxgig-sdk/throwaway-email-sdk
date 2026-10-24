@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -116,6 +117,16 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["body"] = {
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "application/dns-message",
+                },
+                ["response"] = {
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "application/dns-message",
+                },
               },
             },
           },
@@ -156,6 +167,11 @@ local function make_config()
                   ["exist"] = {
                     "dns",
                   },
+                },
+                ["response"] = {
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "application/dns-message",
                 },
               },
             },
@@ -243,6 +259,10 @@ local function make_config()
                     "id",
                   },
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -329,6 +349,10 @@ local function make_config()
                     "id",
                   },
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -364,6 +388,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -390,6 +418,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "raw",
+                  ["media"] = "text/plain",
+                },
               },
               {
                 ["kind"] = "http",
@@ -410,6 +442,11 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "application/yaml",
+                },
               },
             },
           },
@@ -478,11 +515,13 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "cd",
-                    "do",
                     "name",
-                    "type",
                   },
+                },
+                ["response"] = {
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "application/dns-json",
                 },
               },
             },
@@ -552,6 +591,10 @@ local function make_config()
                   ["exist"] = {
                     "subject",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -630,6 +673,10 @@ local function make_config()
                   ["exist"] = {
                     "subject",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

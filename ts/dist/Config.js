@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -135,7 +136,17 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "body": {
+                                "binary": true,
+                                "kind": "raw",
+                                "media": "application/dns-message"
+                            },
+                            "response": {
+                                "binary": true,
+                                "kind": "raw",
+                                "media": "application/dns-message"
+                            }
                         }
                     ]
                 },
@@ -176,6 +187,11 @@ class Config {
                                 "exist": [
                                     "dns"
                                 ]
+                            },
+                            "response": {
+                                "binary": true,
+                                "kind": "raw",
+                                "media": "application/dns-message"
                             }
                         }
                     ]
@@ -262,6 +278,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -348,6 +368,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -383,7 +407,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -409,7 +437,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "raw",
+                                "media": "text/plain"
+                            }
                         },
                         {
                             "kind": "http",
@@ -429,7 +461,12 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "binary": true,
+                                "kind": "raw",
+                                "media": "application/yaml"
+                            }
                         }
                     ]
                 }
@@ -498,11 +535,13 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "cd",
-                                    "do",
-                                    "name",
-                                    "type"
+                                    "name"
                                 ]
+                            },
+                            "response": {
+                                "binary": true,
+                                "kind": "raw",
+                                "media": "application/dns-json"
                             }
                         }
                     ]
@@ -572,6 +611,10 @@ class Config {
                                 "exist": [
                                     "subject"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -650,6 +693,10 @@ class Config {
                                 "exist": [
                                     "subject"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

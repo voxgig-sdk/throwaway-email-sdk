@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/throwaway-email-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/throwaway-email-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/throwaway-email-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -50,19 +51,19 @@ import (
 func main() {
     client := sdk.New()
 
-    // Load a single dnsQuery — the value is the loaded record.
+    // Load a single dnsQuery — the value is the entity; Data() reads its record.
     dnsQuery, err := client.DnsQuery(nil).Load(map[string]any{"dns": "example_dns"}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(dnsQuery)
+    fmt.Println(dnsQuery.(sdk.Entity).Data())
 
     // Create a dnsQuery.
     created, err := client.DnsQuery(nil).Create(map[string]any{}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(created)
+    fmt.Println(created.(sdk.Entity).Data())
 }
 ```
 
@@ -148,7 +149,7 @@ v2n, err := client.V2n(nil).Load(
 if err != nil {
     panic(err)
 }
-fmt.Println(v2n) // the returned mock data
+fmt.Println(v2n.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -239,9 +240,9 @@ All entities implement the `ThrowawayEmailEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
+| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity, and return it. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -249,21 +250,21 @@ All entities implement the `ThrowawayEmailEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` / `Create` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    dnsQuery, err := client.DnsQuery(nil).Load(nil, nil)
+    dnsQuery, err := client.DnsQuery(nil).Load(map[string]any{"dns": "example"}, nil)
     if err != nil { /* handle */ }
-    // dnsQuery is the returned record
+    // dnsQuery is the entity; dnsQuery.(sdk.Entity).Data() reads its record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -367,7 +368,7 @@ dnsQuery, err := client.DnsQuery(nil).Load(map[string]any{"dns": "dns"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(dnsQuery) // the loaded record
+fmt.Println(dnsQuery.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: Create
@@ -378,7 +379,7 @@ result, err := client.DnsQuery(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -407,7 +408,7 @@ domain, err := client.Domain(nil).Load(map[string]any{"id": "domain_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(domain) // the loaded record
+fmt.Println(domain.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -436,7 +437,7 @@ email, err := client.Email(nil).Load(map[string]any{"id": "email_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(email) // the loaded record
+fmt.Println(email.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -458,7 +459,7 @@ list, err := client.List(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(list) // the loaded record
+fmt.Println(list.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -468,7 +469,10 @@ lists, err := client.List(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(lists) // the array of records
+// A []any of entities, one per record.
+for _, item := range lists.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -489,7 +493,7 @@ resolve, err := client.Resolve(nil).Load(map[string]any{"name": "name"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(resolve) // the loaded record
+fmt.Println(resolve.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -517,7 +521,7 @@ v2n, err := client.V2n(nil).Load(map[string]any{"subject": "subject"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v2n) // the loaded record
+fmt.Println(v2n.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -546,7 +550,7 @@ v3n, err := client.V3n(nil).Load(map[string]any{"subject": "subject"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v3n) // the loaded record
+fmt.Println(v3n.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 ## Features
@@ -683,7 +687,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 

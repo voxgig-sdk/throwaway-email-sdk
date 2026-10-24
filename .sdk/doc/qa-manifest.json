@@ -3,5 +3,19 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API for detecting disposable/throwaway email domains with trait-based analysis",
+      "Array of traits identified for the domain",
+      "Check result",
+      "DNS records for the domain (when available)",
+      "DNS response in JSON format",
+      "DNS response in wire format",
+      "Domain list",
+      "Production",
+      "Staging",
+      "Trait analysis result"
+    ]
+  }
 }

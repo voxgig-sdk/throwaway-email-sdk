@@ -55,11 +55,13 @@ main: kit: entity: resolve: {
           o: "/resolve"
           q: {
             exist: [
-              "cd"
-              "do"
               "name"
-              "type"
             ]
+          }
+          rs: {
+            binary: true
+            kind: "raw"
+            media: "application/dns-json"
           }
           s: [
             {

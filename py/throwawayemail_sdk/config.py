@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -145,6 +146,16 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "body": {
+                  "binary": True,
+                  "kind": "raw",
+                  "media": "application/dns-message",
+                },
+                "response": {
+                  "binary": True,
+                  "kind": "raw",
+                  "media": "application/dns-message",
+                },
               },
             ],
           },
@@ -185,6 +196,11 @@ def make_config():
                   "exist": [
                     "dns",
                   ],
+                },
+                "response": {
+                  "binary": True,
+                  "kind": "raw",
+                  "media": "application/dns-message",
                 },
               },
             ],
@@ -272,6 +288,10 @@ def make_config():
                     "id",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -358,6 +378,10 @@ def make_config():
                     "id",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -393,6 +417,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -419,6 +447,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "raw",
+                  "media": "text/plain",
+                },
               },
               {
                 "kind": "http",
@@ -439,6 +471,11 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "binary": True,
+                  "kind": "raw",
+                  "media": "application/yaml",
+                },
               },
             ],
           },
@@ -507,11 +544,13 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "cd",
-                    "do",
                     "name",
-                    "type",
                   ],
+                },
+                "response": {
+                  "binary": True,
+                  "kind": "raw",
+                  "media": "application/dns-json",
                 },
               },
             ],
@@ -581,6 +620,10 @@ def make_config():
                   "exist": [
                     "subject",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -659,6 +702,10 @@ def make_config():
                   "exist": [
                     "subject",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

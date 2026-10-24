@@ -93,6 +93,7 @@ class ThrowawayEmailConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -142,6 +143,16 @@ class ThrowawayEmailConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'body' => [
+                    'binary' => true,
+                    'kind' => 'raw',
+                    'media' => 'application/dns-message',
+                  ],
+                  'response' => [
+                    'binary' => true,
+                    'kind' => 'raw',
+                    'media' => 'application/dns-message',
+                  ],
                 ],
               ],
             ],
@@ -182,6 +193,11 @@ class ThrowawayEmailConfig
                     'exist' => [
                       'dns',
                     ],
+                  ],
+                  'response' => [
+                    'binary' => true,
+                    'kind' => 'raw',
+                    'media' => 'application/dns-message',
                   ],
                 ],
               ],
@@ -269,6 +285,10 @@ class ThrowawayEmailConfig
                       'id',
                     ],
                   ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -355,6 +375,10 @@ class ThrowawayEmailConfig
                       'id',
                     ],
                   ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -390,6 +414,10 @@ class ThrowawayEmailConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -416,6 +444,10 @@ class ThrowawayEmailConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'raw',
+                    'media' => 'text/plain',
+                  ],
                 ],
                 [
                   'kind' => 'http',
@@ -436,6 +468,11 @@ class ThrowawayEmailConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'binary' => true,
+                    'kind' => 'raw',
+                    'media' => 'application/yaml',
+                  ],
                 ],
               ],
             ],
@@ -504,11 +541,13 @@ class ThrowawayEmailConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'cd',
-                      'do',
                       'name',
-                      'type',
                     ],
+                  ],
+                  'response' => [
+                    'binary' => true,
+                    'kind' => 'raw',
+                    'media' => 'application/dns-json',
                   ],
                 ],
               ],
@@ -578,6 +617,10 @@ class ThrowawayEmailConfig
                     'exist' => [
                       'subject',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -656,6 +699,10 @@ class ThrowawayEmailConfig
                     'exist' => [
                       'subject',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],

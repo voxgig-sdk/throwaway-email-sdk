@@ -79,6 +79,7 @@ module ThrowawayEmailConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -128,6 +129,16 @@ module ThrowawayEmailConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "body" => {
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/dns-message",
+                  },
+                  "response" => {
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/dns-message",
+                  },
                 },
               ],
             },
@@ -168,6 +179,11 @@ module ThrowawayEmailConfig
                     "exist" => [
                       "dns",
                     ],
+                  },
+                  "response" => {
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/dns-message",
                   },
                 },
               ],
@@ -255,6 +271,10 @@ module ThrowawayEmailConfig
                       "id",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -341,6 +361,10 @@ module ThrowawayEmailConfig
                       "id",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -376,6 +400,10 @@ module ThrowawayEmailConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -402,6 +430,10 @@ module ThrowawayEmailConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "raw",
+                    "media" => "text/plain",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -422,6 +454,11 @@ module ThrowawayEmailConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/yaml",
+                  },
                 },
               ],
             },
@@ -490,11 +527,13 @@ module ThrowawayEmailConfig
                   },
                   "select" => {
                     "exist" => [
-                      "cd",
-                      "do",
                       "name",
-                      "type",
                     ],
+                  },
+                  "response" => {
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/dns-json",
                   },
                 },
               ],
@@ -564,6 +603,10 @@ module ThrowawayEmailConfig
                     "exist" => [
                       "subject",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -642,6 +685,10 @@ module ThrowawayEmailConfig
                     "exist" => [
                       "subject",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

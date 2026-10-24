@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { ThrowawayEmailSDK, BaseFeature, stdutil } from '../../..'
+import { ThrowawayEmailSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('DnsQueryEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = ThrowawayEmailSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.DnsQuery().load({"dns":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.THROWAWAY_EMAIL_TEST_LIVE
@@ -51,7 +63,7 @@ describe('DnsQueryEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"dns_query","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /dns-query","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/dns-query","q":{},"r":{},"s":[{"lit":"dns-query"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /dns-query","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB","k":"query","n":"dns","or":"dns","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/dns-query","q":{"exist":["dns"]},"r":{},"s":[{"lit":"dns-query"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"dns_query","name__orig":"dns_query","Name":"DnsQuery","name_":"dns_query","name-":"dns-query","NAME":"DNS_QUERY","index$":0}, {"active":true,"entity":"dns_query","key$":"BasicDnsQueryFlow","kind":"basic","name":"BasicDnsQueryFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"dns_query_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"dns_query_ref01","srcdatavar":"dns_query_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-dns_query_ref01"}}],"index$":1}]}, 'DnsQuery', {"POST /dns-query":{"protocol":"http","requestBody":{"required":true,"content":{"application/dns-message":{"schema":{"type":"string","format":"binary","description":"DNS query message in wire format"}}}},"parameters":[]},"GET /dns-query":{"protocol":"http","parameters":[{"name":"dns","in":"query","required":true,"description":"Base64url-encoded DNS query message","schema":{"type":"string","example":"AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"dns_query","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /dns-query","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/dns-query","q":{},"r":{},"rb":{"binary":true,"kind":"raw","media":"application/dns-message"},"rs":{"binary":true,"kind":"raw","media":"application/dns-message"},"s":[{"lit":"dns-query"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /dns-query","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB","k":"query","n":"dns","or":"dns","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/dns-query","q":{"exist":["dns"]},"r":{},"rs":{"binary":true,"kind":"raw","media":"application/dns-message"},"s":[{"lit":"dns-query"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"dns_query","name__orig":"dns_query","Name":"DnsQuery","name_":"dns_query","name-":"dns-query","NAME":"DNS_QUERY","index$":0}, {"active":true,"entity":"dns_query","key$":"BasicDnsQueryFlow","kind":"basic","name":"BasicDnsQueryFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"dns_query_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"dns_query_ref01","srcdatavar":"dns_query_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-dns_query_ref01"}}],"index$":1}]}, 'DnsQuery', {"POST /dns-query":{"protocol":"http","requestBody":{"required":true,"content":{"application/dns-message":{"schema":{"type":"string","format":"binary","description":"DNS query message in wire format","index$":1}}}},"parameters":[]},"GET /dns-query":{"protocol":"http","parameters":[{"name":"dns","in":"query","required":true,"description":"Base64url-encoded DNS query message","schema":{"type":"string","example":"AAABAAABAAAAAAAAB3Rlc3RtYWlsBGFyZXMAAQAB"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -78,6 +90,12 @@ describe('DnsQueryEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options
